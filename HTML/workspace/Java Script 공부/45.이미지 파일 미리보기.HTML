@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이미지파일 미리보기</title>
+</head>
+<body>
+    <div>
+        <input type="file" name="file" accept="image/*" onchange="handleImgChange()">
+    </div>
+    <div>
+        <img src="" alt="" width="300">
+    </div>
+    <script>
+        const handleImgChange = () =>{
+            const imgFile = document.querySelector("[type='file']").files[0];
+            console.log(imgFile);
+            const imgTag = document.querySelector("img");
+            if(imgFile){
+                const reader = new FileReader();
+                // FileReader: 자바 스크립트에서 파일을 읽기 위한 API
+                reader.onload =  (e) => {
+                    // FileReader를 실행할 때의 동작 설정
+                    imgTag.src = e.target.result;
+                    // readAsDataURL 매서드가 실행되면 src에 파일 데이터를 저장
+                    imgTag.style.display = 'block';
+                    // display CSS를 block으로 설정하여 화면에 표기
+                }
+                reader.readAsDataURL(imgFile);
+                // 파일을 base64로 읽어 위의 reader.onload의 e에 저장하여 실행
+            }else{
+                imgTag.src = "";
+                imgTag.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

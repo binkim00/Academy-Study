@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연습문제18</title>
+    <style>
+        body{
+            background-image: url(../images/bg_grid.gif);
+        }
+
+        .box1{
+            width: 600px; height: 200px;
+            /* border: 1px solid rgba(128, 128, 128, 0.336); */
+            background-color: rgba(128, 128, 128, 0.6);
+        }
+
+        .box2{
+            width: 230px; height: 80px;
+            background-color: #DC143C;
+            font-weight: bold;
+            padding: 10px;
+        }
+
+        .box3{
+            width: 230px; height: 80px;
+            background-color: #00FF00;
+            font-weight: bold;
+            padding: 10px;
+        }
+
+        .box4{
+            width: 230px; height: 80px;
+            background-color: #1D8AF4;
+            font-weight: bold;
+            padding: 10px;
+        }
+
+        .z1{position: absolute; left: 10px; top: 10px; z-index: 3;}
+        .z2{position: absolute; left: 80px; top: 60px; z-index: 5;}
+        .z3{position: absolute; left: 110px; top: 150px; z-index: 1;}
+
+    </style>
+</head>
+<body>
+
+    <div class="box1">
+        <div class="box2 z1">박스의 크기와 위치를 잘 살펴 보아야 합니다.</div>
+        <div class="box3 z2">박스의 포지션 속성을 바꿔가며 테스트해 보아야 합니다.</div>
+        <div class="box4 z3">포지션을 이해하기 위해서는 시험해보고 관찰해 보는 것이 절대적으로 필요합니다.</div>
+    </div>
+
+</body>
+</html>

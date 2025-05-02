@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연습문제28</title>
+</head>
+<body>
+    <script>
+        // 문제 1
+        // 점수가 90점 이상이면 A
+        // 점수가 80점 이상이면 B
+        // 점수가 70점 이상이면 C
+        // 점수가 60점 이상이면 D
+        // 점수가 60점 미만이라면 F
+        // 를 출력하는 코드를 만들어보세요.
+        // 점수 = 59 -->
+        let score = 59;
+        if(score>=90){
+            console.log("A")
+        }else if(score>=80){
+            console.log("B")
+        }else if(score>=70){
+            console.log("C")
+        }else if(score>=60){
+            console.log("D")
+        }else{
+            console.log("F")
+        }
+
+
+        // 문제 2 (수식을 어떻게 작성할 지 모르겠으면 검색)
+        // 숫자가 짝수인지 홀수인지 구하는 if문을 작성하라
+        // 숫자 = 11
+        let num = 11;
+        if(num % 2 === 0){ //숫자를 2로 나누었을 때 0이 되냐?를 물음
+            console.log(num+"은/는 !짝수!")
+        }else{
+            console.log(num+"은/는 !홀수!")
+        };
+
+        // 문제3
+        // 숫자의값에 20을 더한 값을 출력하라. 단 숫자와 20더한 계산값이
+        // 255를 초과하는 경우 255를 출력한다. 0보다 작은 값일 경우 0을 출력한다.
+        // 숫자 = -30
+        let num2 = -30;
+        let num3 = num2 + 20;
+        if(num3>255){
+            console.log(255)
+        }else if(num3<0){
+            console.log(0)
+        }else{
+            console.log(num3)
+        }
+
+    </script>
+    
+</body>
+</html>

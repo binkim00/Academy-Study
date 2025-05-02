@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연습문제7</title>
+    <style>
+        #container {
+            width: 530px;
+            margin: 0 auto;
+            padding: 20px 40px;
+        }
+        ul {
+            list-style-type: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h2>배송주소</h2>
+        <hr>
+        <!-- 중복 id 수정: id="addr"를 고유한 id로 변경 (addr1, addr2, addr3 등) -->
+        <!-- 폼 요소에 name 속성 추가: 서버로 데이터를 제출할 때 필요한 name 속성 추가 -->
+        
+        <div id="select">
+            <label for="way">배송방법</label>
+            <ul>
+                <li><label><input type="radio" name="way" value="1">일반택배</label></li>
+                <li><label><input type="radio" name="way" value="2">해외택배</label></li>
+                <li><label><input type="radio" name="way" value="3">안심택배</label></li>
+                <li><label><input type="radio" name="way" value="4">편의점 픽업</label></li>
+                <li><label><input type="radio" name="way" value="5">중고매장 픽업</label></li>
+                <p>!편의점 픽업, 해외배송, 업체배송의 경우 총알하루 배송이 적용되지 않습니다.</p>
+            </ul>
+        </div>
+        <hr>
+
+        <div id="select">
+            <label for="add">배송지</label>
+            <ul>
+                <li><label><input type="radio" name="add" value="a1">최근 배송지</label></li>
+                <button type="button">더보기</button>
+                <li><label><input type="radio" name="add" value="b2">주소록</label></li>
+                <li><label><input type="radio" name="add" value="c3">회원정보동일</label></li>
+                <li><label><input type="radio" name="add" value="d4">새로입력</label></li>
+            </ul>
+        </div>
+
+        <div id="select">
+            <label for="name">이름</label>
+            <input type="text" id="name" name="name">
+        </div>    
+
+        <div id="select">
+            <label for="addr1">주소</label>
+            <ul>
+                <input type="text" id="addr1" name="addr1">
+                <button type="button">주소찾기</button><br>
+                <label for="addr2">도로명 주소<input type="text" id="addr2" name="addr2"></label><br>
+                <label for="addr3">지번 주소<input type="text" id="addr3" name="addr3"></label>
+                <button type="button">주소록에 추가</button><br>
+                <p>주소/우편번호체계가 새롭게 변경되었습니다.<br>정확하고 빠른 배송을 위해 입력된 주소를 확인하시고 업데이트 해주시기 바랍니다.</p>
+            </ul>
+        </div>
+
+        <div id="select">
+            <label for="phone">핸드폰</label>
+            <select name="phone_number">
+                <option value="choice" selected>선택</option>
+                <option value="010">010</option>
+                <option value="011">011</option>
+                <option value="016">016</option>
+                <option value="070">070</option>
+            </select>-
+            <input type="text" maxlength="4" name="phone_part1">-<input type="text" maxlength="4" name="phone_part2">
+            <span class="info">!연락처는 하나만 입력하셔도 결제가 가능합니다.</span>
+        </div>
+        
+
+        <div id="select">
+            <label for="tel">일반전화</label>
+            <select name="tel_number">
+                <option value="choice" selected>선택</option>
+                <option value="010">010</option>
+                <option value="011">011</option>
+                <option value="016">016</option>
+                <option value="070">070</option>
+            </select>-
+            <input type="text" maxlength="4" name="tel_part1">-<input type="text" maxlength="4" name="tel_part2">
+        </div>
+        <hr>
+        <h2>주문고객</h2>
+        <hr>
+
+        <div id="select">
+            <label for="order_name">이름</label>
+            <input type="text" id="order_name" name="order_name">
+        </div>
+
+        <div id="select">
+            <label for="phone">핸드폰</label>
+            <select name="phone_number">
+                <option value="choice" selected>선택</option>
+                <option value="010">010</option>
+                <option value="011">011</option>
+                <option value="016">016</option>
+                <option value="070">070</option>
+            </select>-
+            <input type="text" maxlength="4" name="phone_part1">-<input type="text" maxlength="4" name="phone_part2">
+            <span class="info">!연락처는 하나만 입력하셔도 결제가 가능합니다.</span>
+        </div>
+        
+
+        <div id="select">
+            <label for="order_tel">일반전화</label>
+            <select name="order_tel_number">
+                <option value="choice" selected>선택</option>
+                <option value="010">010</option>
+                <option value="011">011</option>
+                <option value="016">016</option>
+                <option value="070">070</option>
+            </select>-
+            <input type="text" maxlength="4" name="order_tel_part1">-<input type="text" maxlength="4" name="order_tel_part2">
+        </div>
+
+        <div id="select">
+            <label for="order_email">이메일</label>
+            <input type="email" id="order_email" name="order_email">
+        </div>
+
+        <div id="select">
+            <input type="submit" value="제출">
+        </div>
+
+    </div>
+</body>
+</html>

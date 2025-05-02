@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연습문제26</title>
+    <style>
+        @keyframes Movingbox{
+            0% { transform: translate(000px, 000px); background-color: red;}
+            10% { transform: translate(000px, 100px); background-color: orange;}
+            20% { transform: translate(000px, 200px); background-color: yellow;}
+            30% { transform: translate(000px, 300px); background-color: green;}
+            40% { transform: translate(100px, 300px); background-color: blue;}
+            50% { transform: translate(200px, 300px); background-color: navy;}
+            60% { transform: translate(300px, 300px); background-color: violet;}
+            70% { transform: translate(300px, 200px); background-color: gray;}
+            80% { transform: translate(300px, 100px); background-color: gold;}
+            90% { transform: translate(300px, 000px); background-color: silver;}
+            100% { transform: translate(000px, 000px); background-color: red;}
+        }
+
+        div {
+            margin: 20px;
+            width: 100px;
+            height: 100px;
+            background-color: aqua;
+
+            animation-name: Movingbox;
+            animation-duration: 5s;
+            animation-iteration-count: infinite;
+        }
+    </style>
+</head>
+<body>
+    <div>Animation.. </div>
+</body>
+</html>

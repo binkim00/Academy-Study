@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>화려한 오목 게임</title>
+  <style>
+    body {
+      background: linear-gradient(to bottom, #f0f8ff, #e6e6fa);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+    h1 {
+      color: #4b0082;
+    }
+    #board {
+      display: grid;
+      grid-template-columns: repeat(15, 40px);
+      grid-template-rows: repeat(15, 40px);
+      gap: 1px;
+      background-color: #8b4513;
+      border: 5px solid #4b0082;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+    .cell {
+      width: 40px;
+      height: 40px;
+      background-color: #deb887;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .black, .white {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      box-shadow: inset -2px -2px 5px rgba(0,0,0,0.4);
+    }
+    .black {
+      background: radial-gradient(#000000, #333);
+    }
+    .white {
+      background: radial-gradient(#fff, #ccc);
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      background-color: #4b0082;
+      color: white;
+      cursor: pointer;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    }
+    button:hover {
+      background-color: #6a0dad;
+    }
+  </style>
+</head>
+<body>
+  <h1>화려한 오목 게임 🎮</h1>
+  <div id="board"></div>
+  <button onclick="undoMove()">⏪ 되돌리기</button>
+  <script>
+    const size = 15;
+    const board = document.getElementById('board');
+    const cells = [];
+    const state = Array.from({ length: size }, () => Array(size).fill(null));
+    let isBlackTurn = true;
+    let history = [];
+
+    for (let y = 0; y < size; y++) {
+      cells[y] = [];
+      for (let x = 0; x < size; x++) {
+        const cell = document.createElement('div');
+        cell.classList.add('cell');
+        board.appendChild(cell);
+        cell.addEventListener('click', () => handleMove(x, y));
+        cells[y][x] = cell;
+      }
+    }
+
+    function handleMove(x, y) {
+      if (state[y][x]) return;
+
+      if (isBlackTurn && isDoubleThree(x, y)) {
+        alert("⚠️ 흑돌은 3-3 금수입니다!");
+        return;
+      }
+
+      placeStone(x, y, isBlackTurn ? 'black' : 'white');
+      history.push({ x, y });
+      if (checkWin(x, y)) {
+        setTimeout(() => alert(`${isBlackTurn ? '⚫ 흑' : '⚪ 백'} 승리!`), 10);
+        return;
+      }
+      isBlackTurn = !isBlackTurn;
+    }
+
+    function placeStone(x, y, color) {
+      const stone = document.createElement('div');
+      stone.className = color;
+      cells[y][x].appendChild(stone);
+      state[y][x] = color;
+    }
+
+    function undoMove() {
+      if (history.length === 0) return;
+      const last = history.pop();
+      clearCell(last.x, last.y);
+      state[last.y][last.x] = null;
+      isBlackTurn = !isBlackTurn;
+    }
+
+    function clearCell(x, y) {
+      cells[y][x].innerHTML = '';
+    }
+
+    function checkWin(x, y) {
+      const color = state[y][x];
+      const directions = [
+        [1, 0], [0, 1], [1, 1], [1, -1]
+      ];
+      return directions.some(([dx, dy]) => {
+        let count = 1;
+        for (let dir of [-1, 1]) {
+          let i = 1;
+          while (true) {
+            const nx = x + dx * i * dir;
+            const ny = y + dy * i * dir;
+            if (nx < 0 || ny < 0 || nx >= size || ny >= size || state[ny][nx] !== color) break;
+            count++;
+            i++;
+          }
+        }
+        return count >= 5;
+      });
+    }
+
+    function isDoubleThree(x, y) {
+      let count = 0;
+      const testState = JSON.parse(JSON.stringify(state));
+      testState[y][x] = 'black';
+
+      const checkOpenThree = (dx, dy) => {
+        let line = '';
+        for (let i = -4; i <= 4; i++) {
+          const nx = x + dx * i;
+          const ny = y + dy * i;
+          if (nx < 0 || ny < 0 || nx >= size || ny >= size) {
+            line += 'X';
+          } else if (testState[ny][nx] === 'black') {
+            line += 'B';
+          } else if (testState[ny][nx] === null) {
+            line += '.';
+          } else {
+            line += 'W';
+          }
+        }
+        // 3목 패턴 확인: .BB. 또는 .B.B. (열린 3)
+        const patterns = [/\.BBB\./, /\.BB\.B\./, /\.B\.BB\./, /\.B\.B\.B\./];
+        return patterns.some(p => p.test(line));
+      };
+
+      const directions = [
+        [1, 0], [0, 1], [1, 1], [1, -1]
+      ];
+
+      for (const [dx, dy] of directions) {
+        if (checkOpenThree(dx, dy)) count++;
+        if (count >= 2) return true;
+      }
+      return false;
+    }
+  </script>
+</body>
+</html>

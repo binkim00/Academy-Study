@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>배송</title>
+  <style>
+    #container {
+      width: 800px;
+      margin: 0 auto;
+    }
+
+    th {
+      color: rgb(23, 158, 211);
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <form action="#" method="get">
+      <h2>배송주소</h2>
+      <hr>
+      <table>
+        <tr>
+          <th>배송방법</th>
+          <td><label><input type="radio" name="pickup">일반택배</label></td>
+          <td><label><input type="radio" name="pickup">해외배송</label></td>
+          <td><label><input type="radio" name="pickup">안심택배</label></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><label><input type="radio" name="pickup">편의점 픽업</label></td>
+          <td><label><input type="radio" name="pickup">중고매장 픽업</label></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td colspan="3">!편의점픽업, 해외배송, 업체배송의 경우 총알하루 배송이 적용되지 않습니다.</td>
+        </tr>
+      </table>
+      <hr>
+      <table>
+        <tr>
+          <th>배송지</th>
+          <td><label>
+            <input type="radio" name="address_type">최근배송지
+            <button type="button">더보기</button>
+          </label></td>
+          <td><label><input type="radio" name="address_type">주소록</label></td>
+          <td><label><input type="radio" name="address_type">회원정보동일</label></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><label><input type="radio" name="address_type">새로입력</label></td>
+        </tr>
+      </table>
+      <table>
+        <tr>
+            <th><label for="name">이름</label></th>
+            <td><input type="text" id="name" name="name"></td>
+        </tr>
+        <tr>
+          <th>배송주소</th>
+          <td><input type="text" name="addr1"><button type="button">주소찾기</td>
+        </tr>
+        <tr>
+          <th></th>
+          <td><label>도로명주소<input type="text" name="addr2"></label></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td><label>지번 주소<input type="text" name="addr3"></label><button type="button">주소록에 추가</button></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td>주소/우편번호체계가 새롭게 변경되었습니다.<br>정확하고 빠른 배송을 위해 입력된 주소를 확인하시고 업데이트 해주시기 바랍니다.</td>
+        </tr>
+        <tr>
+          <th>핸드폰</th>
+          <td>
+            <select name="phone">
+              <option>선택</option>
+              <option>010</option>
+              <option>070</option>
+            </select>
+            -
+            <input type="text"name="phone2" size="4" maxlength="4">
+            -
+            <input type="text" name="phone3" size="4" maxlength="4">
+            !연락처는 하나만 입력하셔도 결제가 가능합니다.
+          </td>
+        </tr>
+        <tr>
+          <th>일반전화</th>
+          <td>
+            <select name="tel">
+              <option>선택</option>
+              <option>02</option>
+              <option>051</option>
+            </select>
+            -
+            <input type="text"name="tel2" size="4" maxlength="4">
+            -
+            <input type="text" name="tel3" size="4" maxlength="4">
+          </td>
+        </tr>
+      </table>
+      <hr>
+      <h2>주문고객</h2>
+      <hr>
+      <table>
+        <tr>
+          <th><label for="name">이름</label></th>
+          <td><input type="text" id="name" name="name"></td>
+        </tr>
+        <tr>
+          <th>핸드폰</th>
+          <td>
+            <select name="phone">
+              <option>선택</option>
+              <option>010</option>
+              <option>070</option>
+            </select>
+            -
+            <input type="text"name="phone2" size="4" maxlength="4">
+            -
+            <input type="text" name="phone3" size="4" maxlength="4">
+            !연락처는 하나만 입력하셔도 결제가 가능합니다.
+          </td>
+        </tr>
+        <tr>
+          <th>일반전화</th>
+          <td>
+            <select name="tel">
+              <option>선택</option>
+              <option>02</option>
+              <option>051</option>
+            </select>
+            -
+            <input type="text"name="tel2" size="4" maxlength="4">
+            -
+            <input type="text" name="tel3" size="4" maxlength="4">
+          </td>
+        </tr>
+        <tr>
+          <th><label for="email">이메일</label></th>
+          <td><input type="text" id="email" name="email"></td>
+        </tr>
+      </table>
+    </form>
+  </div>
+</body>
+
+</html>

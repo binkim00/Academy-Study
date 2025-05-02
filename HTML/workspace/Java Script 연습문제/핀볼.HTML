@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>우주 핀볼 게임</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: #000;
+      color: white;
+      font-family: Orbitron, sans-serif;
+    }
+    canvas {
+      display: block;
+      margin: 0 auto;
+      box-shadow: 0 0 30px #00ffff;
+    }
+    #scoreHistory {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(0,0,0,0.5);
+      padding: 10px;
+      border-radius: 10px;
+      font-size: 14px;
+    }
+    #controls {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      background: rgba(255,255,255,0.1);
+      padding: 10px;
+      border-radius: 10px;
+      font-size: 14px;
+    }
+    #controls label {
+      margin-right: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div id="scoreHistory"></div>
+  <canvas id="gameCanvas" width="600" height="800"></canvas>
+
+  <div id="controls">
+    <label for="ballSpeed">공 속도</label>
+    <input type="range" id="ballSpeed" min="1" max="10" value="4">
+    <label for="paddleSpeed">패들 속도</label>
+    <input type="range" id="paddleSpeed" min="5" max="30" value="10">
+  </div>
+
+  <script>
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+
+    const ball = {
+      x: canvas.width / 2,
+      y: canvas.height - 50,
+      dx: 300,
+      dy: -400,
+      radius: 10,
+    };
+
+    const paddle = {
+      width: 120,
+      height: 15,
+      x: canvas.width / 2 - 60,
+      speed: 600,
+      dx: 0
+    };
+
+    let obstacles = [];
+    let score = 0;
+    let gameOver = false;
+    let lastTime = performance.now();
+
+    function getRandomObstacles() {
+      const count = Math.floor(Math.random() * 3) + 6;
+      const spacing = 50;
+      const newObstacles = [];
+      for (let i = 0; i < count; i++) {
+        const radius = Math.random() * 20 + 20;
+        const x = Math.random() * (canvas.width - 2 * radius) + radius;
+        const y = i * spacing + 100;
+        newObstacles.push({ x, y, radius });
+      }
+      return newObstacles;
+    }
+
+    function drawBall() {
+      ctx.beginPath();
+      ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+      ctx.fillStyle = "#00ffff";
+      ctx.shadowBlur = 10;
+      ctx.shadowColor = "#00ffff";
+      ctx.fill();
+      ctx.closePath();
+      ctx.shadowBlur = 0;
+    }
+
+    function drawPaddle() {
+      ctx.fillStyle = "#ff69b4";
+      ctx.fillRect(paddle.x, canvas.height - paddle.height - 10, paddle.width, paddle.height);
+    }
+
+    function drawObstacles() {
+      ctx.fillStyle = "#ffaa00";
+      obstacles.forEach(o => {
+        ctx.beginPath();
+        ctx.arc(o.x, o.y, o.radius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.closePath();
+      });
+    }
+
+    function drawScore() {
+      ctx.fillStyle = "#ffffff";
+      ctx.font = "20px Orbitron";
+      ctx.fillText(`Score: ${score}`, 10, 30);
+    }
+
+    function collisionDetection(deltaTime) {
+      const ballNextX = ball.x + ball.dx * deltaTime;
+      const ballNextY = ball.y + ball.dy * deltaTime;
+
+      // 패들 충돌
+      if (
+        ballNextX > paddle.x &&
+        ballNextX < paddle.x + paddle.width &&
+        ballNextY + ball.radius > canvas.height - paddle.height - 10
+      ) {
+        ball.dy = -Math.abs(ball.dy);
+        const bonus = Math.floor(Math.random() * 11) * 10 + 100;
+        score += bonus;
+      }
+
+      // 장애물 충돌
+      obstacles.forEach(o => {
+        const dx = ballNextX - o.x;
+        const dy = ballNextY - o.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < ball.radius + o.radius) {
+          ball.dy *= -1;
+        }
+      });
+    }
+
+    function update() {
+      if (gameOver) return;
+
+      const currentTime = performance.now();
+      const deltaTime = (currentTime - lastTime) / 1000;
+      lastTime = currentTime;
+
+      ball.x += ball.dx * deltaTime;
+      ball.y += ball.dy * deltaTime;
+
+      if (ball.x + ball.radius > canvas.width || ball.x - ball.radius < 0) ball.dx *= -1;
+      if (ball.y - ball.radius < 0) ball.dy *= -1;
+      if (ball.y + ball.radius > canvas.height) {
+        saveScore(score);
+        gameOver = true;
+        setTimeout(() => {
+          alert("게임 오버! 점수: " + score);
+          displayScores();
+          document.location.reload();
+        }, 100);
+      }
+
+      paddle.x += paddle.dx * deltaTime;
+      if (paddle.x < 0) paddle.x = 0;
+      if (paddle.x + paddle.width > canvas.width) paddle.x = canvas.width - paddle.width;
+
+      collisionDetection(deltaTime);
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawBall();
+      drawPaddle();
+      drawObstacles();
+      drawScore();
+    }
+
+    function gameLoop() {
+      update();
+      draw();
+      if (!gameOver) requestAnimationFrame(gameLoop);
+    }
+
+    document.addEventListener("keydown", e => {
+      if (e.key === "ArrowLeft") paddle.dx = -paddle.speed;
+      else if (e.key === "ArrowRight") paddle.dx = paddle.speed;
+    });
+
+    document.addEventListener("keyup", e => {
+      if (e.key === "ArrowLeft" || e.key === "ArrowRight") paddle.dx = 0;
+    });
+
+    function saveScore(currentScore) {
+      const key = "spacePinballScores";
+      const saved = JSON.parse(localStorage.getItem(key)) || [];
+      saved.push(currentScore);
+      localStorage.setItem(key, JSON.stringify(saved));
+    }
+
+    function displayScores() {
+      const key = "spacePinballScores";
+      const saved = JSON.parse(localStorage.getItem(key)) || [];
+      const div = document.getElementById("scoreHistory");
+      div.innerHTML = "<strong>이전 점수:</strong><br>" + saved.reverse().slice(0, 5).join("<br>");
+    }
+
+    obstacles = getRandomObstacles();
+    setInterval(() => {
+      if (!gameOver) obstacles = getRandomObstacles();
+    }, 5000);
+
+    displayScores();
+    gameLoop();
+
+    const ballSpeedInput = document.getElementById("ballSpeed");
+    const paddleSpeedInput = document.getElementById("paddleSpeed");
+
+    ballSpeedInput.addEventListener("input", () => {
+      const speed = parseFloat(ballSpeedInput.value) * 60;
+      const angle = Math.atan2(ball.dy, ball.dx);
+      ball.dx = Math.cos(angle) * speed;
+      ball.dy = Math.sin(angle) * speed;
+    });
+
+    paddleSpeedInput.addEventListener("input", () => {
+      paddle.speed = parseFloat(paddleSpeedInput.value) * 50;
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>문제4~8</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;}
+
+    .container {width: 1000px;}
+
+    .header {background-color: #78909C;}
+    .header h1 {
+        margin: 0;
+        font-size: 24px;}
+    .header nav {
+        margin-top: 10px;
+        text-align: right;}
+    .header nav a {
+        margin-left: 20px;
+        text-decoration: none;
+        color: black;
+        margin: 15px;
+        font-size: large;}
+    .header nav a:hover {color: white;}
+
+
+    .img {
+        background-image: url("https://placehold.co/1000x300");
+        background-size: cover;
+        background-position: center;
+        height: 300px;
+    }
+    h2 {
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
+    .grid-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: auto auto;
+        color: #000;
+        font-size: 14px;
+    }
+    .grid1{
+        background-color: #90A4AE;
+        text-align: justify;
+        padding: 5px 10px 10px 10px;
+    }
+    .grid2{
+        background-color: #87C1DD;
+        text-align: justify;
+        text-align: justify;
+        padding: 5px 10px 10px 10px;
+    }
+    .grid3{
+        background-color: #729EB4;
+        text-align: justify;
+        padding: 5px 10px 10px 10px;
+    }
+    .grid4{
+        background-color: #55688C;
+        text-align: justify;
+        padding: 5px 10px 10px 10px;    
+    }
+
+    .grid-container div:nth-child(1) {grid-column: 1 / 2; grid-row: 1 / 3;}
+    .grid-container div:nth-child(2) {grid-column: 2 / 3; grid-row: 1 / 3;}
+    .grid-container div:nth-child(3) {grid-column: 3 / 4; grid-row: 1 / 2;}
+    .grid-container div:nth-child(4) {grid-column: 3 / 4; grid-row: 2 / 3;}
+
+    .grid5 {
+        background-color: #a2c5d5;
+        text-align: center;
+        padding: 5px 10px 5px 10px;;
+        font-size: 13px;
+    }
+    .grid5 h2 {
+        text-align: left;
+        margin: 0;
+    }
+    
+
+  </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Header Area</h1>
+            <nav>
+              <a href="#">HTML</a>
+              <a href="#">CSS</a>
+              <a href="#">JavaScript</a>
+              <a href="#">JQuery</a>
+            </nav>
+        </div>
+          
+
+        <div class="img"></div>
+
+        <div class="grid-container">
+            <div class="grid1">
+                <h2>Section A</h2>
+                녹차는 은은한 향을 좋아하는 사람들이 애용하는 차이다.
+                녹차를 마실 줄 모르는 사람들은 티백들을 모두 뜯어 주전자에 넣고
+                끊이기도 하는데 가한차의 향기도 견디기 힘들겠지만 보관도 힘들고
+                그때 그때 방금 끓인 듯한 맛을 느끼지 못하게 되며 진한 카페인 덕에
+                밤에 잠들기도 힘들 것이다.
+            </div>
+
+            <div class="grid2">
+                <h2>Section B</h2>
+                커피는 독한 향을 좋아하는 사람도 매우 좋아하며 심한 경우 태어나기
+                전부터 커피를 마신 듯 강한 중독 증세를 보이는 경우가 많다. 심지어
+                원두를 씹어서 향에 자신을 담그는 사람도 있고 설탕, 시럽 등 다른
+                조미를 절대로 허락하지 않는 오직 커피맛만을 고집하는 마니아들이 늘고 있다.
+            </div>
+
+            <div class="grid3">
+                <h2>Article A</h2>
+                너무 화려하지 않으며 고귀한 느낌을 가지고 있다. 붉은 색이 단연 으뜸이며
+                한 송이만 있어도 빼어나다.
+            </div>
+
+            <div class="grid4">
+                <h2>Article B</h2>
+                드물게 푸른색을 띠고 있으며 작지만 시원해 보이는 어린 꽃이라고 할 수 있다.
+                여럿이 함께 있을 때 더욱 아름답다.
+            </div>
+        </div>
+
+            <div class="grid5">
+            <h2>Footer Area</h2><br>
+            [부산IT교육센터] 부산광역시 부산진구 중앙대로 708 부산파이낸스센터
+            4F, 5F 부산IT교육센터 T. 051.753.5600<br>
+            COPYRIGHT ⓒ BUSAN HUMAN RESOURCES DEVELOPMENT INSTITUTE. All rights reserved.
+            </div>
+
+    </div>
+</body>
+</html>

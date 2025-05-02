@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프런트엔드 개발자 지원서</title>
+    <style>
+        #container{
+            width: 530px;
+            border: 1px solid black;
+            margin: 0 auto;
+            padding: 20px 40px;
+        }
+        ul{
+            list-style-type: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- div태그 : 일정 크기를 가지는 구조를 만들때 사용하는 태그 -->
+    <div id="container">
+        <h1>프런트엔드 개발자 지원서</h1>
+        <p>HTML, CSS, JavaScript에 대한 기술적 이해와 경험이 있는 분을 찾습니다.</p>
+        <hr>
+        <form>
+            <h3>개인정보</h3>
+            <ul>
+                <li><label>이름<input type="text" name="name" placeholder="공백없이 입력하세요"></label></li>
+                <li><label>연락처<input type="tel" name="tel"></label></li>
+            </ul>
+            <h3>지원 분야</h3>
+            <ul>
+                <li><label><input type="radio" name="web" value="p">웹 퍼블리싱</label></li>
+                <li><label><input type="radio" name="web" value="a">웹 애플리케이션 개발</label></li>
+                <li><label><input type="radio" name="web" value="e">개발 환경 개선</label></li>
+            </ul>
+            <h3>지원동기</h3>
+            <textarea cols="60" rows="5" placeholder="본사 지원 동기를 간략히 써 주세요."></textarea>
+            <div>
+                <input type="submit" value="접수하기">
+                <input type="reset" value="다시쓰기">
+            </div>
+        </form>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>함수</title>
+</head>
+<body>
+    <script>
+        // 함수란 특정 기능을 수행하도록 만든 명령어 모음
+        // 함수는 반드시()가 붙어 있음
+        // alert과 prompt처럼 이미 만들어져 있는 함수들이 많이 있음
+        alert("메시지창을 출력하는 함수 alert()");
+        prompt("입력창을 출력하는 prompt()함수");
+
+        // 함수를 정의하는 방법(만드는 방법)
+        function 함수이름(매개변수){
+            // 함수에서 실행할 코드
+            return 실행결과;
+            // retrun : 함수의 실행결과를 돌려줘야할 때 사용
+        }
+        // 구구단을 출력하는 함수
+        function gugudan(dan){
+            for(let i=1; i<=9; i++){
+                console.log(`${dan}*${i}=${dan*i}`);
+            }
+        }
+        // 함수를 출력하는 방법
+        gugudan(3);
+        gugudan(6);
+        gugudan(9);
+
+        // retrun이 있는 함수의 경우
+        function pow(number, count){
+            let result = number;
+            for(let i = 1; i < count; i++){
+                result *= number;
+            }
+            return result;
+            // 결과 값을 변수에 저장하는 경우 retrun을 사용
+        }
+        let num = pow(2,3);
+        console.log(num)
+
+        // 함수 표현식으로 함수 정의하기
+        // 변수의 함수를 담는 방식 => 함수 선언문으로 만든 내용과 동일하게 사용가능
+        // 네이밍 함수 방식
+        const gugudan2 = function gugudan(dan){
+            for(let i=1; i<=9; i++){
+                console.log(`${dan}*${i}=${dan*i}`);
+            }
+        }
+        gugudan2(4);
+
+        // 익명 함수
+        const gugudan3 = function(dan){
+            for(let i=1; i<=9; i++){
+                console.log(`${dan}*${i}=${dan*i}`);
+            }
+        }
+        gugudan3(7);
+        // => 둘 다 요즘은 사용잘 안함
+
+        // 화살표 함수로 함수 정의하기 => 최근 많이 사용
+        const gugudan4 = (dan) => { //()안에 매개변수만 넣으면 됨, 매개변수의 갯수 추가 가능
+            for(let i=1; i<=9; i++){
+                console.log(`${dan}*${i}=${dan*i}`);
+            }
+        }
+        gugudan4(8); //(8)은 인수라고 부름, 매개변수의 갯수 만큼 기입
+
+
+        // 함수의 호이스팅 : 함수가 어디에 적혀 있던 사용이 가능하도록 만들어주는 기능
+        hello(); // 호이스팅으로 인해 함수보다 위에 잇어도 실행됨
+        function hello(){
+            console.log("HelloWorld!");
+        }
+        hello();
+
+
+
+
+    </script>
+    
+</body>
+</html>
