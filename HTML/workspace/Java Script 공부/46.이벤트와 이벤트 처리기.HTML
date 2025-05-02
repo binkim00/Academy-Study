@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트와 이벤트 처리기.HTML</title>
+</head>
+<body>
+    <button onclick="alert('인라인 방식으로 실행')">인라인 방식</button>
+    <!-- 잘 사용하지 않는 방식, 프론트 프레임 워크(react)에서 사용 -->
+
+    <button id="btn2">프로퍼티 리스너 방식</button>
+
+    <button id="btn3">이벤트 등록 메서드 방식</button>
+    
+    <script>
+        // 프로퍼티 리스너 방식
+        // 여러 개의 함수를 하나의 버튼에 설정할 수 없는 단점
+        // 함수 안에 여러 속성을 담아야 함
+        const btn2 = document.querySelector("#btn2");
+        btn2.onclick = function(){
+            alert("프로퍼티 리스너 방식으로 실행")
+        };
+
+        // 이벤트 등록 메서드 방식
+        // 여러 함수를 따로 설정 할 수 있음, 가장 많이 사용 하는 방식
+        const btn3 = document.querySelector("#btn3");
+        btn3.addEventListener("click", function(){
+            alert("이벤트 등록 메서드 방식으로 실행");
+        });
+        // 두 번째 이벤트를 btn3 버튼에 설정
+        const handleBhn3Click =()=>{
+            alert("두 번째 이벤트 등록 메서드 실행");
+        };
+        btn3.addEventListener("click", handleBhn3Click);
+        // 세 번째 이벤트 리스너 등록
+        document.querySelector("#btn3").addEventListener("click",()=>{
+            alert("세 번째 이벤트 등록 메서드 실행")
+        });
+
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>글꼴 관련 스타일</title>
+    <!-- 폰트 사용 예시1 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Moirai+One&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+    
+    <style>
+        /* 폰트 사용 예시1 */
+        @font-face
+        {font-family: 'NanumPenScript';
+        src: url('./Nanum_Pen_Script/NanumPenScript-Regular.ttf')format('truetype');}
+
+        /* 폰트 사용 예시2 */
+        /* @import url('https://fonts.googleapis.com/css2?family=Moirai+One&family=Nanum+Pen+Script&display=swap'); */
+
+        body{font-family:"맑은 고딕", 돋움 , 굴림;}
+        /* font-family : 글꼴 설정 */
+        /* 원하는 글꼴 작성 후; */
+
+        /* 폰트 사용 예시1 */
+        h1{font-size: 60px;}
+        p{font-size: 40px; font-family: 'NanumPenScript';}
+        /* font-size : 글자크기 설정 */
+        /* 아무것도 설정하지 않을 겨우 16px 기본 */
+        /* px : 픽셀, 고정된 크기 */
+        /* % : 부모의 크기를 기준으로 설정. ex) 부모16px*50%=8px  */
+        /* em : 부모의 크기를 1로 하고 그에 대한 숫자로 표기. ex) 16*0.5em=8px */
+        /* rem : html의 크기를 기준으로 하고 그에 대한 숫자로 표기 ex)16*2rem=32px */
+        /* 글자로 설정 : xx-small, x-small, small, medium, large, x-large, xx-large */
+
+        .p2{font-style: italic;
+            font-family: "Moirai One";
+            font-weight: bold;}
+        /* font-style : 기울어진 글꼴 사용하는 속성 */
+        /* italic : 글꼴 안에 저장되어있는 기울어진 글꼴 */
+        /* oblique : 정상 글끌을 약간 기울어지게 표현하는 설정 */
+        /* nomral : 기본값 */
+
+        /* 폰트 사용 예시2 */
+        .moirai-one-regular 
+        {font-family: "Moirai One", system-ui;
+        font-weight: 400;
+        font-style: normal;}
+
+
+
+        .p3{font-weight: bold;}
+        /* font-weight: 글자 굵기 설정 */
+        /* nomail, bold, bolder, ligther, 100~900 */
+
+
+    </style>
+</head>
+<body>
+    <h1>레드향</h1>
+    <p>껍질에 붉은 빛이 돌아 레드향 이라 불린다.</p>
+    <p class="p2">레드향은 한라봉과 귤을 교배한 것으로</p>
+    <p class="p3">일반 귤보다 2~3배 크고, 과육이 붉고 통통하다.</p>
+</body>
+</html>

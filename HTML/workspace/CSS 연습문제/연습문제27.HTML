@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연습문제27</title>
+    <style>
+        .wrapper {
+            display: grid;
+            gap: 10px; /* 그리드 간 간격 */
+            grid-template-columns: repeat(3, 350px);
+            grid-template-rows: repeat(3, 200px);
+        }
+
+        .layout{
+            display: grid;
+            gap: 5px; padding: 13px; margin: 5px;
+            background-color: black;
+            width: 330px;
+        }
+        
+        .grid-layout1{
+            grid-template-columns: 100px 100px 100px;
+            grid-template-rows: 50px 50px;
+        }
+        .grid1{background-color: red;}
+        .grid2{background-color: orange;}
+        .grid3{background-color: yellow;}
+        .grid4{background-color: green;}
+        .grid5{background-color: blue;}
+        .grid6{background-color: navy;}
+        .grid7{background-color: violet;}
+        .grid8{background-color: gold;}
+        .grid9{background-color: silver;}
+        .grid10{background-color: white;}
+        .grid11{background-color: grey;}
+        .grid12{background-color: aqua;}
+        .grid13{background-color: burlywood;}
+        .grid14{background-color: rebeccapurple;}
+        .grid15{background-color: orangered;}
+        .grid16{background-color: yellowgreen;}
+        .grid17{background-color: rgb(182, 179, 2);}
+        .grid18{background-color: rgb(255, 2, 171);}
+
+        .grid-layout2{
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(2, 50px);
+        }
+        .grid-layout2 div:nth-child(1){grid-column: 1/3;}
+        .grid-layout2 div:nth-child(2){grid-column: 3/4; grid-row: 1/3;}
+        .grid-layout2 div:nth-child(3){grid-column: 1/2; grid-row: 2/3;}
+        .grid-layout2 div:nth-child(4){grid-column: 2/3; grid-row: 2/3;}
+
+        .grid-layout3{
+            display: grid;
+            grid-template-columns: repeat(4, 100px);
+            grid-template-rows: repeat(4, 25px);
+        }
+        .grid-layout3 div:nth-child(1){grid-column: 1/4;}
+        .grid-layout3 div:nth-child(2){grid-column: 1/2; grid-row: 2/4;}
+        .grid-layout3 div:nth-child(3){grid-column: 2/4; grid-row: 2/4;}
+        .grid-layout3 div:nth-child(4){grid-column: 1/4; grid-row: 4/6;}
+
+        .grid-layout4{
+            display: grid;
+            grid-template-columns: repeat(4, 74px);
+            grid-template-rows: repeat(5, 25px);
+        }
+        .grid-layout4 div:nth-child(1){grid-column: 1/3; grid-row: 1/3;}
+        .grid-layout4 div:nth-child(2){grid-column: 3/5; grid-row: 1/3;}
+        .grid-layout4 div:nth-child(3){grid-column: 1/2; grid-row: 3/5;}
+        .grid-layout4 div:nth-child(4){grid-column: 2/5; grid-row: 3/5;}
+        .grid-layout4 div:nth-child(5){grid-column: 1/5; grid-row: 5/6;}
+
+        .grid-layout5{
+            display: grid;
+            grid-template-columns: repeat(6, 45px);
+            grid-template-rows: repeat(3, 45px);
+        }
+
+        .grid-layout6{
+            display: grid;
+            grid-template-columns: repeat(4, 75px);
+            grid-template-rows: repeat(5, 25px);
+        }
+        .grid-layout6 div:nth-child(1){grid-column: 1/3; grid-row: 1/2;}
+        .grid-layout6 div:nth-child(2){grid-column: 3/4; grid-row: 1/2;}
+        .grid-layout6 div:nth-child(3){grid-column: 4/5; grid-row: 1/2;}
+        .grid-layout6 div:nth-child(4){grid-column: 1/2; grid-row: 2/3;}
+        .grid-layout6 div:nth-child(5){grid-column: 2/3; grid-row: 2/3;}
+        .grid-layout6 div:nth-child(6){grid-column: 3/4; grid-row: 2/3;}
+        .grid-layout6 div:nth-child(7){grid-column: 1/3; grid-row: 3/5;}
+        .grid-layout6 div:nth-child(8){grid-column: 3/4; grid-row: 3/4;}
+        .grid-layout6 div:nth-child(9){grid-column: 4/5; grid-row: 3/4;}
+        .grid-layout6 div:nth-child(10){grid-column: 3/4; grid-row: 4/5;}
+        .grid-layout6 div:nth-child(11){grid-column: 1/4; grid-row: 5/6;}
+        .grid-layout6 div:nth-child(12){grid-column: 4/5; grid-row: 5/6;}
+
+        .grid-layout7{
+            display: grid;
+            grid-template-columns: repeat(2, 150px);
+            grid-template-rows: repeat(3, 50px);
+        }
+        .grid-layout7 div:nth-child(1){grid-column: 1/2; grid-row: 1/2;}
+        .grid-layout7 div:nth-child(2){grid-column: 2/3; grid-row: 1/2;}
+        .grid-layout7 div:nth-child(3){grid-column: 1/2; grid-row: 2/4;}
+        .grid-layout7 div:nth-child(4){grid-column: 2/3; grid-row: 2/4;}
+        
+        .innergird{
+            display: grid;
+            padding: 3px;
+            grid-template-columns: repeat(2, 70px);
+            grid-template-rows: repeat(2, 50px);
+        }
+        .innergird div:nth-child(1){grid-column: 1/3; grid-row: 1/2; margin: 3px;}
+        .innergird div:nth-child(2){grid-column: 1/2; grid-row: 2/3; margin: 3px;}
+        .innergird div:nth-child(3){grid-column: 2/3; grid-row: 2/3; margin: 3px;}
+
+
+        .grid-layout8{
+            display: grid;
+            grid-template-columns: repeat(5, 60px);
+            grid-template-rows: repeat(3, 40px);
+        }
+        .grid-layout8 div:nth-child(1){grid-column: 1/2; grid-row: 1/2;}
+        .grid-layout8 div:nth-child(2){grid-column: 2/3; grid-row: 1/2;}
+        .grid-layout8 div:nth-child(3){grid-column: 3/4; grid-row: 1/2;}
+        .grid-layout8 div:nth-child(4){grid-column: 4/5; grid-row: 1/2;}
+        .grid-layout8 div:nth-child(5){grid-column: 5/6; grid-row: 1/2;}
+        .grid-layout8 div:nth-child(6){grid-column: 1/2; grid-row: 2/3;}
+        .grid-layout8 div:nth-child(7){grid-column: 2/3; grid-row: 2/3;}
+        .grid-layout8 div:nth-child(8){grid-column: 3/6; grid-row: 2/3;}
+        .grid-layout8 div:nth-child(9){grid-column: 1/6; grid-row: 3/4;}
+
+        .grid-layout9{
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(3, 50px);
+        }
+        .grid-layout9 div:nth-child(1){grid-column: 1/4; grid-row: 1/2;}
+        .grid-layout9 div:nth-child(2){grid-column: 1/2; grid-row: 2/4;}
+        .grid-layout9 div:nth-child(3){grid-column: 2/4; grid-row: 2/3;}
+        .grid-layout9 div:nth-child(4){grid-column: 2/3; grid-row: 3/4;}
+        .grid-layout9 div:nth-child(4){grid-column: 3/4; grid-row: 3/4;}
+
+
+
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="layout grid-layout1">
+            <div class="grid1">가</div>
+            <div class="grid2">나</div>
+            <div class="grid3">다</div>
+            <div class="grid4">라</div>
+            <div class="grid5">마</div>
+            <div class="grid6">바</div>
+        </div>
+
+        <div class="layout grid-layout2">
+            <div class="grid1">A</div>
+            <div class="grid2">B</div>
+            <div class="grid3">C</div>
+            <div class="grid4">D</div>
+        </div>
+
+        <div class="layout grid-layout3">
+            <div class="grid1">A</div>
+            <div class="grid2">B</div>
+            <div class="grid3">C</div>
+            <div class="grid4">D</div>
+        </div>
+
+        <div class="layout grid-layout4">
+            <div class="grid1">A</div>
+            <div class="grid2">B</div>
+            <div class="grid3">C</div>
+            <div class="grid4">D</div>
+            <div class="grid5">E</div>
+        </div>
+
+        <div class="layout grid-layout5">
+            <div class="grid1">1</div>
+            <div class="grid2">2</div>
+            <div class="grid3">3</div>
+            <div class="grid4">4</div>
+            <div class="grid5">5</div>
+            <div class="grid6">6</div>
+            <div class="grid7">7</div>
+            <div class="grid8">8</div>
+            <div class="grid9">9</div>
+            <div class="grid10">10</div>
+            <div class="grid11">11</div>
+            <div class="grid12">12</div>
+            <div class="grid13">13</div>
+            <div class="grid14">14</div>
+            <div class="grid15">15</div>
+            <div class="grid16">16</div>
+            <div class="grid17">17</div>
+            <div class="grid18">18</div>
+        </div>
+
+        <div class="layout grid-layout6">
+            <div class="grid1">1</div>
+            <div class="grid2">2</div>
+            <div class="grid3">3</div>
+            <div class="grid4">4</div>
+            <div class="grid5">5</div>
+            <div class="grid6">6</div>
+            <div class="grid7">7</div>
+            <div class="grid8">8</div>
+            <div class="grid9">9</div>
+            <div class="grid10">10</div>
+            <div class="grid11">11</div>
+            <div class="grid12">12</div>
+        </div>
+        
+        <div class="layout grid-layout7">
+            <!-- 그리드 안 그리드 만들기 -->
+            <div class="grid1">1</div>
+            <div class="grid2">2</div>
+            <div class="grid3">3</div>
+            <div class="grid4 innergird">
+                <div class="grid5">5</div>
+                <div class="grid6">6</div>
+                <div class="grid7">7</div>
+            </div>
+        </div>
+
+        <div class="layout grid-layout8">
+            <div class="grid1">1</div>
+            <div class="grid2">2</div>
+            <div class="grid3">3</div>
+            <div class="grid4">4</div>
+            <div class="grid5">5</div>
+            <div class="grid6">6</div>
+            <div class="grid7">7</div>
+            <div class="grid8">8</div>
+            <div class="grid9">9</div>
+        </div>
+
+        <div class="layout grid-layout9">
+            <div class="grid1">가</div>
+            <div class="grid2">나</div>
+            <div class="grid3">다</div>
+            <div class="grid4">라</div>
+            <div class="grid5">마</div>
+        </div>
+    </div>
+
+</body>
+</html>

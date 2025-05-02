@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>박스모델</title>
+    <style>
+        div{ 
+            display: inline-block;
+            width: 300px;
+            padding: 20px;
+            margin: 20px;
+            background-color: rgb(150, 211, 232);
+            border-radius: 55px 10px / 10px 55px;
+        }
+        .shadow1{box-shadow: 8px 15px;}
+        .shadow2{box-shadow: 8px 15px rgb(183, 181, 181);}
+        .shadow3{box-shadow: 8px 15px 10px rgb(183, 181, 181);}
+        .shadow4{box-shadow: 8px 15px 10px 3px rgb(183, 181, 181);}
+        .shadow5{box-shadow: 8px 15px 10px 3px inset rgb(183, 181, 181);}
+        .shadow6{box-shadow: 5px 5px 5px red, 10px 10px 5px yellow, 15px 15px 5px blue;}
+    </style>
+</head>
+<body>
+    <div class="shadow1">It`s impossible not only starting good but also keeping it firm!!</div>
+    <div class="shadow2">It`s impossible not only starting good but also keeping it firm!!</div>
+    <div class="shadow3">It`s impossible not only starting good but also keeping it firm!!</div>
+    <div class="shadow4">It`s impossible not only starting good but also keeping it firm!!</div>
+    <div class="shadow5">It`s impossible not only starting good but also keeping it firm!!</div>
+    <div class="shadow6">It`s impossible not only starting good but also keeping it firm!!</div>
+</body>
+</html>

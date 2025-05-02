@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>변형 효과 스타일</title>
+    <style>
+        div{
+            background-color: aqua;
+            width: 100px; height: 100px; margin: 10px;
+            transition-duration: 1s;
+        }
+
+        /* translate 위치 이동 scale 확대 skew 기울기 rotate 회전*/
+        .translate:hover{transform: translate(100px, 100px);}
+        .scale:hover{transform: scale(3,3); transform-origin: left;}
+         /* transform-origin: <x축 y축> : 회전의 중심 설정
+        x축 = left, right, center
+        y축 = top, center, bottom */
+        .skew:hover{transform: skew(30deg, 30deg);}
+        .rotate:hover{transform: rotate(30deg);}
+
+    </style>
+
+</head>
+<body>
+    <div class="translate">translate</div>
+    <div class="scale">scale</div>
+    <div class="skew">skew</div>
+    <div class="rotate">rotate</div>
+    
+</body>
+</html>

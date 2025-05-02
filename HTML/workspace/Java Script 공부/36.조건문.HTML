@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>조건문</title>
+</head>
+<body>
+    <script>
+        // if문 문법
+        // if(조건식){
+        //     조건식이 true일 때 실행되는 코드
+        //     실행 코드는 여러줄 작성 가능
+        // }else if(조건식){ 위의 조건식에서 false가 나오면 elseif를 실행
+        //     조건식이 true일 때 실행되는 코드
+        // }else if(조건식){ 위의 두 가지 조건식에서 false가 나오면 elseif 실행
+        //     조건식이 true일 때 실행되는 코드
+        // }else{
+        //      위의 조건식이 모두 false일 때 실행되는 코드
+        // }
+
+        // if문은 단독으로 사용 가능
+        // else문은 if 문의 조건식이 false일 때 실행되는 코드,
+        // if문 아래에만 가능하고 단독으로는 사용할 수 없음
+        // esle if와 esle는 부속절이라 부름
+        // 조건식 중 하나라도 true가 나오면 부속절은 실행되지 않음
+
+        let score = 65;
+        if(score>=90){
+            console.log("A");
+        }else if(score>=80){
+            console.log("B")
+        }else if(score>=70){
+            console.log("C")
+        }else{
+            console.log("F")
+        }
+
+
+        // switch 조건문 : if문과 같은 조건문, 숫자 값은 번거로우나 문자 값은 수월함.
+        // switch(변수){
+        //     case 변수와 비교할 값:
+        //         실행할 코드;
+        //         break;
+        //     case 두 번째 비교할 값:
+        //         실행할 코드;
+        //         break;
+        //     default:
+        //         위의 조건에 해다하는 값이 없을 때 실행할 코드;
+        //         if문의 else와 같은 역할    
+        // }
+        // 1번 예시. case 따로 설정
+        let food ="carrot";
+        switch(food){
+            case "melon":
+                console.log("과일");
+                break; //break가 없으면 아래 값을 전부 실행함
+            case "apple":
+                console.log("과일");
+                break;
+            case "banana":
+                console.log("과일");
+                break;
+            case "carrot":
+                console.log("채소");
+                break;   
+            default:
+                console.log("그것은 과일과 채소가 아닙니다")    ;
+                break;      
+        }
+        // 2번 예시. case 합쳐서 설정
+        let food2 ="전복";
+        switch(food2){
+            case "melon":
+            case "apple":
+            case "banana":
+                console.log("과일");
+                break; 
+            case "carrot":
+                console.log("채소");
+                break;   
+            default:
+                console.log("그것은 과일과 채소가 아닙니다")    ;
+                break;      
+        }
+
+    </script>
+    
+</body>
+</html>

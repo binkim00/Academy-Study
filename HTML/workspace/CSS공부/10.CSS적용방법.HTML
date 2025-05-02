@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS적용방법</title>
+    
+    <!-- 내부 스타일 시트 방식 ↓ -->
+    <style>
+        p {color: blue;}
+    </style>
+
+    <!-- 외부 스타일 시트 방식 ↓ -->
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <!-- 인라인 스타일 : 태그에 style 속성을 사용 -->
+    <!-- style="속성: 속성 값;" -->
+    <!-- 선호하는 스타일은 아님 -->
+    <h1 style="color: red;">인라인 스타일로 설정</h1>
+
+
+    <!-- 웹 문서 안에서 사용할 스타일을 문서 안에 정리한 것
+    모든 스타일 정보는 <head> 태그와 </head> 태그 안에서 정의
+    <style> 태그와 </style> 태그 사이에 작성 -->
+    <!-- 제작 과정에서 사용 -->
+    <p>내부 스타일 시트</p>
+
+
+    <!-- 여러 웹 문서에서 사용할 스타일을 별도 파일로 저장해 놓고 
+    필요할 때마다 파일에서 가져와 사용
+    <style> 태그 없이 <link> 태그만 사용해 
+    미리 만들어 놓은 외부 스타일 시트 파일 연결 -->
+    <!-- 제작이 끝난 이후 외부 시트를 이용 -->
+    <!-- 더 자주 사용하게 될 듯 -->
+    <div>외부 스타일 시트로 설정</div>
+
+</body>
+</html>

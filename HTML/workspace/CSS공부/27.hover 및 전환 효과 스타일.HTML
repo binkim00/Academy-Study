@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>27. hover및 전환효과 스타일</title>
+    <style>
+        .red-box{
+            width: 100px; height: 20px;
+            background-color: red;
+            /* transition-property : 전환효과를 설정할 속성 */
+            transition-property: background-color,width;
+            /* transition-duration : 전환이 완되는 걸리는 시간*/
+            transition-duration: 6s, 500ms;
+            /* transition-delay : 변경되기전 대기시간을 설정 */
+            transition-delay: 1s;
+
+        }
+        .red-box:hover{
+            background-color: blue;
+            width: 500px;
+        }
+        .linear{transition-timing-function: linear;}
+        .ease{transition-timing-function:ease ;}
+        .ease-in{transition-timing-function:ease-in ;}
+        .ease-out{transition-timing-function: ease-out;}
+        .ease-in-out{transition-timing-function: ease-in-out;}
+       
+        .transition{
+            width: 100px;
+            background-color: aqua;
+            transition: width 5s ease-in 1s;
+            /* 한 번에 설정 : property, 전환시간, 전환방법, 딜레이 순으로 ,없이 기입 */
+        }
+        .transition:hover{
+            background-color: rgb(7, 7, 7);
+            width: 300px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="red-box linear">linear</div>
+    <div class="red-box ease">ease</div>
+    <div class="red-box ease-in">ease-in</div>
+    <div class="red-box ease-out">ease-out</div>
+    <div class="red-box ease-in-out">ease-in-out</div>
+    <div class="transition">transition</div>
+</body>
+</html>

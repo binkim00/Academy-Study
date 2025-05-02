@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>background 관련 스타일</title>
+    <style>
+        div{
+            /* width: 600px; height: 300px; */
+            /* border: 1px solid black; */
+            /* 이미지가 가로세로 보다 작을 경우 반복해서 채우게 됨. */
+            /* background-image: url(../images/coffee.jpg);
+            /* 이미지 반복 설정 */
+            /* no-repeat : 반복X */
+            /* repeat-x : 가로 방향 반복 */
+            /* repeat-y : 세로 방향 반복 */
+            /* repeat : 가로세로 반복 하는 기본값 */
+            /* round : 이미지가 요소의 크기에 맞도록 맞춰서 반복*/
+            /* space : 이미지가 짤리지 않도록 반복 */
+            /* background-repeat: no-repeat; */
+
+            /* 이미지가 배경보다 작을 경우 사용하는 속성 */
+            /* background-size */
+            /* auto : 이미지 크기를 유지 */
+            /* cover : 이미지의 가로세로 비율을 유지하면서 요소의 배경을 채움 */
+            /* contain : 이미지의 가로세로 비율을 유지하면서 배경 안에 들어가도록 축소나 확대 */
+            /* 너비 높이 : 직접 이미지 크기 설정 */
+            /* background-size: auto; */
+
+            /* background-position : 이미지를 특정 위치에 출력하는 속성 */
+            /* left, center, right : 가로 위치 지정 */
+            /* top, center, bottom : 세로 위치 지정 */
+            /* px, rem, em, % : <x축> <y축>로 직접 지정 가능*/
+            /* background-position: 50% 50%; */
+
+
+            /* background-attachment : 스크롤 할 때의 이미지 작동 방식 */
+            /* local : 이미지와 웹 모두 스크롤 */
+            /* scroll : 이미지가 요소에는 고정되지만, 웹 부라우저에서는 스크롤 됨 */
+            /* fixed : 이미지와 웹 브라우저 모두 고정 */
+            width: 1280px; height: 800px;
+            background-attachment: fixed;
+            background-position: center;
+            background-image: url(../images/bg.jpg);
+
+            /* background 속성 한번에 지정하기 */
+            /* 색상, 이미지, 반복, 위치/크기, 스크롤 작동 */
+            /* background: red url(../images/mic.jpg) no-repeat center/100% 100% fixed */
+
+
+        }
+
+
+        p{
+            height: 500px;
+            background-color: aqua;
+        }
+    </style>
+</head>
+<body>
+    <p>background-attachment</p>
+    <div></div>
+    <p>background-attachment</p>
+</body>
+</html>

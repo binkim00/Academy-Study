@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트 자료형</title>
+</head>
+<body>
+    <script>
+        // 변수에 문자열 저장하기
+        // 글자를 저장할 때는 따옴표들로 감싸서 저장
+        // 감싸지 않으면 변수명으로 인식
+        let name = '홍길동';
+        let name2 = "이순신";
+
+        // 문자열 더하기        
+        console.log(name+" 입니다.");
+        let name3 = name+'입니다'
+        console.log(name3);
+
+        // 문자열 안에 따옴표 사용
+        // 이스케이프 문자를 이용하여 표시 가능
+        // \' = 작음 따옴표, \" = 큰 따옴표, \n = 줄 바꿈
+        // \t = 수평 탭, \\ = \ 1개
+        alert("안녕하세요. 저는\"이순신\"입니다.\n오늘은 4월 3일 입니다.")
+
+        // 숫자 자료형
+        // 문자는 이어주기만 하지만 숫자 자료형은 더해줌
+        let num = 10;
+        let num2 = 20.5;
+        let num3 = num+num2;
+        console.log(num3);
+
+        // 논리 자료형 : true, false 둘 중 하나 만을 저장하는 자료형, 조건식에 사용.
+        let bool = true;
+        let bool2 = false;
+
+        // undifined : 단 한번도 값을 저장하지 않은 변수에 설정되는 값
+        let unde;
+        console.log(unde);
+
+        // null : 데이터가 없음을 설정하는 값
+        let nu = null;
+        console.log(nu)
+
+        // 객체 자료형 : 문자, 숫자, 논리형, 언디파인, 널 같은 기본 자료형을 제외한 모든 자료형
+        // 여러가지 데이터를 묶어 놓거나 함수가 들어잇는 데이터
+        // 배열 : 하나의 이름으로 여러 개의 값을 저장할 수 있는 자료형
+        let scores = [100,90,80,70,60,50];
+        let subject = ['국어','수학','영어','과학','사회'];
+        // 첫 번째 데이터의 주소(인덱스)가 0부터 시작함.
+        console.log(subject[0]+"는 "+ scores[0]+"점 입니다.");
+        console.log(subject[1]+"는 "+ scores[1]+"점 입니다.");
+        console.log(subject[2]+"는 "+ scores[2]+"점 입니다.");
+
+        // 객체 리터럴 : key:value로 이루어진 데이터
+        let stuentScore = {
+            koreanScore:80,
+            englishScore:70,
+            mathScore:60
+        };
+        console.log(stuentScore.koreanScore);
+        console.log(stuentScore['englishScore'])
+        
+    </script>
+    
+</body>
+</html>

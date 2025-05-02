@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연습문제4</title>
+</head>
+<body>
+    <h1>회원 가입을 환영합니다</h1>
+    <form action="#">
+        <fieldset>
+            <legend>사용자 정보</legend>
+            <ul>
+                <li><label>아이디 <input type="text" name="id"></label></li>
+                <li><label>이메일 <input type="email" name="email"></label></li>
+                <li><label>비밀번호 <input type="password" name="pw"></label></li>
+                <li><label>비밀번호 확인 <input type="password"></label></li>
+                <!-- 비밀번호 확인은 서버로 보내면 name속성 넣기 -->
+                <!-- 대부분 HTML에서 확인해서 안 넣음 -->
+            </ul>
+        </fieldset>
+    
+        <fieldset>
+            <legend>이벤트와 새로운 소식</legend>
+                <label><input type="radio" name="event" value="yes"> 메일 수신 </label>
+                <label><input type="radio" name="event" value="no"> 메일 수신 안 함</label>
+        </fieldset>
+        <input type="submit" value="가입하기">
+        <input type="reset" value="취소">
+    </form>
+<!-- file:///C:/Users/it/Desktop/workspace/%EC%97%B0%EC%8A%B5%EB%AC%B8%EC%A0%9C4.
+HTML
+?id=aaa
+&email=aaa
+%40naver.com
+&pw=aaa
+&event=yes# -->
+
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>input태그</title>
+</head>
+<body>
+    <!-- type = “submit”, type=“reset” 
+    폼 전송/리셋 버튼 
+    전송(submit) 버튼 : 사용자 입력 내용을 서버로 전송
+    리셋(reset) 버튼 : 사용자 입력 내용 전부 삭제
+    value 속성을 이용해 버튼 표시 내용 지정-->
+
+    <!-- type="hidden" : 화면 상에는 보이지 않는 데이터만 저장하는 타입 -->
+    <!-- submit 실행시 hidden에 있는 데이터도 함께 전송 -->
+    <form action="#">
+    <!-- method 설정을 안하면 get으로 자동으로 설정 -->
+        <input type="hidden" name="hidden" value="hiddendata">
+        <!-- 음...쿠팡으로 치면 옵션 설정을 하고 새로 고침을 할 때
+        페이지는 새로고침이 되지만 정보는 남아있는 경우 등? -->
+        <input type="text" name="id">
+        <input type="submit" value="전송">
+    </form>
+
+
+
+    <!-- enctype="multipart/form-data" : 파일을 전송하려면 사용해야하는 속성 -->
+    <form action="#" method="post" enctype="multipart/form-data">
+        <!-- multiple속성 : 파일을 여러 개 선택가능 -->
+        <input type="file" name="file" multiple>
+        <button>전송</button>
+        <!-- 서버가 있어야 전송이 가능 -->
+    </form>
+
+
+    <!-- type="image" : submit 버튼 대신 이미지 삽입 -->
+    <form action="#">
+        <input type="date" name="date">
+        <input type="month" name="month">
+        <input type="week" name="week">
+        <input type="image" src="./images/login.png" alt="로그인">
+        <input type="button" value="버튼" onclick="window.open('index.html')">
+        <button type="button" onclick="window.open('index.html')">버튼태그</button>
+        <!-- onclick속성 : 자바스크립트를 실행하기위한 속성 -->
+        <!-- window.open('파일이름') : 파일을 새 창에 열어주는 자바스크립트 -->
+        <!-- 버튼은 많이 사용해서 따로 태그도 존재함, 타입 설정을 안하면 submit이 됨 -->
+    </form>
+
+    <form action="#">
+        <input type="time" name="time">
+        <input type="datetime-local" name="datetime-local">
+        <input type="submit" value="전송">
+        <!-- file:///C:/Users/it/Desktop/workspace/7.input태그.
+        HTML
+        ?time=09:00
+        &datetime-local=2025-03-26T09:00# -->
+    </form>
+
+
+    <form action="#">
+        <input type="date" name="date">
+        <input type="month" name="month">
+        <input type="week" name="week">
+        <input type="submit" value="전송">
+    </form>
+
+
+    <form action="#">
+        <input type="number" name="num">
+        <!-- 숫자만 입력 가능, 스핀 박스로 표시됨 -->
+        <input type="range" name="ran">
+        <!-- 퍼센트 숫자로 나옴 -->
+        <input type="submit" value="전송">
+        <!-- file:///C:/Users/it/Desktop/workspace/7.input%ED%83%9C%EA%B7%B8.
+         HTML
+         ?num=181
+         &ran=88# -->
+    </form>
+
+    <form action="#">
+        <input type="number" name="num" min="2" max="10" step="2">
+        <!-- 최대 최소 설정 후 입력은 되지만 전송 불가 -->
+        <!-- 2개씩 설정해서 홀수는 전송불가 -->
+        <input type="range" name="ran" min="2" max="10" step="2">
+        <input type="submit" value="전송">
+    </form>
+
+
+    <form action="">
+        <!-- radio 타입 : 여러 개의 내용 중 한 개만 선택해야 하는 경우 사용하는 태그 -->
+        <!-- 똑같은 name속성을 사용 하는 것으로 input태그를 하나로 묶어서 사용 -->
+        <!-- name이 여러 개이면 다른 이름의 name끼리는 선택 가능함 -->
+        <label>선물포장<input type="radio" name="gift" value="yes"></label>
+        <label>일반 포장<input type="radio"name="gift" value="no"></label>
+        <label>방문 포장<input type="radio"name="gift2" value="true"></label>
+        <label>배달 포장<input type="radio"name="gift2" value="false"></label>
+        <input type="submit" value="전송">
+        <!-- file:///C:/Users/it/Desktop/workspace/7.input%ED%83%9C%EA%B7%B8.
+        HTML
+        ?gift=yes
+        &gift2=true -->
+
+    </form>
+
+    <form action="">
+        <!-- 체크박스의 경우 label 태그를 눌러 체크가 가능하도록 함 -->
+        <!-- label 설정을 안하면 박스를 클릭해야함, 설정을 하면 글자 클릭해도 됨 -->
+        <!-- value속성 : 체크가 되었을 때 value의 값을 전송함 -->
+        <label>선물용3kg<input type="checkbox" name="check1"></label>
+        <label>선물용5kg<input type="checkbox" name="check2" value="A5"></label>
+        <label>가정용3kg<input type="checkbox" name="check3" value="B3"></label>
+        <label>가정용5kg<input type="checkbox" name="check4" value="C5"></label>
+        <input type="submit" value="전송">
+        <!-- file:///C:/Users/it/Desktop/workspace/7.input%ED%83%9C%EA%B7%B8.
+        HTML
+        ?check1=on
+        &check2=on -->
+        <!-- 체크 한 번호만 데이터 전송 -->
+        <!-- file:///C:/Users/it/Desktop/workspace/7.input%ED%83%9C%EA%B7%B8.
+        HTML
+        ?check1=on
+        &check2=A5
+        &check3=B3
+        &check4=C5 -->
+        <!-- value값 설정 이후 ↑ on이 아닌 설정한 값으로 전송됨 -->
+
+    </form>
+
+
+    <form action="#">
+        <input type="search" name="search">
+        <!-- X버튼이 생겨서 내용이 초기화 됨 -->
+        <input type="url" name="url">
+        <!-- https;//가 있어야 submit 가능 -->
+        <input type="email" name="email">
+        <!-- @가 있어야 submit 가능 -->
+        <input type="tel" name="tel">
+        <!-- 아무거나 입력해도 submit 가능 -->
+        <input type="submit" value="전송">
+    </form>
+
+</body>
+</html>

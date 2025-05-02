@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>목록 관련 스타일</title>
+    <style>
+        /* list-style-position : li태그 들여쓰기 옵션 */
+        /* inside : 들여쓰기
+           outside : 기본값 */
+        .book1{
+            list-style-type: square;
+            list-style-position: inside;
+        }
+        .book2{
+            list-style-type: upper-latin;
+            list-style-position: outside;
+        }
+        .book3{
+            list-style-image: url('images/dot.png');
+        }
+    </style>
+</head>
+<body>
+    <h1>도서 시리즈</h1>
+    <ul class="book1">
+        <li>Do it! 시리즈</li>
+        <li>첫 코딩 시리즈</li>
+        <li>된다 시리즈</li>
+    </ul>
+    <ol class="book2">
+        <li>Do it! 시리즈</li>
+        <li>첫 코딩 시리즈</li>
+        <li>된다 시리즈</li>
+    </ol>
+    <ul class="book3">
+        <li>Do it! 시리즈</li>
+        <li>첫 코딩 시리즈</li>
+        <li>된다 시리즈</li>
+    </ul>
+</body>
+</html>

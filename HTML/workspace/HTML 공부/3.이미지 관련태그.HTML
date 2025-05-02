@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이미지 관련 태그</title>
+</head>
+<body>
+    <div>
+        <img src="./images/salad.jpg" alt="샐러드" width="250px" height="250px">
+    </div>
+    <!-- width(가로), heith(세로): 이미지의 크기를 조절하는 속성 -->
+    <!-- 가로 세로중 둘 중에 하나만 설정하면 원본 비율을 유지 -->
+
+    <!-- % 퍼센트 이용하여 이미지 크기 설정 -->
+    <!-- 가로 퍼센트 설정시 가로크기는 고정되어 있기 때문에 설정할 수 있음 -->
+    <!-- 세로 퍼센트 설정은 크기 제한이 없음, 
+    브라우저는 정보를 아래로 쌓기 때문에 설정할 수 없음,
+    세로를 설정하려면 부모 태그의 세로크기를 설정해야함. -->
+    <!-- 퍼센트 설정은 화면 비율에 상관없이 고정된 비율의 크기 유지 -->
+    <div style="height: 500px; border: 1px solid black;">
+        <img src="./images/salad.jpg" alt="샐러드" height="50%">
+    </div>
+
+    <!-- img태그 : HTML 문서에 이미지를 출력할때 사용하는 태그 -->
+    <!-- src속성 : 파일의 위치를 설정 -->
+    <!-- alt속성 : 파일이 없을 경우 대신 나오는 문구를 설정-->
+    <!-- 절대경로 방식: : 드라이브 부터 시작하여 파일 위치까지 
+    전부 작성하는 방식 -->
+    <!-- 단점 : 이미지 파일의 위치가 변경되거나 다른 컴퓨터로 옮기는 경우에 
+    이미지가 뜨지 않음 -->
+    <img src="C:\Users\it\Desktop\workspace\images\link.png" alt="로고">
+    <!-- 상대경로 : 특정 폴더를 기준으로 파일을 찾는 방식 -->
+    <!-- ./ 방식 : 현재 HTML파일이 있는 폴더를 기준으로 위치를 찾는 방식-->
+    <img src="./images/mic.jpg" alt="현재폴더">
+    <!-- ../ 방식: 현재 HTML파일이 있는 폴더의 상위폴더를 기준으로 
+    위치를 찾는 방식 -->
+    <img src="../workspace/images/salad.jpg" alt="상위폴더">
+    <!-- / : 서버가 설정한 기본 폴더를 기준으로 위치를 찾는 방식, 
+    서버가 있어야 진행이 가능 -->
+    <img src="/images/top.jpg" alt="서버폴더">
+    <!-- 서버 폴더 상위로는 갈 수 없기 때문에 절대경로와
+    ../방식의 이미지는 송출 불가 -->
+    <!-- 인터넷 주소를 이용한 방식, 저작권 문제 있을 수 있음, 
+    이후에 이미지 서버가 따로 있을 때 이용가능한 방법 -->
+    <img src="이미지주소" alt="이미지주소">
+
+  
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grid</title>
+  <link rel="stylesheet" href="grid-basic.css">
+  <style>
+    .grid-container{
+      display: grid;
+      /* grid
+      columns: 열(가로) 설정, 나열한 갯수에 따라 늘어남
+      row: 행(세로) 설정, 나열한 갯수에 따라 늘어남 */
+      grid-template-columns: 100px 100px 100px ;
+      grid-template-rows: 100px 100px 100px ;
+     
+      row-gap: 10px; column-gap: 10px;
+      /* gap : 행과 열의 간격 설정, margin 설정이 안되서 사용 */
+
+      align-items: stretch;
+      /* align-items : 그리드 아이템의 가로 설정
+      stretch, start, center, end */
+
+      justify-items: stretch;
+      /* justify-items: 그리드 아이템의 세로 설정
+      start, center, end, stretch */
+    }
+
+    .grid-layout{
+      display: grid;
+      grid-template-columns: 100px 100px 100px;
+      grid-template-rows: 50px 50px 50px;
+      row-gap: 5px;
+      column-gap: 5px;
+      grid-template-areas: 
+      "header header header"
+      "sidebar content content"
+      "footer footer footer"
+    }
+    #header{grid-area: header; background-color: red;}
+    #sidebar{grid-area: sidebar; background-color: orange;}
+    #content{grid-area: content; background-color: yellow;}
+    #footer{grid-area: footer; background-color: green;}
+
+
+
+    .grid-layout2{
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      grid-template-rows: repeat(3, 100px);
+      gap: 5px;
+    }
+    .grid-layout2 .grid-item:nth-child(1){
+      grid-column-start: 1;
+      grid-column-end: 3;
+      /* 1번째 줄부터 3번째 줄까지 병합, 한줄을 기준으로 병합 */
+    }
+    .grid-layout2 .grid-item:nth-child(2){
+      grid-column: 3/4;
+    }
+    .grid-layout2 .grid-item:nth-child(3){
+      grid-row: 2/4;
+      /* 2번째 줄부터 4번째 줄까지 병합 */
+    }
+    .grid-layout2 .grid-item:nth-child(4){
+      grid-column-start: 2;
+      grid-column-end: 4;
+      grid-row-start: 2;
+      grid-row-end: 4;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="grid-layout2">
+    <div class="grid-item">item-1</div>
+    <div class="grid-item">item-2</div>
+    <div class="grid-item">item-3</div>
+    <div class="grid-item">item-4</div>
+  </div>
+
+  <div class="grid-layout">
+    <div id="header">header</div>
+    <div id="sidebar">sidebar</div>
+    <div id="content">content</div>
+    <div id="footer">footer</div>
+  </div>
+
+  <div class="grid-container">
+    <div class="grid-item">item-1</div>
+    <div class="grid-item">item-2</div>
+    <div class="grid-item">item-3</div>
+    <div class="grid-item">item-4</div>
+    <div class="grid-item">item-5</div>
+    <div class="grid-item">item-6</div>
+    <div class="grid-item">item-7</div>
+    <div class="grid-item">item-8</div>
+    <div class="grid-item">item-9</div>
+  </div>
+</body>
+</html>

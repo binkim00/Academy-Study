@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>폼에서 사용하는 여러가지 태그</title>
+</head>
+<body>
+    <form action="#">
+        <!-- textarea태그 : 여러 줄의 텍스트 입력 시 사용, 게시글, 사용자 약관 등 -->
+        <!-- cols : 가로 크기 -->
+        <!-- rows : 세로 크기 -->
+        <!-- style="resize: none;" : 크기 고정 css -->
+        <textarea cols="40" rows="5" style="resize: none;" name="textarea"></textarea>
+        <br>
+
+        <!-- 드롭다운리스트 -->
+        <!-- select : 드롭다운 리스트를 생성 -->
+        <!-- option : 드롭다운 리스트 안의 데이터 -->
+        <!-- value 설정 시 해당 값 전달, 없다면 태그에 입력된 데이터 전달 -->
+        <!-- selected : 화면이 뜰 때 설정되어있는 기본 값 -->
+        <select name="select">
+            <option value="special_3">선물용3kg</option>
+            <option value="special_5" selected>선물용5kg</option>
+            <option value="family_3">가정용3kg</option>
+            <option value="fanily_5">가정용5kg</option>
+        </select>
+        <button>전송</button>
+    </form>
+
+
+</body>
+</html>

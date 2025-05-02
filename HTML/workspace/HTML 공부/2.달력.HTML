@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>달력</title>
+    <style>
+        .bold-korean {
+            font-weight: bold;
+        }
+         table, th, td{
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+        }
+        th, td{
+            padding: 10px 20px;
+        }
+        .red-text {
+            color:red;
+        }
+        .blue-text {
+            color: blue;
+        }
+        /* 첫 번째 열 (일요일)에만 빨간색 텍스트 적용 */
+        tr td:nth-child(1):not([colspan]) {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <h1 id="calener-title">2025년 3월 달력</h1>
+        <caption>2025년 3월 달력</caption>
+        <!-- <colgroup>
+            <col style="background-color:rgb(94, 87, 87)">
+            <col>
+            <col>
+            <col>
+            <col>
+            <col>
+            <col>     -->
+        </colgroup>
+        <tr>
+            <th>일</th>
+            <th>월</th>
+            <th>화</th>
+            <th>수</th>
+            <th>목</th>
+            <th>금</th>
+            <th>토</th>
+        </tr>
+        <tr>
+            <!-- colspan : 합치는 열의 칸 수 작성 -->
+            <td colspan="6"></td>
+            <td><span class="red-text">1<br>삼일절</span></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td><span class="red-text">3<br>대체휴일</span><br>
+                <span class="blue-text">납세자의 날</span></td>
+            <td>4</td>
+            <td>5<br><span class="blue-text">경칩</span></td>
+            <td>6</td>
+            <td>7</td>
+            <td>8<br><span class="blue-text">국제여성의 날</span></td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>10</td>
+            <td>11</td>
+            <td>12</td>
+            <td>13</td>
+            <td>14<br><span class="blue-text">화이트데이</span></td>
+            <td>15</td>
+        </tr>
+        <tr>
+            <td>16</td>
+            <td>17</td>
+            <td>18</td>
+            <td>19<br><span class="blue-text">상공의 날</span></td>
+            <td>20<br><span class="blue-text">춘분</span></td>
+            <td>21<br><span class="blue-text">암예방의 날</span></td>
+            <td>22</td>
+        </tr>
+        <tr>
+            <td>23</td>
+            <td>24</td>
+            <td>25</td>
+            <td>26</td>
+            <td>27</td>
+            <td>28</td>
+            <td>29</td>
+        </tr>
+        <tr>
+            <td>30</td>
+            <td>31</td>
+            <td colspan="5"></td>
+        </tr>
+    </table>
+    <!-- <script> 안되넴;;;
+        // 한글만 굵게 표시하는 함수
+        function boldKoreanInTitle() {
+            const titleElement = document.getElementById('calendar-title');
+            titleElement.innerHTML = modifiedText;
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            boldKoreanInTitle();
+        });
+    </script> -->
+    
+</body>
+</html>

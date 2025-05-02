@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>노드 추가 삭제하기</title>
+    <style>
+        .comment{
+            border: 1px solid black;
+            border-radius: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h3>댓글 추가</h3>
+        <input type="text" id="comment">
+        <button onclick="add()">댓글 추가</button>
+        <button onclick="remove()">마지막 댓글 삭제</button>
+    </div>
+    <div id="commentDiv"></div>
+
+    <script>
+       const remove = () =>{
+            let commentDiv = document.querySelector("#commentDiv");
+            commentDiv.removeChild(commentDiv.lastChild);
+            // removeChild: 자식 노드를 삭제하는 매서드
+        }
+
+        const add = () =>{
+            let commentTag = document.createElement("p");
+            let commentText = document.querySelector("#comment").value;
+            let commentTextNode = document.createTextNode(commentText);
+            commentTag.appendChild(commentTextNode);
+            let commentDiv = document.querySelector("#commentDiv");
+            commentDiv.appendChild(commentTag);
+        }
+
+        const add2 = () =>{
+            let commentTag = document.createElement("p");
+            let commentText = document.querySelector("#comment").value;
+            commentTag.innerHTML = `<a href="#" class="comment">${commentText}</a>`;
+            let commentDiv = document.querySelector("#commentDiv");
+            commentDiv.appendChild(commentTag);
+        }
+
+        // GPT 추천 코드
+        // const add = () => {
+        //     let commentTag = document.createElement("p");
+        //     let commentText = document.querySelector("#comment").value;
+        //     let commentTextNode = document.createTextNode(commentText);  // 텍스트 노드 생성
+        //     commentTag.appendChild(commentTextNode);  // 텍스트 노드를 p 태그에 추가
+        //     let commentDiv = document.querySelector("#commentDiv");
+        //     commentDiv.appendChild(commentTag);  // p 태그를 commentDiv에 추가
+        // }
+
+
+
+        // 노드 추가 삭제하기
+        // 노드 생성하기
+        // 태그 생성 -> 텍스트 생성 후 추가 -> id 속성 생성 후 추가 -> body에 추가
+        // body가 아니더라도 어디든 append 작업하기
+        // createElement(): 요소 노드 생성하기, 태그 생성하기
+        const divTag = document.createElement("div");
+        console.log(divTag);
+       
+        // createTextNode(): 태그 안에 들어가는 텍스트 생성
+        const textNode = document.createTextNode("노드 추가 삭제하기");
+        
+        // createAttribute(): 속성 생성하기
+        const idAtrribute = document.createAttribute("id");
+        idAtrribute.value = "wrap";
+       
+        // appendChild(): 노드에 자식노드를 연결
+        divTag.appendChild(textNode); // div 태그에 textNode를 추가
+        divTag.setAttributeNode(idAtrribute); // div 태그에 idAtrribute를 추가
+        console.log(divTag);
+
+        // body 태그에 divTag를 추가
+        document.body.appendChild(divTag);
+
+    </script>
+    
+</body>
+</html>

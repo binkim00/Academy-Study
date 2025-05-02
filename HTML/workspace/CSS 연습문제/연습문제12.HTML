@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연습문제12</title>
+    <style>
+        p{padding: 10px;}
+        .p1{text-align: start;
+            border: 1px solid red;}
+            /* soild 실선, dotted 점선, doubel 실선 두개 */
+        .p2{text-align: end;
+            border: 2px dotted red;}
+        .p3{text-align: center;
+            border: 3px double red;}
+        .p4{text-align: justify;
+            border-top: 5px solid red;
+            border-right: 5px dotted red;
+            border-bottom: 5px double red;
+            border-left: 5px dashed red;}
+
+         /* 줄 긋기 속성 : 글자에 밑줄, 윗줄, 삭제선 추가 */
+        .underline{text-decoration: underline;}
+        .overline{text-decoration: overline;}
+        .line-throws{text-decoration: line-through;}
+        .atag{color: black; text-decoration: none;}
+        /* ↑ 기존에는 색과 밑줄이 있지만 없앰 */
+        .atag:hover{color: gray; 
+                    text-decoration: underline;
+                    font-weight: bold;}
+        /* 선택자:hover : 마우스를 올렸을 때 설정한 CSS가 실행됨, 마우스를 빼면 원상복구 */
+        /* 마우스를 텍스트에 올리면 색이 변하고 글자가 굵어지며 밑줄이 생김
+        꽤나 많이 사용 ex) 굵게 변하거나 줄 생기거나 등등 */
+
+        /* text-shadow : 글자에 그림자를 만드는 설정 */
+        /* text-shadow : 가로거리 세로거리 번짐정도 색상(,대신 공백) */
+        /* 가로거리: 오른쪽으로 이동, 세로거리: 아래로 이동 1px 추천, -는 역방향 */
+        .shawdow1{color: red; text-shadow: 2px 2px black;}
+        .shawdow2{text-shadow: 2px 2px 1px #ffa600;}
+        .shawdow3{color: #6e6a6a; text-shadow: 7px -7px 3px #000;}
+
+        /* text-transform : 영어의 대문자 소문자를 변경하는 설정 */
+        /* capitalize : 첫 글자만 대문자로 변환 */
+        /* uppercase : 모두 대문자로 변환 */
+        /* lowercase : 모두 소문자로 변환 */
+        .trans1{text-transform: capitalize;}
+        .trans2{text-transform: uppercase;}
+        .trans3{text-transform: lowercase;}
+
+
+    </style>
+</head>
+
+<body>
+    <p>none</p>
+    <p class="underline shawdow1 trans1">uNdeRliNE</p>
+    <p class="overline shawdow2 trans2">ovErLiNe</p>
+    <p class="line-throws shawdow3 trans3">lIne-ThRoW</p>
+    <a href="#" class="atag">atag</a>
+
+    <p class="p1">한국형 웹콘텐츠 접근성 지침2.0은 원칙, 지침, 검사 항목의 3단계로 구성되어 있다. 본 지침을 준수할 경우 비장애인, 노인 등이 장애인, 젊은이 등과 동등하게 웹사이트에서 제공하는 콘텐츠를 인식하고 이를 운영하고 이해할 수 있게 되는 것이다.</p>
+    <p class="p2">한국형 웹콘텐츠 접근성 지침2.0은 원칙, 지침, 검사 항목의 3단계로 구성되어 있다. 본 지침을 준수할 경우 비장애인, 노인 등이 장애인, 젊은이 등과 동등하게 웹사이트에서 제공하는 콘텐츠를 인식하고 이를 운영하고 이해할 수 있게 되는 것이다.</p>
+    <p class="p3">한국형 웹콘텐츠 접근성 지침2.0은 원칙, 지침, 검사 항목의 3단계로 구성되어 있다. 본 지침을 준수할 경우 비장애인, 노인 등이 장애인, 젊은이 등과 동등하게 웹사이트에서 제공하는 콘텐츠를 인식하고 이를 운영하고 이해할 수 있게 되는 것이다.</p>
+    <p class="p4">한국형 웹콘텐츠 접근성 지침2.0은 원칙, 지침, 검사 항목의 3단계로 구성되어 있다. 본 지침을 준수할 경우 비장애인, 노인 등이 장애인, 젊은이 등과 동등하게 웹사이트에서 제공하는 콘텐츠를 인식하고 이를 운영하고 이해할 수 있게 되는 것이다.</p>
+    
+</body>
+</html>

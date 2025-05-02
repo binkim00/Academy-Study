@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS와 박스 모델</title>
+    <style>
+        div,p,h1,li{border: 1px solid black;}
+        img,span,b,strong,i,em{border: 1px solid black;}
+        /* width : 가로크기 */
+        /* heigth : 세로크기, 세로를 퍼센트로 설정하려면 부모 태그의 크기가 설정되어 있어야함 */
+        .box1{width: 400px; height: 100px;}
+        .box{ height: 100px;}
+        .box2{width: 50%; height: 50%;}
+    </style>
+</head>
+<body>
+    <div class="box1"></div>
+    <div class="box">
+        <div class="box2"></div>
+    </div>
+    <!-- 블록 레벨 요소 : 혼자 한줄을 차지하는 태그 -->
+    <div>블록 레벨 요소1 div</div>
+    <p>블록 레벨 요소2 p</p>
+    <h1>블록 레벨 요소3 h1</h1>
+    <li>블록 레벨 요소4 li</li>
+    <!-- 인라인 레벨 요소 : 줄을 차지하지 않는 태그
+     , 태그안에있는 내용만큼만 크기를 가짐
+     ,img, span, b, strong, i, em -->
+    <img src="./images/login.png" alt="로그인">
+    <span>인라인 레벨 요소1 span</span>
+    <b>인라인 레벨 요소2 b</b>
+    <strong>인라인 레벨 요소3 strong</strong>
+    <i>인라인 레벨 요소4 i</i>
+    <em>인라인 레벨 요소5 em</em>
+</body>
+</html>

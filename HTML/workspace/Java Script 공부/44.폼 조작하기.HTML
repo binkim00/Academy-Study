@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>폼 조작하기</title>
+</head>
+<body>
+    <form name="frm1">
+        <input type="text" name="id">
+        <input type="password" name="pw">
+    </form>
+
+    <form name="frm2">
+        <input type="email" name="email">
+        <input type="tel" name="tel">
+        <textarea name="desc"></textarea>
+    </form>
+
+    <form name="frm3">
+        <label><input type="checkbox" name="apple" value="사과">사과</label>
+        <label><input type="checkbox" name="banana">바나나</label>
+        <label><input type="checkbox" name="orange">오렌지</label>
+        <label><input type="checkbox" name="melon">멜론</label>
+    </form>
+
+    <form name="frm4">
+        <label><input type="radio" name="fruits" value="apple">사과</label>
+        <label><input type="radio" name="fruits" value="banana">바나나</label>
+        <label><input type="radio" name="fruits" value="orange">오렌지</label>
+        <label><input type="radio" name="fruits" value="melon">멜론</label>
+    </form>
+
+    <form name="frm5">
+        <select name="comboBox" id="cb1">
+            <option value="apple">사과</option>
+            <option value="banana">바나나</option>
+            <option value="orange" selected>오렌지</option>
+            <option value="melon">멜론</option>
+        </select>
+    </form>
+
+    <form name="frm6">
+        <input type="file" name="upload" onchange="handleFileBtn()">
+        <img src="" alt="" id="frm6Img">
+    </form>
+
+
+    <script>
+        // 폼 조작하기
+        // 폼의 경우 forms를 이용하여 바로 조작가능
+        console.log(document.forms);
+        console.log(document.forms[0]);
+        console.log(document.forms[1]);
+        
+        // name속성을 이용하여 조작하기 frm1
+        console.log(document.frm1);
+        console.log(document.frm2);
+        // 위의 방식을 사용하면 querySelector를 사용할 필요없이 바로 조작가능
+
+        // form 태그 안의 input태그 조작하기 frn2
+        console.log(document.frm1.id); //name 작성시 사용, 가장 많이 사용
+        console.log(document.frm1.elements[0]); //name 없을 시 사용
+        console.log(document.frm1.elements['id']);
+
+        // input, textarea 태그가 텍스트 박스인 경우의 value 조작하기 frn3
+        document.frm1.id.value = "hong";
+        document.frm1.pw.value = "1234";
+        document.frm2.email.value = "hongemail@naver.com";
+        console.log(document.frm2.email.value);
+        document.frm2.desc.value="텍스트 공간입니다."
+        console.log(document.frm2.desc.value);
+
+        // 체크박스 조작하기 : value가 아닌 checked 속성 사용 frn4
+        document.frm3.apple.checked = true;
+        document.frm3.banana.checked = true;
+        // 전체 체크박스의 value 출력하기
+        // 속성 선택자 : 설정한 속성이 있는 모든 태그를 찾아 조작
+        // ex) querySelectorAll("[type='checkbox']")
+        const checkboxEls = document.querySelectorAll("[type='checkbox']");
+        for(let i=0; i<checkboxEls.length; i++){
+            if(checkboxEls[i].checked === true){
+                // value값을 설정하지 않으면 on이 출력됨
+                console.log(checkboxEls[i].value);
+            }
+        }
+
+        // radio 타입 조작하기 frm5
+        // let radioEls = document.querySelectorAll("[type='radio']");
+        let radioEls = document.querySelectorAll("[name='fruits']");
+        radioEls[2].checked = true;
+        for(let i=0; i<radioEls.length; i++){
+            if(radioEls[i].checked === true){
+                console.log(radioEls[i].value);
+            }
+        }
+    
+        // 콤보박스 조작하기
+        let comboBoxOptions = document.querySelectorAll("#cb1 option");
+        comboBoxOptions[3].seleced = true;
+        for(let i=0; i<comboBoxOptions.length; i++){
+            if(comboBoxOptions[i].seleced === true){
+                console.log(comboBoxOptions[i].value);
+            }
+        }
+
+        // 파일 업로드 조작하기
+        // 이미지 태그 조작하기
+        const handleFileBtn = () =>{
+            // files : input태그 안에 들어있는 모든 파일
+            const files = document.frm6.upload.files;
+            console.log(files[0].name);
+            console.log(files[0].size);
+            console.log(files[0].type);
+            console.log(files[0].lastModifiedDate);
+            // 이미지 태그의 src속에 파일 이름 저장하기
+            const frm6Img = document.querySelector("#frm6Img");
+            frm6Img.src = files[0].name;
+        }
+        
+
+
+
+
+    </script>
+</body>
+</html>

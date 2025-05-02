@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>사다리타기 게임</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+    canvas {
+      border: 1px solid #ccc;
+      margin-top: 20px;
+    }
+    button, input {
+      margin: 5px;
+      padding: 10px;
+      font-size: 16px;
+    }
+    .input-container {
+      margin-bottom: 10px;
+    }
+    .name-buttons button {
+      margin: 5px;
+      background-color: #f0f0f0;
+      border: 1px solid #aaa;
+      cursor: pointer;
+    }
+    .name-buttons button:hover {
+      background-color: #ddd;
+    }
+  </style>
+</head>
+<body>
+  <h1>사다리타기 게임</h1>
+  <div class="input-container">
+    <input type="text" id="namesInput" placeholder="이름 입력 (쉼표로 구분, 최대 6명)" size="40">
+    <br>
+    <input type="text" id="resultsInput" placeholder="결과 입력 (쉼표로 구분, 최대 6개)" size="40">
+    <br>
+    <button onclick="drawLadder()">사다리 생성</button>
+  </div>
+  <div class="name-buttons" id="nameButtons"></div>
+  <canvas id="ladderCanvas" width="600" height="500"></canvas>
+
+  <script>
+    const canvas = document.getElementById('ladderCanvas');
+    const ctx = canvas.getContext('2d');
+    const lines = 6;
+    const topMargin = 60;
+    const bottomMargin = 40;
+    const sideMargin = 50;
+    const stepCount = 20;
+    const ladderWidth = canvas.width - sideMargin * 2;
+    const ladderHeight = canvas.height - topMargin - bottomMargin;
+    const xGap = ladderWidth / (lines - 1);
+    const yGap = ladderHeight / stepCount;
+
+    let verticals = [];
+    let horizontalLines = [];
+    let names = [];
+    let results = [];
+
+    function drawLadder() {
+      names = document.getElementById('namesInput').value.split(',').map(v => v.trim()).slice(0, lines);
+      results = document.getElementById('resultsInput').value.split(',').map(v => v.trim()).slice(0, lines);
+      if (names.length < lines || results.length < lines) {
+        alert('이름과 결과를 모두 6개 입력해주세요.');
+        return;
+      }
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      verticals = [];
+      horizontalLines = [];
+
+      // 세로줄
+      for (let i = 0; i < lines; i++) {
+        const x = sideMargin + i * xGap;
+        verticals.push(x);
+        ctx.beginPath();
+        ctx.moveTo(x, topMargin);
+        ctx.lineTo(x, canvas.height - bottomMargin);
+        ctx.stroke();
+      }
+
+      // 가로줄 랜덤 생성
+      for (let i = 0; i < stepCount; i++) {
+        for (let j = 0; j < lines - 1; j++) {
+          if (Math.random() < 0.3 && !horizontalLines.some(h => h.row === i && (h.col === j || h.col === j - 1))) {
+            horizontalLines.push({ row: i, col: j });
+          }
+        }
+      }
+
+      // 가로줄 그리기
+      for (const line of horizontalLines) {
+        const x1 = verticals[line.col];
+        const x2 = verticals[line.col + 1];
+        const y = topMargin + line.row * yGap;
+        ctx.beginPath();
+        ctx.moveTo(x1, y);
+        ctx.lineTo(x2, y);
+        ctx.stroke();
+      }
+
+      // 이름/결과 표시
+      ctx.font = '14px sans-serif';
+      ctx.textAlign = 'center';
+      for (let i = 0; i < lines; i++) {
+        ctx.fillText(names[i], verticals[i], 30);
+        ctx.fillText(results[i], verticals[i], canvas.height - 10);
+      }
+
+      // 버튼 생성
+      const nameButtons = document.getElementById('nameButtons');
+      nameButtons.innerHTML = '';
+      for (let i = 0; i < lines; i++) {
+        const btn = document.createElement('button');
+        btn.innerText = names[i];
+        btn.onclick = () => startAnimation(i);
+        nameButtons.appendChild(btn);
+      }
+    }
+
+    function startAnimation(startCol) {
+      let x = verticals[startCol];
+      let y = topMargin;
+      let col = startCol;
+
+      const path = [];
+      for (let i = 0; i < stepCount; i++) {
+        const hor = horizontalLines.find(h => h.row === i && h.col === col);
+        const horLeft = horizontalLines.find(h => h.row === i && h.col === col - 1);
+        const newY = topMargin + (i + 1) * yGap;
+
+        path.push({ x, y });
+
+        if (hor) {
+          x = verticals[col + 1];
+          path.push({ x, y });
+          col++;
+        } else if (horLeft) {
+          x = verticals[col - 1];
+          path.push({ x, y });
+          col--;
+        }
+
+        y = newY;
+      }
+
+      path.push({ x, y });
+
+      // 애니메이션 그리기
+      let i = 0;
+      const interval = setInterval(() => {
+        if (i >= path.length - 1) {
+          clearInterval(interval);
+          ctx.beginPath();
+          ctx.arc(path[i].x, path[i].y, 5, 0, Math.PI * 2);
+          ctx.fillStyle = 'red';
+          ctx.fill();
+          alert(`${names[startCol]} → ${results[col]}`);
+          return;
+        }
+
+        ctx.beginPath();
+        ctx.moveTo(path[i].x, path[i].y);
+        ctx.lineTo(path[i + 1].x, path[i + 1].y);
+        ctx.strokeStyle = 'red';
+        ctx.stroke();
+        i++;
+      }, 100);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연습문제31</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
+        *{
+            font-family: "Nanum Pen Script", cursive;
+            font-size:xx-large;
+        }
+        
+        #wrap{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 80%;
+            margin: 0 auto;
+            text-align: center;
+        }
+        img{
+            width: 180px;
+            height: auto;
+        }
+        button{
+            font-size: 60px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="wrap">
+
+        <div>
+            <img id="userImg" src="../자료 모음/images/바위.png" alt="user">
+            <p id="userText">바위</p>
+        </div>
+
+        <div>
+            <h3 id="resultText">! 게임을 시작하세요 ^ㅇ^ ! </h3>
+            <p>VS</p>
+            <div>
+                <button onclick="play('scissors')">✌</button>
+                <button onclick="play('rock')">👊</button>
+                <button onclick="play('paper')">🖐</button>
+            </div>
+        </div>
+
+        <div>
+            <img id="comImg" src="../자료 모음/images/바위.png" alt="computer">
+            <p id="comText">바위</p>
+        </div>
+
+    </div>
+    
+    <script>
+        const images = {
+            scissors: "../자료 모음/images/가위.png",
+            rock: "../자료 모음/images/바위.png",
+            paper: "../자료 모음/images/보.png"
+        };
+        const names = {
+            scissors: "가위",
+            rock: "바위",
+            paper: "보"
+        };
+
+
+        function play(userChoice) {
+            const choices = ["scissors", "rock", "paper"];
+            const comChoice = choices[Math.floor(Math.random() * 3)];
+
+            document.getElementById("userImg").src = images[userChoice];
+            document.getElementById("userText").textContent = names[userChoice];
+
+            document.getElementById("comImg").src = images[comChoice];
+            document.getElementById("comText").textContent = names[comChoice];
+
+            const result = getResult(userChoice, comChoice);
+            document.getElementById("resultText").textContent = result;
+
+            let resultColor;
+            if (result === "이겼습니다") {
+                resultColor = "blue";
+            } else if (result === "졌습니다") {
+                resultColor = "red";
+            } else {
+                resultColor = "black";
+            }
+
+            document.getElementById("resultText").style.color = resultColor;
+        }
+        
+        function getResult(user, com) {
+            if (user === com) return "비겼습니다";
+            if (
+                (user === "scissors" && com === "paper") ||
+                (user === "rock" && com === "scissors") ||
+                (user === "paper" && com === "rock")
+            ) {
+                return "이겼습니다";
+            } else {
+                return "졌습니다";
+            }
+        }
+        
+
+
+
+
+
+    </script>
+</body>
+</html>

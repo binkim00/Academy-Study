@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>position 스타일</title>
+    <style>
+        .box{width: 100px; height: 100px;}
+        .red-box{background-color: red;}
+        .green-box{background-color: green;}
+        .blue-box{background-color: blue;}
+
+        .relative{position: relative; 
+                   /* 좌표속성 
+                   top : 100px = 아래로 100px 이동
+                   right : 오른쪽에서 왼쪽으로 이동
+                   bottom : 아래에서 위로 이동
+                   left : 왼쪽에서 오른쪽으로 이동 */
+                   /* relative : 자기 자신의 원래 위치에서 자표 이동 */
+                left: 100px;
+                top: 100px;}
+
+        .absolute{
+            position: absolute;
+            left: 300px; top: 100px;
+            /* left, right만 사용시 : 현재 위치에서 좌표 이동 */
+            /* 원래 위치에 없는 것으로 확인해서 아래의 태그가 위로 올라옴 */
+            /* 다른 태그들의 영향을 받지 않고 원하는 위치에 설정 가능 */
+            /* top이나 bottom을 사용하면 웹 브라우저의 0,0 위치를 기준으로 좌표 이동 */
+            }
+
+        .fixed{
+            position: fixed;
+            /* fixed : 스크롤에 상관없이 화면을 기준으로 위치 설정 */
+            /* 좌표 이동 방식은 absolute와 동일 */
+            left: 100px; top: 100px;
+        }
+
+        .sticky{
+            position: sticky;
+            /* 스크롤 중에 일정 지점이 되면 fixed 처럼 작동 */
+            /* 좌표이동 방식은 relative와 동일 */
+            /* IE같은 옛날 브라우저에서는 실행 안됨 */
+            left: 200px; top: 0;
+        }
+
+        .z1{position: absolute; left: 30px;top: 600px; z-index: 5;}
+        .z2{position: absolute; left: 50px; top: 620px; z-index: 3;}
+        .z3{position: absolute; left: 70px; top: 640px; z-index: 1;}
+        /* z-index : z축을 설정, 숫자값 기입, 정수만 기입, 큰 값이 앞으로 옴 */
+
+
+    </style>
+</head>
+<body>
+    relative 확인하기(상대적인 위치)
+    <div class="box red-box sticky">sticky</div>
+    <div class="box green-box relative"></div>
+    <div class="box blue-box"></div>
+    absolute 확인하기(절대적인 위치)
+    <div class="box red-box"></div>
+    <div class="box green-box absolute">absolute</div>
+    <div class="box blue-box"></div>
+    <div class="box blue-box fixed">fixed</div>
+    z-index 확인하기
+    <div class="box red-box z1">z1</div>
+    <div class="box green-box z2">z2</div>
+    <div class="box blue-box z3">z3</div>
+
+    
+</body>
+</html>

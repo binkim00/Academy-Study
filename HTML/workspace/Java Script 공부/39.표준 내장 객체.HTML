@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>표준 내장 객체</title>
+</head>
+<body>
+    <script>
+        // 표준 내장 객체 : 이미 만들어져 있는 객체
+        // String : 문자열 관련 객체
+        let str = "안녕하세요.";
+        console.log(`${str} 의 문자열의 개수 : ${str.length}`);
+        console.log(`${str} 에 A가 있는지 확인 : ${str.includes("A")}`);
+        let phone = "010-1234-5678"
+        console.log(`${phone} 의 -를 /로 변경 : ${phone.replaceAll('-','/')}`);
+        // All없으면 1개만 변경
+
+
+        // Date : 날짜 관련 객체
+        // 날짜 객체 선언하기
+        let now = new Date(); // 오늘 날짜 설정
+        console.log(now);
+        let date = new Date(2025,0,1,10,11,20); // 직접 특정 날짜 설정(년,월,월,시,분,초 순서)
+        console.log(date);
+        //toLocaleString() : 현지에서 사용하는 날짜 및 시간 출력
+        console.log(now.toLocaleString());
+        // toLocaleDateString(): 현지에서 사용하는 날짜 출력
+        console.log(date.toLocaleDateString());
+        // 자바스크립트는 월 설정시 0~11을 1~12월로 설정
+        
+        
+        // Array : 배열 관련 객체
+        let arr = [1, 50, 30, 100, 40, 13, 17, 25]
+        console.log(`${arr} 배열에 저장된 데이터의 수 : ${arr.length}`);
+        //메서드 : 객체 안에 있는 함수
+        // 파괴적 메서드 : 메서드가 실행되면 원본데이터를 변경하는 메서드
+        arr.sort(function (a,b){
+            return a-b; // 오름차순 정렬, b-a는 내림차순
+        }); 
+        console.log(`${arr} 의 순서를 오름차순으로 정렬 : ${arr}`);
+        arr.reverse(); // 배열안의 값을 반대로 정렬하는 메서드
+        console.log(`arr 의 순서를 반대로으로 정렬 : ${arr}`);
+
+
+        // Math : 숫자 관련 객체, Math 이후에 .을 해야 자동완성 가능
+        let number = 3.987;
+        // 반올림
+        console.log(`${number}의 반올림 : ${Math.round(number)}`);
+        // 버림
+        console.log(`${number}의 버림 : ${Math.floor(number)}`);
+        // 랜덤값
+        console.log(`0~1사이의 소수점값을 출력함 ${Math.random()}`);
+        
+        // 1~5까지의 랜덤값 출력하기
+        let randomValue = Math.floor(Math.random()*5)+1
+        console.log(randomValue);
+        // Math.random()은 0 이상 1 미만의 랜덤한 소수를 반환
+        // Math.random()으로 반환된 값에 5를 곱합니다. 이때 결과는 0 이상 5 미만의 실수
+        // Math.floor()는 내림(floor) 함수를 사용하여 소수점을 버리고 가장 큰 정수로 내립니다.
+        // 이렇게 하면 0 이상 4 이하의 정수가 됩니다. 즉, 결과값은 0, 1, 2, 3, 4 중 하나
+        // Math.floor(Math.random() * 5). 이 표현식은 0부터 4까지의 정수 중 하나를 생성
+        // Math.floor(Math.random() * 5) + 1
+        // 마지막으로, + 1을 더해줍니다. 
+        // 이렇게 하면 0부터 4 사이의 값에 1을 더하므로 1부터 5까지의 정수
+
+
+    </script>
+    
+</body>
+</html>

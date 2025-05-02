@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>애니메이션 스타일</title>
+    <style>
+        @keyframes bgchange{
+            /* 시간에 대한 경과를 퍼센트로 설정
+            퍼센트는 0~100까지 가능 */
+            0%{background-color: red;}
+            23%{background-color: blue}
+            57%{background-color: orange;}
+            100%{background-color: green;}
+        }
+        div{
+            width: 100px; height: 100px;
+            background-color: aqua;
+
+            /* animation-name:(키 프레임이름) = 키프레임을 div에 적용 */
+            animation-name: bgchange;
+           
+            /* 키 프레임 실행에 걸리는 시간 */
+            animation-duration: 5s;
+            
+            /* 애니메이션 실행되기 전 대기시간 */
+            animation-delay: 1s;
+            
+            /* 애니메이션 종료된 이후 상태
+            none: 원상태에서 실행 후 원상태로 복귀
+            forwards: 원상태에서 실행 후 100상태 유지
+            backwards : 0~100 실행 후 원상태로 돌아감
+            both: 0에서 실행 후 100에서 유지 */
+            animation-fill-mode: backwards;
+            
+            /* animation-iteration-count: 실행 횟수 기입, infinite는 무한 */
+            animation-iteration-count: infinite;
+
+            /* animation-direction : 애니메이션 진행 방향
+            normal: 0~100%로 실행, 기본값
+            reverse: 100~0%로 실행
+            alternate-reverse 100~0~100으로 반복 */
+            animation-direction: reverse;
+
+
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>폼 관련태그</title>
+</head>
+<body>
+    <!-- form태그 : 텍스트 박스나 체크 박스를 감싸는 태그로 데이터를 보내는 
+    형식이나 위치를 설정하는 태그-->
+    <!-- 폼 태그 하나로는 사용불가 -->
+    <!-- action속성 : 데이터를 보낼 위치를 설정 -->
+    <!-- method속성 : GET방식이나 POST방식을 설정하여 데이터를 보내는 형식을 설정 -->
+    <!-- GET방식 : 데이터를 주소창에 설정하여 보내는 방식, 인터넷 주소창 ?뒤부터가 GET방식 -->
+    <!-- ? : 첫 번째 파라미터(데이터)가 시작을 의미하는 기호 -->
+    <!-- name=vlaue -->
+    <!-- & : 다음 파라미터의 시작을 의미하는 기호 -->
+
+    <!-- GET방식 : 검색, 데이터를 가지고 다른 페이지로 이동할 때 사용 -->
+    <form action="./1.텍스트 관련태그.html" method="GET">
+        <p>여긴 GET방식</p>
+        <input type="text" name="id">
+        <!-- input태그 : 입력을 할 수 있는 공간을 만드는 태그 -->
+        <input type="password" name="pw">
+        <!-- type속성 : 여러가지 입력 형식을 설정하는 속성 -->
+        <!-- name속성 : 파라미터(데이터)의 이름을 설정하는 속성. 설정하지 않으면 데이터가 안보내짐 -->
+        <input type="submit" value="전송">
+        <!-- type="submit" : form태그의 action부분을 실행하면서 데이터를 가지고 가는 버튼을 설정 -->
+        <!-- 없으면 데이터를 보내거나 이동이 안됨 -->
+
+        <!-- 전송버튼을 누르면 action속성에 설정된 위치로 이동 -->
+        <!-- file:///C:/Users/it/Desktop/workspace/
+        1.%ED%85%8D%EC%8A%A4%ED%8A%B8%20%EA%B4%80%EB%A0%A8%ED%83%9C%EA%B7%B8.
+        html
+        ?id=test1
+        &pw=password -->
+        <!-- 입력한 내용이 주소창에 나옴 -->
+    </form>
+
+    <!-- POST방식 : 데이터가 주소창에 보이지 않도록 데이터를 전달하는 방식 -->
+    <!-- 데이터가 주소창에 보이지 않기 때문에 보안이 뛰어남, 결제,회원가입,로그인 등에 사용 -->
+    <!-- 데이터가 긴 게시글 작성 등 데이터가 많이 들어가는 유형에도 사용 -->
+    <form action="#" method="POST">
+        <p>여긴 POST방식</p>
+        <input type="text" name="id">
+        <input type="password" name="pw">
+        <input type="submit" value="전송">
+        <!-- file:///C:/Users/it/Desktop/workspace/6.%ED%8F%BC%20%EA%B4%80%EB%A0%A8%ED%83%9C%EA%B7%B8.
+        HTML# -->
+        <!-- 안나옴;; ㅋ -->
+    </form><br>
+
+    <h1>레드향 주문하기</h1>
+    <form action="#" method="GET">
+        <!-- fieldset : 폼 요소를 그룹으로 묶는 태그 -->
+        <!-- legend : 그룹으로 묶는 구역에 제목을 붙이는 태그 -->
+        <!-- 구분만 시켜주는 태그 -->
+        <fieldset> 
+            <legend>회원정보</legend>
+            <label>아이디<input type="text" name="id"></label>
+            <label for="pw">비밀번호</label>
+        <!-- label의 for 속성 : input태그의 id 속성값을 설정하여 label과 input을 연결 -->
+            <input id="pw" type="password" name="pw">
+        </fieldset>
+        <fieldset>
+            <legend>상품 선택</legend>
+        </fieldset>
+        <fieldset>
+            <legend>배송 정보</legend>
+        </fieldset>
+    </form>
+
+    
+    
+</body>
+</html>

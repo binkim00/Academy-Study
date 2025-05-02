@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오디오, 비디오 관련 태그</title>
+</head>
+<body>
+    <!-- object태그 : 오디오, 비디오 뿐만아니라 PDF등의 다양한 파일을 출력하는 태그 -->
+    <!--  기본 유형 = <object data="" width="1000px" height="800px"></object> -->
+   
+    <!-- <object data="./medias/spring.mp3" width="1000px" height="800px"></object>
+    <object data="./medias/product.pdf" width="1000px" height="800px"></object>
+    <object data="./medias/flight.mp4" width="1000px" height="800px"></object> -->
+
+
+
+    <!-- embed태그 : 오래된 브라우저에서 멀티미디어 파일을 출력하는 태그 -->
+    <!-- 종료 태그가 없다는 차이점이 존재 -->
+
+    <!-- <embed src="medias/product.pdf" width="800px" height="600px">
+    <embed src="medias/flower.mp4" width="800px" height="600px">
+    <embed src="medias/salad.mp4" width="800px" height="600"> -->
+
+    
+    <!-- audio태그 : 음악파일을 재생하기 위한 태그 -->
+    <!-- video태그 : 비디오파일을 재생하기 위한 태그 -->
+    <!-- 태그 속성들 확인 하기 -->
+
+    <!-- <audio src="medias/spring.mp3" autoplay loop controls></audio> -->
+    <!-- 나쁜 용도로 사용해서 오디오 오토 플레이는 막힘 -->
+
+    <video src="medias/flower.mp4" controls autoplay muted loop></video>
+    <!-- 비디오는 크롬과 파이어폭스에서는 뮤트를 하면 자동 재생이 가능 -->
+
+    
+    <!-- 요즘은 영상을 유튜브 같은 매체에서 끌어와서 많이 사용은 안함 -->
+    <!-- 유튜브 퍼가기 하이퍼링크 이용 -->
+    <iframe width="900" height="600" src="https://www.youtube.com/embed/bbELTEi1T24?si=0aoWqCNAXp_C6aYu" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <!-- iframe태그: html 파일 안에 html파일을 실행하는 태그 -->
+    <iframe src="2.테이블 관련 태그.HTML" frameboeder="0"></iframe>
+
+
+
+</body>
+</html>
