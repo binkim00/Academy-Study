@@ -8,15 +8,27 @@ public class PhoneManager {
         Scanner sc = new Scanner(System.in);
         HashMap<String, Phone> phoneMap = new HashMap<>();
 
-        System.out.print("인원 수 >> ");
-        int num = Integer.parseInt(sc.nextLine());
+        int num = 0;
+        while (true) {
+            System.out.print("인원 수 >> ");
+            try {
+                num = Integer.parseInt(sc.nextLine());
+                if (num <= 0) {
+                    System.out.println("1명 이상의 숫자를 입력하세요.");
+                    continue;
+                }
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("숫자 형식이 아닙니다. 다시 입력하세요.");
+            }
+        }
 
         for (int i = 0; i < num; i++) {
             System.out.print("이름과 전화번호(번호는 연속적으로 입력하세요.), 주소 >> ");
             String name = sc.next();
             String tel = sc.next();
             String address = sc.next();
-            sc.nextLine(); // 줄바꿈 제거
+            sc.nextLine();
 
             phoneMap.put(name, new Phone(name, tel, address));
         }
