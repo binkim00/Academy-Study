@@ -52,7 +52,7 @@ public class q5 {
             }
         }
 
-        System.out.println("제일 인구가 적은 나라는 (" + minName + ", " + minPeople + ")");
+        System.out.println("제일 인구가 적은 나라는 (" + minName + ", " + minPeople + "명)");
         sc.close();
     }
 }
