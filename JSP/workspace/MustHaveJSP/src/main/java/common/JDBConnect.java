@@ -7,9 +7,13 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class JDBConnect {
+//	데이터베이스 접속 정보
 	public Connection con;
+//  정적 쿼리문을 실행하는 객체
 	public Statement stmt;
+//	동적쿼리문을 실행하는 객체
 	public PreparedStatement psmt;
+//	SELECT의 결과를 받는 객체
 	public ResultSet rs;
 	
 	public JDBConnect() {
@@ -46,3 +50,17 @@ public class JDBConnect {
 		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

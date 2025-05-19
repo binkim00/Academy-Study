@@ -9,6 +9,25 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
+  
+  <filter>
+  <filter-name>SetCharEncoding</filter-name>
+  <filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
+  <init-param>
+  	<param-name>encoding</param-name>
+  	<!-- 매개변수에 설정할 값 -->
+  	<param-value>utf-8</param-value>
+  </init-param>
+  </filter>
+  <!-- 위에서 생성한 필터를 url에 적용 -->
+  <filter-mapping>
+  <!-- 적용할 필터의 이름을 설정 -->
+  	<filter-name>SetCharEncoding</filter-name>
+  	<!-- 주소창의 내용을 확인하여 실행할 페이지를 설정 -->
+  	<!-- /*의미: localhost:8080로 실행되는 모든 페이지 -->
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
   <!-- JSP파일에 있는 변수는 변경하기 힘들기 때문에 변경하기 쉬운 설정파일을 만들어 사용 -->
   <!-- context-param은 JSP에서 application 객체를 통해 접근할 수 있는
   '초기화 파라미터'를 설정하는 부분임 -->

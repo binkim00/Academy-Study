@@ -17,9 +17,13 @@ public class DBConnPool {
 	
 	public DBConnPool() {
 		try {
+//			컨텐스트 초기화 
 			Context initCtx = new InitialContext();
+//			컨텍스트에 프로젝트 환경 설정
 			Context ctx = (Context)initCtx.lookup("java:comp/env");
+//			server.xml에 작성한 설정을 가지고 데이터소스 생성
 			DataSource source = (DataSource)ctx.lookup("dbcp_myoracle");
+//			Connection 생성
 			con = source.getConnection();
 			System.out.println("DB 커넥션 풀 연결 성공");
 		}catch(Exception e) {
@@ -39,3 +43,12 @@ public class DBConnPool {
 		}
 	}
 }
+
+
+
+
+
+
+
+
+
