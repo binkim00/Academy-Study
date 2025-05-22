@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="board.dao.BoardDAO, board.dto.BoardDTO, java.util.List" %>
+<%
+    BoardDAO dao = new BoardDAO();
+    List<BoardDTO> recentNotices = dao.selectRecentNotices(5);
+    dao.close();
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -83,9 +89,6 @@
                     </div>
                 </div>						
                 <div class="swiper-pagination"></div>
-                <!-- <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div> -->
-                
             </div><!--//swiper-container-->
         </div><!--//main_rolling_mobile -->
 	
@@ -126,18 +129,29 @@
 					<a href="javascript:;">전화 상담 신청</a>
 				</p>
 				<div class="bbs_line">
-					<h3>NOTICE</h3>
-					<ul class="notice_recent">
-						<li><a href="javascript:;">이번 여름 휴가 제주 갈까? 미션 투어 (여행경비 50만원 지원)</a></li>
-						<li><a href="javascript:;">박물관 미션 투어 응모 당첨자 발표</a></li>
-						<li><a href="javascript:;">추석 연휴 티켓/투어 배송 및 직접 수령 안내</a></li>
-						<li><a href="javascript:;">하롱베이 서비스 OPEN! (여행정보, 가이드북, 가이드맵)</a></li>
-						<li><a href="javascript:;">투어리스트인투어 서비스 점검 안내</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<!-- //app_area -->
+				    <h3>NOTICE</h3>
+				    <ul class="notice_recent">
+				        <%
+				            if (recentNotices.isEmpty()) {
+				        %>
+				            <li>등록된 공지사항이 없습니다.</li>
+				        <%
+				            } else {
+				                for (BoardDTO dto : recentNotices) {
+				        %>
+				            <li>
+				                <a href="notice_view.jsp?num=<%=dto.getNum()%>">
+				                    <%=dto.getTitle()%>
+				                </a>
+				            </li>
+				        <%
+				                }
+				            }
+				        %>
+				    </ul>
+				</div> <!-- bbs_line 닫는 태그 -->
+			</div> <!-- ✅ 누락되었던 appbbs_box 닫는 태그 -->
+		</div> <!-- appbbs_area 닫기 -->
 
 	</div>
 	<!-- //container -->
@@ -188,6 +202,7 @@
 		});
 	});
 </script>
+
 
 <!-- contact_pop -->
 <div class="popup_base contact_pop">
