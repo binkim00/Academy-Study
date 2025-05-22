@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import jakarta.servlet.ServletContext;
+
 public class JDBConnect {
 //	데이터베이스 접속 정보
 	public Connection con;
@@ -33,6 +35,27 @@ public class JDBConnect {
 			e.printStackTrace();
 		}
 	}
+	// 세 번째 생성자
+    public JDBConnect(ServletContext application) {
+        try {
+            // JDBC 드라이버 로드
+            String driver = application.getInitParameter("OracleDriver"); 
+            Class.forName(driver); 
+
+            // DB에 연결
+            String url = application.getInitParameter("OracleURL"); 
+            String id = application.getInitParameter("OracleId");
+            String pwd = application.getInitParameter("OraclePwd");
+            con = DriverManager.getConnection(url, id, pwd);
+
+            System.out.println("DB 연결 성공(인수 생성자 2)"); 
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    
 	public void close() {
 		// JDBConnect에서 생성했던 객체들 종료하는 메서드
 		try {

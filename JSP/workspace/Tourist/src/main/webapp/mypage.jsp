@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="member.dao.MemberDAO, member.dto.MemberDTO" %>
 <%
     MemberDTO member = (MemberDTO) session.getAttribute("userDTO");
@@ -24,7 +24,7 @@
 
 <body>
 
-
+<%@ include file="Header.jsp" %>
 
 <div id="layout0"> <!-- TOP 버튼과 연결될 ID 추가 -->
 <div id="container">
@@ -41,10 +41,7 @@
     <div class="bodytext_area box_inner">
         <dl class="myinfo">
             <dt>내 정보</dt>
-            <p class="btn_line">
-			  <button type="button" class="btn_baseColor" onclick="history.back()">← 이전으로</button>
-			</p>
-            
+                        
             <dd>
                 <form action="#" class="regForm">
                     <fieldset>
