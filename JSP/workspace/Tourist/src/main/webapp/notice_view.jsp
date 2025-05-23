@@ -12,7 +12,6 @@
     dao.updateVisitCount(num);
     BoardDTO dto = dao.selectView(num);
 
-    // 👉 이전/다음 글 DTO 가져오기
     BoardDTO prevPost = dao.getPrevPost(num);
     BoardDTO nextPost = dao.getNextPost(num);
 
@@ -73,6 +72,7 @@
     <div class="bodytext_area box_inner">			
         <ul class="bbsview_list">
             <li class="bbs_title"><%= dto.getTitle() %></li>
+            <li class="bbs_writer">작성자 : <span><%= dto.getName() %></span></li>
             <li class="bbs_hit">작성일 : <span><%= dto.getPostdate() %></span></li>
             <li class="bbs_date">조회수 : <span><%= dto.getVisitcount() %></span></li>
             <li class="bbs_content">
@@ -83,10 +83,20 @@
         </ul>
 
         <p class="btn_line txt_right">
-            <a href="notice_list.jsp" class="btn_bbs">목록</a>
-        </p>
+					<%
+					    if (session.getAttribute("userId") != null &&
+					        session.getAttribute("userId").toString().equals(dto.getId())) {
+					%>
+					    <a href="" class="btn_bbs" onclick="location.href='Edit.jsp?num=<%=dto.getNum()%>';">수정하기</a>
+						<a href="" class="btn_bbs" onclick="deletePost();">삭제하기</a>
+					<%
+					    }
+					%>
+		    			<a href="notice_list.jsp" class="btn_bbs">목록</a>
 
-        <!-- 이전글/다음글 기능은 아직 미구현 상태 -->
+		</p>
+
+
         <ul class="near_list mt20">
 		    <li><h4 class="prev">다음글</h4>
 		        <% if (nextPost != null) { %>
@@ -116,6 +126,13 @@
 <!-- //wrap -->
 
 <!-- 빠른 링크 영역 그대로 유지 -->
+<script>
+function deletePost() {
+    if (confirm("정말 삭제하시겠습니까?")) {
+        location.href = "Delete.jsp?num=<%=dto.getNum()%>";
+    }
+}
+</script>
 
 </body>
 </html>

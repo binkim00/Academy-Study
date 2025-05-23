@@ -4,20 +4,18 @@
 <%@ page import="java.sql.Statement" %>
 <%@ page import="java.sql.ResultSet" %>
 
-<% System.out.println("✅ notice_list.jsp 실행 시작"); %>
-
 <%
-    BoardDAO dao = new BoardDAO();
-    List<BoardDTO> boardList = dao.selectList();
+    request.setCharacterEncoding("UTF-8");
 
-    // ✅ 현재 접속된 사용자 확인용 코드
-    Statement stmt2 = dao.con.createStatement();
-    ResultSet rs2 = stmt2.executeQuery("SELECT USER FROM dual");
-    if (rs2.next()) {
-        System.out.println("현재 접속된 사용자: " + rs2.getString(1));
+    String search = request.getParameter("search"); 
+    BoardDAO dao = new BoardDAO();
+    List<BoardDTO> boardList = null;
+
+    if (search != null && !search.trim().equals("")) {
+        boardList = dao.searchList(search);  
+    } else {
+        boardList = dao.selectList();         
     }
-    rs2.close();
-    stmt2.close();
 
     dao.close();
 %>
@@ -67,14 +65,16 @@
 
     <!-- bodytext_area -->
     <div class="bodytext_area box_inner">
-        <form action="#" class="minisrch_form">
-            <fieldset>
-                <legend>검색</legend>
-                <input type="text" class="tbox" title="검색어를 입력해주세요" placeholder="검색어를 입력해주세요">
-                <a href="javascript:;" class="btn_srch">검색</a>
-                <a href="notice_write.jsp" class="btn_srch">글쓰기</a>
-            </fieldset>
-        </form>
+		       <form action="notice_list.jsp" method="get" class="minisrch_form">
+				    <fieldset>
+				        <legend>검색</legend>
+				        <input type="text" name="search" class="tbox" 
+				               placeholder="검색어를 입력해주세요" value="<%= request.getParameter("search") == null ? "" : request.getParameter("search") %>">
+				        <input type="submit" value="검색" class="btn_srch">
+				        <a href="notice_write.jsp" class="btn_srch">글쓰기</a>
+				    </fieldset>
+				</form>
+
 
         <table class="bbsListTbl" summary="번호,제목,조회수,작성일 등을 제공하는 표">
             <caption class="hdd">공지사항  목록</caption>
