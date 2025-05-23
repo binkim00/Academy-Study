@@ -13,6 +13,7 @@
     if (userDTO != null) {
         // ✅ 로그인 성공 → 세션에 DTO 저장
         session.setAttribute("userDTO", userDTO);
+        session.setAttribute("userId", userDTO.getId());
         response.sendRedirect("index.jsp"); // 또는 원하는 페이지로 이동
     } else {
 %>

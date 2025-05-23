@@ -7,7 +7,6 @@
     String title = request.getParameter("title");
     String content = request.getParameter("contents");
 
-    // ✅ 세션에서 DTO 가져오기
     MemberDTO user = (MemberDTO)session.getAttribute("userDTO");
 
     if (user == null) {
@@ -15,21 +14,13 @@
         return;
     }
 
-    // ✅ 로그인한 사용자의 ID 추출
     String id = user.getId();
 
-    // ✅ 디버깅용 콘솔 출력
-    System.out.println("📌 제목: " + title);
-    System.out.println("📌 내용: " + content);
-    System.out.println("📌 작성자 ID: " + id);
-
-    // ✅ DTO 객체 구성
     BoardDTO dto = new BoardDTO();
     dto.setTitle(title);
     dto.setContent(content);
     dto.setId(id);
 
-    // ✅ 글쓰기 처리
     BoardDAO dao = new BoardDAO();
     int result = dao.insertWrite(dto);
     dao.close();

@@ -289,6 +289,7 @@ footer .foot_area .snslink li + li + li a {background-image:url(../img/ico_insta
 .bbsview_list {padding-bottom:30px;  border-top:2px solid #384d75;}
 .bbsview_list li {box-sizing:border-box; padding:0 15px; border-bottom:1px solid #ccc; font-size:14px; color:#666;}
 .bbsview_list li.bbs_title {width:100%; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; height:50px; line-height:50px; font-weight:bold; font-size:16px;}
+.bbsview_list li.bbs_writer {width:100%; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; height:50px; line-height:50px; font-size:14px;}
 .bbsview_list li.bbs_hit {height:40px; line-height:40px; float:left; width:50%;}
 .bbsview_list li.bbs_date {height:40px; line-height:40px; float:left; width:50%;}
 .bbsview_list li.bbs_content {clear:both; min-height:200px; padding:20px 15px;}

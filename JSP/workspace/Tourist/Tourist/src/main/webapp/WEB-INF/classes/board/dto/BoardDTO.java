@@ -7,6 +7,8 @@ public class BoardDTO {
     private String id;         // 작성자 ID
     private java.sql.Date postdate; // 작성일
     private int visitcount;    // 조회수
+    private String name;  // 작성자 이름
+
 
     // 기본 생성자
     public BoardDTO() {}
@@ -53,4 +55,12 @@ public class BoardDTO {
     public void setVisitcount(int visitcount) {
         this.visitcount = visitcount;
     }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 }

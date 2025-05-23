@@ -9,6 +9,7 @@ public class BoardDTO {
 	private String id;
 	private Date postDate;
 	private int visitCount;
+	private String name;
 	
 	public BoardDTO() {}
 	public BoardDTO(int num, String title, String content, String id, Date postDate, int visitCount) {
@@ -55,6 +56,12 @@ public class BoardDTO {
 	}
 	public void setVisitCount(int visitCount) {
 		this.visitCount = visitCount;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 }

@@ -37,32 +37,33 @@ public class BoardDAO extends DBConnPool {
         return boardList;
     }
 
-    // 게시글 상세 보기 (1건)
-    public BoardDTO selectView(String num) {
-        BoardDTO dto = new BoardDTO();
+	    // 게시글 상세 보기 (1건)
+	    public BoardDTO selectView(String num) {
+	        BoardDTO dto = new BoardDTO();
+	        try {
+	            String query = 
+	                "SELECT b.*, m.name " +
+	                "FROM tourist_board b " +
+	                "JOIN tourist_member m ON b.id = m.id " +
+	                "WHERE b.num = ?";
+	            psmt = con.prepareStatement(query);
+	            psmt.setString(1, num);
+	            rs = psmt.executeQuery();
+	            if (rs.next()) {
+	                dto.setNum(rs.getString("num"));
+	                dto.setTitle(rs.getString("title"));
+	                dto.setContent(rs.getString("content"));
+	                dto.setId(rs.getString("id"));
+	                dto.setName(rs.getString("name"));  // ✅ 작성자 이름
+	                dto.setPostdate(rs.getDate("postdate"));
+	                dto.setVisitcount(rs.getInt("visitcount"));
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	        return dto;
+	    }
 
-        String query = "SELECT * FROM tourist_board WHERE num=?";
-
-        try {
-            psmt = con.prepareStatement(query);
-            psmt.setString(1, num);
-            rs = psmt.executeQuery();
-
-            if (rs.next()) {
-                dto.setNum(rs.getString("num"));
-                dto.setTitle(rs.getString("title"));
-                dto.setContent(rs.getString("content"));
-                dto.setId(rs.getString("id"));
-                dto.setPostdate(rs.getDate("postdate"));
-                dto.setVisitcount(rs.getInt("visitcount"));
-            }
-        } catch (Exception e) {
-            System.out.println("게시글 상세 보기 중 예외 발생");
-            e.printStackTrace();
-        }
-
-        return dto;
-    }
 
     // 조회수 증가
     public void updateVisitCount(String num) {
@@ -185,6 +186,30 @@ public class BoardDAO extends DBConnPool {
 	            e.printStackTrace();
 	        }
 	        return result;
+	    }
+
+	    // 검색어 메서드
+	    public List<BoardDTO> searchList(String keyword) {
+	        List<BoardDTO> list = new ArrayList<>();
+	        try {
+	            String sql = "SELECT * FROM tourist_board WHERE title LIKE ? ORDER BY num DESC";
+	            psmt = con.prepareStatement(sql);
+	            psmt.setString(1, "%" + keyword + "%");
+	            rs = psmt.executeQuery();
+	            while (rs.next()) {
+	                BoardDTO dto = new BoardDTO();
+	                dto.setNum(rs.getString("num"));
+	                dto.setTitle(rs.getString("title"));
+	                dto.setContent(rs.getString("content"));
+	                dto.setId(rs.getString("id"));
+	                dto.setPostdate(rs.getDate("postdate"));
+	                dto.setVisitcount(rs.getInt("visitcount"));
+	                list.add(dto);
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	        return list;
 	    }
 
 
