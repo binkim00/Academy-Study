@@ -8,17 +8,31 @@
     request.setCharacterEncoding("UTF-8");
 
     String search = request.getParameter("search"); 
+    String pageNumParam = request.getParameter("pageNum");
+    int pageNum = (pageNumParam == null || pageNumParam.equals("")) ? 1 : Integer.parseInt(pageNumParam);
+    int pageSize = 10;  // 한 페이지에 보여줄 게시글 수
+    int start = (pageNum - 1) * pageSize + 1;
+    int end = pageNum * pageSize;
+
     BoardDAO dao = new BoardDAO();
     List<BoardDTO> boardList = null;
+    int totalCount = 0;
+    int totalPage = 0;
 
     if (search != null && !search.trim().equals("")) {
-        boardList = dao.searchList(search);  
+        boardList = dao.searchList(search);  // ※ 이건 전체 검색결과를 가져옴 (페이지네이션 미지원)
+        totalCount = boardList.size();
+        totalPage = (int)Math.ceil((double)totalCount / pageSize);
+        boardList = boardList.subList(Math.min(start - 1, totalCount), Math.min(end, totalCount));
     } else {
-        boardList = dao.selectList();         
+        boardList = dao.selectListPage(start, end);
+        totalCount = dao.getTotalCount();
+        totalPage = (int)Math.ceil((double)totalCount / pageSize);
     }
 
     dao.close();
 %>
+
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -114,16 +128,42 @@
 
         <!-- pagination -->
         <div class="pagination">
-            <a href="javascript:;" class="firstpage  pbtn"><img src="img/btn_firstpage.png" alt="첫 페이지로 이동"></a>
-            <a href="javascript:;" class="prevpage  pbtn"><img src="img/btn_prevpage.png" alt="이전 페이지로 이동"></a>
-            <a href="javascript:;"><span class="pagenum currentpage">1</span></a>
-            <a href="javascript:;"><span class="pagenum">2</span></a>
-            <a href="javascript:;"><span class="pagenum">3</span></a>
-            <a href="javascript:;"><span class="pagenum">4</span></a>
-            <a href="javascript:;"><span class="pagenum">5</span></a>
-            <a href="javascript:;" class="nextpage  pbtn"><img src="img/btn_nextpage.png" alt="다음 페이지로 이동"></a>
-            <a href="javascript:;" class="lastpage  pbtn"><img src="img/btn_lastpage.png" alt="마지막 페이지로 이동"></a>
-        </div>
+			    <!-- 첫 페이지 이동 -->
+			    <a href="notice_list.jsp?<% if (search != null) out.print("search=" + java.net.URLEncoder.encode(search, "UTF-8") + "&"); %>pageNum=1" class="firstpage pbtn">
+			        <img src="img/btn_firstpage.png" alt="첫 페이지로 이동">
+			    </a>
+			
+			    <!-- 이전 페이지 -->
+			    <a href="notice_list.jsp?<% if (search != null) out.print("search=" + java.net.URLEncoder.encode(search, "UTF-8") + "&"); %>pageNum=<%= (pageNum > 1 ? pageNum - 1 : 1) %>" class="prevpage pbtn">
+			        <img src="img/btn_prevpage.png" alt="이전 페이지로 이동">
+			    </a>
+			
+			<%
+			    // 페이지 번호 범위 설정 (ex: 1~5, 6~10 단위)
+			    int pageBlock = 5;
+			    int startPage = ((pageNum - 1) / pageBlock) * pageBlock + 1;
+			    int endPage = Math.min(startPage + pageBlock - 1, totalPage);
+			
+			    for (int i = startPage; i <= endPage; i++) {
+			%>
+			    <a href="notice_list.jsp?<% if (search != null) out.print("search=" + java.net.URLEncoder.encode(search, "UTF-8") + "&"); %>pageNum=<%=i%>">
+			        <span class="pagenum <%= (i == pageNum ? "currentpage" : "") %>"><%=i%></span>
+			    </a>
+			<%
+			    }
+			%>
+			
+			    <!-- 다음 페이지 -->
+			    <a href="notice_list.jsp?<% if (search != null) out.print("search=" + java.net.URLEncoder.encode(search, "UTF-8") + "&"); %>pageNum=<%= (pageNum < totalPage ? pageNum + 1 : totalPage) %>" class="nextpage pbtn">
+			        <img src="img/btn_nextpage.png" alt="다음 페이지로 이동">
+			    </a>
+			
+			    <!-- 마지막 페이지 -->
+			    <a href="notice_list.jsp?<% if (search != null) out.print("search=" + java.net.URLEncoder.encode(search, "UTF-8") + "&"); %>pageNum=<%= totalPage %>" class="lastpage pbtn">
+			        <img src="img/btn_lastpage.png" alt="마지막 페이지로 이동">
+			    </a>
+		</div>
+
         <!-- //pagination -->
     </div>
     <!-- //bodytext_area -->
