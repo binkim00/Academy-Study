@@ -212,6 +212,56 @@ public class BoardDAO extends DBConnPool {
 	        return list;
 	    }
 
+	 // ✅ 페이지별 게시글 목록 조회
+	    public List<BoardDTO> selectListPage(int start, int end) {
+	        List<BoardDTO> boardList = new ArrayList<>();
+
+	        String query = "SELECT * FROM ("
+	                     + " SELECT Tb.*, ROWNUM rNum FROM ("
+	                     + "   SELECT * FROM tourist_board ORDER BY num DESC"
+	                     + " ) Tb WHERE ROWNUM <= ?"
+	                     + ") WHERE rNum >= ?";
+
+	        try {
+	            psmt = con.prepareStatement(query);
+	            psmt.setInt(1, end);
+	            psmt.setInt(2, start);
+	            rs = psmt.executeQuery();
+
+	            while (rs.next()) {
+	                BoardDTO dto = new BoardDTO();
+	                dto.setNum(rs.getString("num"));
+	                dto.setTitle(rs.getString("title"));
+	                dto.setContent(rs.getString("content"));
+	                dto.setId(rs.getString("id"));
+	                dto.setPostdate(rs.getDate("postdate"));
+	                dto.setVisitcount(rs.getInt("visitcount"));
+
+	                boardList.add(dto);
+	            }
+	        } catch (Exception e) {
+	            System.out.println("페이지별 게시글 조회 중 예외 발생");
+	            e.printStackTrace();
+	        }
+
+	        return boardList;
+	    }
+	    
+	 // ✅ 전체 게시글 수 반환
+	    public int getTotalCount() {
+	        int total = 0;
+	        try {
+	            String query = "SELECT COUNT(*) FROM tourist_board";
+	            stmt = con.createStatement();
+	            rs = stmt.executeQuery(query);
+	            if (rs.next()) total = rs.getInt(1);
+	        } catch (Exception e) {
+	            System.out.println("게시글 수 조회 중 예외 발생");
+	            e.printStackTrace();
+	        }
+	        return total;
+	    }
+
 
 	    
 }
