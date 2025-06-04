@@ -1,0 +1,5 @@
+1. Controller의 @WebServlet 의 주소로 요청
+2. Controller의 doGet이나 doPost로 실행됨
+3. DAO를 이용하여 DB에서 필요한 데이터를 받아옴
+4. req.getRequestDispatcher를 이용하여 화면JSP실행
+5. 브라우저에 화면 출력

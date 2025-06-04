@@ -38,16 +38,7 @@
     <!-- Editable user database that can also be used by
          UserDatabaseRealm to authenticate users
     -->
-    <Resource name="dbcp_myoracle" 
-              auth="Container"
-              type="javax.sql.DataSource"
-              driverClassName="oracle.jdbc.OracleDriver"
-              url="jdbc:oracle:thin:@localhost:1521:xe"
-              username="musthave"
-              password="1234"
-              maxTotal="20"
-              maxIdle="10"
-              maxWaitMillis="1"/>
+    <Resource auth="Container" driverClassName="oracle.jdbc.OracleDriver" maxIdle="10" maxTotal="20" maxWaitMillis="1" name="dbcp_myoracle" password="1234" type="javax.sql.DataSource" url="jdbc:oracle:thin:@localhost:1521:xe" username="musthave"/>
     <!-- <Resource auth="Container" description="User database that can be updated and saved" factory="org.apache.catalina.users.MemoryUserDatabaseFactory" name="UserDatabase" pathname="conf/tomcat-users.xml" type="org.apache.catalina.UserDatabase"/> -->
   </GlobalNamingResources>
 
@@ -71,10 +62,7 @@
          AJP  Connector: /docs/config/ajp.html
          Define a non-SSL/TLS HTTP/1.1 Connector on port 8080
     -->
-    <Connector port="8080" protocol="HTTP/1.1"
-           connectionTimeout="20000"
-           redirectPort="8443"
-           URIEncoding="UTF-8" />
+    <Connector URIEncoding="UTF-8" connectionTimeout="20000" port="8080" protocol="HTTP/1.1" redirectPort="8443"/>
 
     <!-- A "Connector" using the shared thread pool-->
     <!--
@@ -156,7 +144,7 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="Tourist" path="/Tourist" reloadable="true" source="org.eclipse.jst.jee.server:Tourist"/><Context docBase="MustHaveJSP" path="/MustHaveJSP" reloadable="true" source="org.eclipse.jst.jee.server:MustHaveJSP"/></Host>
+      <Context docBase="Tourist" path="/Tourist" reloadable="true" source="org.eclipse.jst.jee.server:Tourist"/><Context docBase="MustHaveJSP" path="/MustHaveJSP" reloadable="true" source="org.eclipse.jst.jee.server:MustHaveJSP"/><Context docBase="Tourist_mvc_model2" path="/Tourist_mvc_model2" reloadable="true" source="org.eclipse.jst.jee.server:Tourist_mvc_model2"/></Host>
     </Engine>
   </Service>
 </Server>
