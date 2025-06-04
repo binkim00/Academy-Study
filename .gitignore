@@ -1,14 +1,14 @@
-# Eclipse 환경 설정 파일 제외 (workspace 관련 정보는 공유하지 않음)
+# Eclipse 작업공간 정보 (절대 공유 X)
 .metadata/
 
-# Java 빌드 출력물 제외 (클래스 파일 등)
-**/target/
+# Java 프로젝트 내부 빌드 출력물 (Tomcat 서버 bin은 제외!)
 **/build/
+**/target/
 
-# Tomcat bin 폴더는 제외하지 않음 (직접 복사해서 포함할 예정이므로)
-# bin/ ← 이 줄 삭제!
+# 프로젝트 내부 bin만 제외 (Tomcat/bin은 포함됨)
+**/bin/
+!**/Tomcat*/bin/
 
-# IDE 설정 파일 제외 (선택사항)
-.classpath
-.project
-.settings/
+# OS 및 에디터 임시파일
+.DS_Store
+Thumbs.db
