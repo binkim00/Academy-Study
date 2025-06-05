@@ -51,7 +51,7 @@ dao.close();
 
 		<!-- bodytext_area -->
 		<div class="bodytext_area box_inner">	
-			<form action="boardEdit_process.jsp" method="POST">
+			<form action="boardupdate.do" method="POST">
 			<input type="hidden" name="num" value="<%=dto.getNum()%>"/>	
 			<ul class="bbsview_list">
 					<li class="bbs_title">제목 : <input type="text" name="title" value="<%=dto.getTitle() %>" size="100" placeholder="제목을 입력해주세요."></li>
@@ -63,7 +63,7 @@ dao.close();
 			</ul>
 			<p class="btn_line txt_right">
 				<input type="submit" value="글 수정하기" class="btn_srch">
-				<a href="board_list.html" class="btn_bbs">목록</a>
+				<a href="./boardlist.do" class="btn_bbs">목록</a>
 			</p>
 			</form>
 			<ul class="near_list mt20">
