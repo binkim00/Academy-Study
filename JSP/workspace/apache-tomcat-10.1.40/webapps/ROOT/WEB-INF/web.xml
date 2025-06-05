@@ -1,30 +1,75 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
- Licensed to the Apache Software Foundation (ASF) under one or more
-  contributor license agreements.  See the NOTICE file distributed with
-  this work for additional information regarding copyright ownership.
-  The ASF licenses this file to You under the Apache License, Version 2.0
-  (the "License"); you may not use this file except in compliance with
-  the License.  You may obtain a copy of the License at
-
-      http://www.apache.org/licenses/LICENSE-2.0
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
--->
-<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
-                      https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
-  version="6.0"
-  metadata-complete="true">
-
-  <display-name>Welcome to Tomcat</display-name>
-  <description>
-     Welcome to Tomcat
-  </description>
-
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd" id="WebApp_ID" version="5.0">
+<display-name>MustHaveJSP</display-name>
+<welcome-file-list>
+<welcome-file>index.html</welcome-file>
+<welcome-file>index.jsp</welcome-file>
+<welcome-file>index.htm</welcome-file>
+<welcome-file>default.html</welcome-file>
+<welcome-file>default.jsp</welcome-file>
+<welcome-file>default.htm</welcome-file>
+</welcome-file-list>
+<filter>
+<!--  필터 이름 설정  -->
+<filter-name>SetCharEncoding</filter-name>
+<!--  필터에서 실행할 클래스 이름  -->
+<filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
+<init-param>
+<!--  매개변수 설정  -->
+<param-name>encoding</param-name>
+<!--  매개변수에 설정할 값  -->
+<param-value>utf-8</param-value>
+</init-param>
+</filter>
+<!--  위에서 생성한 필터를 url에 적용  -->
+<filter-mapping>
+<!--  적용할 필터의 이름을 설정  -->
+<filter-name>SetCharEncoding</filter-name>
+<!--  주소창의 내용을 확인하여 실행할 페이지를 설정  -->
+<!--  /* 의미 : localhost:8081로 실행되는 모든 페이지  -->
+<url-pattern>/*</url-pattern>
+</filter-mapping>
+<!--  JSP파일에 있는 변수는 변경하기 힘들기 때문에 변경하기 쉬운 설정파일을 만들어 사용  -->
+<context-param>
+<param-name>INIT_PARAM</param-name>
+<param-value>web.xml에 저장한 초기화 매개변수</param-value>
+</context-param>
+<!--  try catch나 errorPage속성으로 처리하지 않은 모든 에러를 처리하는 부분  -->
+<!--  <error-page>
+  	<error-code>404</error-code>
+  	<location>/02ImplicitObject/Exception.jsp</location>
+  </error-page>
+  <error-page>
+  	<error-code>405</error-code>
+  	<location>/02ImplicitObject/Exception.jsp</location>
+  </error-page>
+  <error-page>
+  	<error-code>500</error-code>
+  	<location>/02ImplicitObject/Exception.jsp</location>
+  </error-page>  -->
+<!--  세션 유지시간을 20분으로 설정  -->
+<session-config>
+<session-timeout>20</session-timeout>
+</session-config>
+<context-param>
+<param-name>POSTS_PER_PAGE</param-name>
+<param-value>10</param-value>
+</context-param>
+<context-param>
+<param-name>PAGES_PER_BLOCK</param-name>
+<param-value>10</param-value>
+</context-param>
+<!--  자바파일을 연결하기 위한 설정  -->
+<!--  <servlet>
+  	서블릿 이름 설정
+  	<servlet-name>HelloServlet</servlet-name>
+  	자바파일의 경로 설정
+  	<servlet-class>servlet.HelloServlet</servlet-class>
+  </servlet>
+  서블릿과 URI연결하는 설정
+  <servlet-mapping>
+  	연결할 서블릿 이름 설정
+  	<servlet-name>HelloServlet</servlet-name>
+  	서블릿에 연결할 URI 설정
+  	<url-pattern>/12Servlet/HelloServlet.do</url-pattern>
+  </servlet-mapping>  -->
 </web-app>

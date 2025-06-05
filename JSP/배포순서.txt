@@ -1,0 +1,27 @@
+1. export
+2. 톰캣 bin 폴더에서 cmd dir하면 하위 파일 전체 검색
+3. war파일을 톰캣 웹앱에 넣고 root 폴더 삭제 후 ROOT로 이름 변경
+4. cmd에서 startup.bat 끌 때는 shoutdown?
+
+
+한글깨짐 처리
+1.레지스트리 편집기
+2.커런트 유저 새로만들기
+3. 톰캣
+4. 새로만들기 코드페이지
+5. 10진수 65001
+
+1.bin폴더 카탈리나 뱃
+2. set JAVA_OPTS=%JAVA_OPTS% %LOGGING_MANAGER% "-Dfile.encoding=utf-8"
+추가
+
+데이터 베이스 연결
+1. 컨텍스트
+<ResourceLink 
+	    global="dbcp_myoracle" 
+	    name="dbcp_myoracle" 
+	    type="javax.sql.DataSource"
+	/>
+
+2. 서버
+<Resource auth="Container" driverClassName="oracle.jdbc.OracleDriver" maxIdle="10" maxTotal="20" maxWaitMillis="1" name="dbcp_myoracle" password="1234" type="javax.sql.DataSource" url="jdbc:oracle:thin:@localhost:1521:xe" username="musthave"/>

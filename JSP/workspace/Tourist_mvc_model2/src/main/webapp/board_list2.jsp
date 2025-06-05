@@ -71,17 +71,17 @@
 						</tr>
 					</c:when>
 					<c:otherwise>
-						<c:forEach var="dto" items = "${boardLists}" varStatus="loop">
-							<tr>
-								<td>${totalCount-loop.index}</td>
-							<td class="tit_notice">
-								<a href="board_view.jsp?num=${dto.num }">
-									${dto.title}
-								</a>
-							</td>
-							<td>${dto.visitCount}</td>
-							<td>${dto.postDate}</td>
-						</tr>		
+						<c:forEach var="dto" items="${boardLists}" varStatus="loop">
+						    <tr>
+						        <td>${totalCount - ((pageNum - 1) * 10 + loop.index)}</td>
+						        <td class="tit_notice">
+						            <a href="boardview.do?num=${dto.num}">
+						                ${dto.title}
+						            </a>
+						        </td>
+						        <td>${dto.visitCount}</td>
+						        <td>${dto.postDate}</td>
+						    </tr>
 						</c:forEach>
 					</c:otherwise>
 				</c:choose>
@@ -89,16 +89,33 @@
 			</table>
 			<!-- pagination -->
 			<div class="pagination">
-				<a href="javascript:;" class="firstpage  pbtn"><img src="img/btn_firstpage.png" alt="첫 페이지로 이동"></a>
-				<a href="javascript:;" class="prevpage  pbtn"><img src="img/btn_prevpage.png" alt="이전 페이지로 이동"></a>
-				<a href="javascript:;"><span class="pagenum currentpage">1</span></a>
-				<a href="javascript:;"><span class="pagenum">2</span></a>
-				<a href="javascript:;"><span class="pagenum">3</span></a>
-				<a href="javascript:;"><span class="pagenum">4</span></a>
-				<a href="javascript:;"><span class="pagenum">5</span></a>
-				<a href="javascript:;" class="nextpage  pbtn"><img src="img/btn_nextpage.png" alt="다음 페이지로 이동"></a>
-				<a href="javascript:;" class="lastpage  pbtn"><img src="img/btn_lastpage.png" alt="마지막 페이지로 이동"></a>
+			    <a href="boardlist.do?pageNum=1" class="firstpage pbtn">
+			        <img src="img/btn_firstpage.png" alt="첫 페이지로 이동">
+			    </a>
+
+			    <c:if test="${pageNum > 1}">
+			        <a href="boardlist.do?pageNum=${pageNum - 1}" class="prevpage pbtn">
+			            <img src="img/btn_prevpage.png" alt="이전 페이지로 이동">
+			        </a>
+			    </c:if>
+
+			    <c:forEach var="i" begin="1" end="${totalPage}">
+			        <a href="boardlist.do?pageNum=${i}&searchWord=${param.searchWord}">
+			            <span class="pagenum ${i == pageNum ? 'currentpage' : ''}">${i}</span>
+			        </a>
+			    </c:forEach>
+
+			    <c:if test="${pageNum < totalPage}">
+			        <a href="boardlist.do?pageNum=${pageNum + 1}" class="nextpage pbtn">
+			            <img src="img/btn_nextpage.png" alt="다음 페이지로 이동">
+			        </a>
+			    </c:if>
+			
+			    <a href="boardlist.do?pageNum=${totalPage}" class="lastpage pbtn">
+			        <img src="img/btn_lastpage.png" alt="마지막 페이지로 이동">
+			    </a>
 			</div>
+
 			<!-- //pagination -->
 			
 		</div>

@@ -15,38 +15,38 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet("/boardlist.do")
-public class ListController extends HttpServlet{
-	private static final long serialVersionUID = 1L;
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// BoardDTO를 사용한 리스트 boardLists를 선언
-		List<BoardDTO> boardLists = new ArrayList<>();
-		// map에 검색조건 설정하기
-		String searchWord = req.getParameter("searchWord");
-		Map<String,Object> map = new HashMap<>();
-		if(searchWord != null && !searchWord.equals("")) {
-			map.put("searchWord", searchWord);
-		}
-		// tourist_board의 전체 건수 저장하기
-		BoardDAO dao = new BoardDAO();
-		int totalCount = dao.selectCount(map);
-		// DAO를 사용하여 DB에서 tourist_board의 전체 데이터를 리스트에 저장
-		boardLists = dao.selectList(map);
-		// req에 boardLists데이터, 전체 건수 저장하기
-		req.setAttribute("boardLists", boardLists);
-		req.setAttribute("totalCount", totalCount);
-		// board_list.jsp 실행
-		req.getRequestDispatcher("/board_list2.jsp").forward(req, resp);
-	}
+public class ListController extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String searchWord = req.getParameter("searchWord");
+        Map<String, Object> map = new HashMap<>();
+        if (searchWord != null && !searchWord.equals("")) {
+            map.put("searchWord", searchWord);
+        }
+
+        BoardDAO dao = new BoardDAO();
+        int totalCount = dao.selectCount(map);
+
+        String pageNumStr = req.getParameter("pageNum");
+        int currentPage = (pageNumStr != null) ? Integer.parseInt(pageNumStr) : 1;
+        int pageSize = 10;
+        int start = (currentPage - 1) * pageSize + 1;
+        int end = currentPage * pageSize;
+
+        map.put("start", start);
+        map.put("end", end);
+
+        List<BoardDTO> boardLists = dao.selectListPaging(map);
+
+        req.setAttribute("boardLists", boardLists);
+        req.setAttribute("totalCount", totalCount);
+        req.setAttribute("pageNum", currentPage);
+
+        int totalPage = (int) Math.ceil((double) totalCount / pageSize);
+        req.setAttribute("totalPage", totalPage);
+
+        req.getRequestDispatcher("/board_list2.jsp").forward(req, resp);
+    }
 }
-
-
-
-
-
-
-
-
-
-
-

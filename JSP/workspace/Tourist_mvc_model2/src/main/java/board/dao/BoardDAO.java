@@ -55,6 +55,47 @@ public class BoardDAO extends DBConnPool{
 		}
 		return bbs;
 	}
+	
+	public List<BoardDTO> selectListPaging(Map<String, Object> map) {
+	    List<BoardDTO> bbs = new Vector<>();
+	    String query = "SELECT * FROM ("
+	                 + "  SELECT Tb.*, ROWNUM rNum FROM ("
+	                 + "    SELECT * FROM tourist_board";
+
+	    if (map.get("searchWord") != null) {
+	        query += " WHERE title LIKE '%" + map.get("searchWord") + "%'";
+	    }
+
+	    query += " ORDER BY num DESC"
+	           + "  ) Tb"
+	           + " ) WHERE rNum BETWEEN ? AND ?";
+
+	    try {
+	        psmt = con.prepareStatement(query);
+	        psmt.setInt(1, (int) map.get("start"));
+	        psmt.setInt(2, (int) map.get("end"));
+	        rs = psmt.executeQuery();
+
+	        while (rs.next()) {
+	            BoardDTO dto = new BoardDTO();
+	            dto.setNum(rs.getInt("num"));
+	            dto.setTitle(rs.getString("title"));
+	            dto.setContent(rs.getString("content"));
+	            dto.setPostDate(rs.getDate("postdate"));
+	            dto.setId(rs.getString("id"));
+	            dto.setVisitCount(rs.getInt("visitcount"));
+	            bbs.add(dto);
+	        }
+	    } catch (Exception e) {
+	        System.out.println("페이징 게시물 조회 중 예외 발생");
+	        e.printStackTrace();
+	    }
+
+	    return bbs;
+	}
+
+	
+	
 	public int insertWrite(BoardDTO dto) {
 		int result = 0;
 		try {
@@ -140,6 +181,8 @@ public class BoardDAO extends DBConnPool{
 		}
 		return result;
 	}
+	
+	
 }
 
 
