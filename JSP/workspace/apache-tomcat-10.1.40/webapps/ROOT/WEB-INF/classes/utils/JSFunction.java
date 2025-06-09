@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.jsp.JspWriter;
 
 public class JSFunction {
+	// JSP파일에서 사용하는 메시지 출력 메서드
 	public static void alertLocation(String msg, String url, JspWriter out) {
 		try {
 			String script = ""
@@ -18,6 +19,19 @@ public class JSFunction {
 			e.printStackTrace();
 		}
 	}
+	public static void alertBack(String msg, JspWriter out) {
+		try {
+			String script = ""
+					+ "<script>"
+					+ "	alert('"+msg+"');"
+					+ " history.back();"
+					+ "</script>";
+			out.print(script);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	// 서블릿(Controller)에서 사용하는 메시지 출력 메서드
 	public static void alertLocation(HttpServletResponse resp, String msg, String url) {
 		try {
 			resp.setContentType("text/html;charset=UTF-8");
@@ -42,18 +56,6 @@ public class JSFunction {
 					+ " history.back();"
 					+ "</script>";
 			writer.print(script);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
-	public static void alertBack(String msg, JspWriter out) {
-		try {
-			String script = ""
-					+ "<script>"
-					+ "	alert('"+msg+"');"
-					+ " history.back();"
-					+ "</script>";
-			out.print(script);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

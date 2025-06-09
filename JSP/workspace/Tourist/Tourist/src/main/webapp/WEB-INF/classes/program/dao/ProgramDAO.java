@@ -8,7 +8,6 @@ import common.DBConnPool;
 
 public class ProgramDAO extends DBConnPool {
 
-    // 전체 프로그램 목록 조회
 	public List<ProgramDTO> selectAll() {
 	    List<ProgramDTO> list = new ArrayList<>();
 
@@ -21,7 +20,7 @@ public class ProgramDAO extends DBConnPool {
 	        while (rs.next()) {
 	            ProgramDTO dto = new ProgramDTO();
 	            dto.setId(rs.getInt("id"));
-	            dto.setIdx(rs.getString("idx")); // ✅ 이 한 줄 꼭 추가!
+	            dto.setIdx(rs.getString("idx"));
 	            dto.setTitle(rs.getString("title"));
 	            dto.setText(rs.getString("text"));
 	            dto.setSubtext(rs.getString("subtext"));
@@ -39,7 +38,6 @@ public class ProgramDAO extends DBConnPool {
 	}
 
     
- // 특정 프로그램 상세 정보 조회
     public ProgramDTO selectProgram(String idx) {
         ProgramDTO dto = null;
 
@@ -52,7 +50,7 @@ public class ProgramDAO extends DBConnPool {
             if (rs.next()) {
                 dto = new ProgramDTO();
                 dto.setId(rs.getInt("id"));
-                dto.setIdx(rs.getString("idx")); // ✅ 정상적으로 idx 넣기
+                dto.setIdx(rs.getString("idx"));
                 dto.setTitle(rs.getString("title"));
                 dto.setText(rs.getString("text"));
                 dto.setSubtext(rs.getString("subtext"));
