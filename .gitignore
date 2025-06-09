@@ -12,3 +12,7 @@
 # OS 및 에디터 임시파일
 .DS_Store
 Thumbs.db
+
+*.zip
+*.war
+
