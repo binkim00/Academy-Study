@@ -1,0 +1,18 @@
+<configuration status="INFO">
+    <appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout charset="UTF-8" pattern="%d{hh:mm:ss} %5p [%c] %m%n"/>
+        </Console>
+    </appenders>
+    <loggers>
+        <logger name="org.springframework" level="INFO" additivity="false">
+            <appender-ref ref="console"/>
+        </logger>
+        <logger name="org.zerock" level="INFO" additivity="false">
+            <appender-ref ref="console"/>
+        </logger>
+        <root level="INFO" additivity="false">
+            <appender-ref ref="console"/>
+        </root>
+    </loggers>
+</configuration>
