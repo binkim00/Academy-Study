@@ -14,7 +14,7 @@
     <!-- HTML,CSS,JavaScript,image 등의 정적파일을 저장하는 공간의 주소를 설정 -->
     <!-- mapping : 주소창에서 실행할 주소  -->
     <!-- location : 실제 파일의 위치(webapp폴더를 기준으로) -->
-    <mvc:resources mapping="/resource/**" location="/resources/" />
+    <mvc:resources mapping="/resources/**" location="/resources/" />
     <!--JSP파일을 불러오는 형식 설정-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <!-- prefix설정 : jsp파일을 부를때 앞에 prefix의 value값을 자동으로 붙여줌 -->

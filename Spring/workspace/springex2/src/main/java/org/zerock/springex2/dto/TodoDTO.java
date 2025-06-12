@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @AllArgsConstructor // 모든 데이터를 저장하는 생성자 생성
 @ToString // TodoDTO안에 있는 모든 데이터를 확인할 수 있는 toString을 생성
 @Builder // TodoDTO생성에 사용하는 메서드 생성
-@Data // @Getter @Setter @RequiredArgsConstructor @ToString @EqualsAndHashCode.
+//@Data // @Getter @Setter @RequiredArgsConstructor @ToString @EqualsAndHashCode.
 public class TodoDTO {
     private Long tno;
     private String title;

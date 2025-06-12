@@ -73,17 +73,23 @@ public class SampleController {
         //RedirectAttributes : 리다이렉트 시 데이터를 저장할 수 있도록 하는 객체
         // addAttribute("key", "value") : 주소창에 설정되는 파라미터 설정
         redirectAttributes
-                        .addAttribute("name", "ABC");
+                .addAttribute("name", "ABC");
         // addFlashAttribute(키,값) : 주소창에 설정되지 않는 JSP에서 1회용으로 사용하는 파라미터 설정
         redirectAttributes
                 .addFlashAttribute("result","success");
         // 간단한 파라미터의 경우 return에 직접 작성하는 방법도 가능
-        return "redirect:/ex6?title=asd";
+        String title = "리다이렉트 파라미터 확인";
+        return "redirect:/ex6?title="+title;
     }
     @GetMapping("/ex6")
     public void ex6(String name, String result){
         log.info(name);
         log.info(result);
+    }
+    @GetMapping("/ex7")
+    public void ex7(String p1, int p2){
+        log.info(p1);
+        log.info(p2);
     }
 
 }

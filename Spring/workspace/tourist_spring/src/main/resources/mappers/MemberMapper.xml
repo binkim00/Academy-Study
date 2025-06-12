@@ -1,0 +1,18 @@
+<insert id="insertMember" parameterType="org.zerock.tourist_spring.member.vo.MemberVO">
+    INSERT INTO tourist_member
+    (
+    id, email, name, password, phone, gender, agree, content, regidate
+    )
+    VALUES
+    (
+    #{id},
+    #{email},
+    #{name},
+    #{password},
+    #{phone},
+    #{gender},
+    #{agree},
+    #{content},
+    NOW()
+    )
+</insert>
