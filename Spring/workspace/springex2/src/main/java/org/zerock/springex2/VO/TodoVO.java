@@ -1,4 +1,4 @@
-package org.zerock.springex2.VO;
+package org.zerock.springex2.vo;
 
 import lombok.*;
 

@@ -23,7 +23,7 @@
     <!--JSP파일을 불러오는 형식 설정-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <!-- prefix설정 : jsp파일을 부를때 앞에 prefix의 value값을 자동으로 붙여줌 -->
-        <property name="prefix" value="/" />
+        <property name="prefix" value="/WEB-INF/views/" />
         <!-- suffix설정 : jsp파일을 부를때 뒤에 suffix의 value값을 자동으로 붙여줌 -->
         <property name="suffix" value=".jsp"/>
     </bean>

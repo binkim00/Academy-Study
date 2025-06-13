@@ -4,4 +4,8 @@ import org.zerock.tourist_spring.member.dto.MemberDTO;
 
 public interface MemberService {
     void register(MemberDTO dto);
+
+    MemberDTO login(String id, String password);
 }
+
+

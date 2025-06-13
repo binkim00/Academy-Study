@@ -1,0 +1,26 @@
+-구성요소
+| 순서 	| 구성요소	| 역할                 		|
+| -- 	| ---------- 	| ------------------ 		|
+| 1	| 테이블       	| 실제 데이터 저장         	|
+| 2 	| VO         	| DB ↔ 자바 객체 매핑     	|
+| 3	| DTO        	| 계층 간 데이터 전달        	|
+| 4	| Mapper     	| SQL 실행 (DAO 역할)    	|
+| 5	| Service   	| 로직 처리, VO ↔ DTO 변환 	|
+| 6	| Controller 	| 요청 처리, 서비스 호출      	|
+| 7	| JSP        	| 화면 출력              	|
+
+
+-회원 가입
+1. 사용자: join.jsp → 회원정보 입력 후 제출
+2. Controller: @PostMapping("/register") → DTO 받음
+3. Service: 비밀번호 암호화, 중복체크, VO로 변환
+4. Mapper: VO를 이용해 INSERT SQL 실행
+5. DB Table: 새로운 회원 레코드 저장
+
+-로그인
+1. 사용자: login.jsp에서 로그인 정보 입력
+2. Controller: login(id, pw) 요청 → Service 호출
+3. Service: Mapper 통해 VO 조회 → pw 일치 확인
+4. Service: VO → DTO 변환
+5. Controller: JSP로 DTO 전달
+6. JSP: ${loginUser.name} 출력

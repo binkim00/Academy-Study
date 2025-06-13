@@ -1,6 +1,8 @@
 package org.zerock.springex2.mapper;
 
-import org.zerock.springex2.VO.TodoVO;
+import org.zerock.springex2.vo.TodoVO;
+
+import java.util.List;
 
 public interface TodoMapper {
     String getTime();
@@ -8,4 +10,6 @@ public interface TodoMapper {
     // DTO : 화면에서 쓰이는 데이터를 클래스화하여 작성한 객체
     // VO는 테이블당 하나, DTO 필요한 만큼 작성해도 무방
     void insertTodo(TodoVO todoVO);
+    List<TodoVO> selectAll();
+    TodoVO selectOne(Long tno);
 }

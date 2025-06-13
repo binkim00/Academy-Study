@@ -37,7 +37,9 @@
         <!--mapper로 사용할 xml파일을 연동하는 설정-->
         <property name="mapperLocations" value="classpath:/mappers/**/*.xml" />
     </bean>
-    <mybatis:scan base-package="org.zerock.tourist_spring.member.mapper" />
+    <mybatis:scan base-package="org.zerock.tourist_spring.member.mapper,
+                                org.zerock.tourist_spring.board.mapper" />
+
 </beans>
 
 

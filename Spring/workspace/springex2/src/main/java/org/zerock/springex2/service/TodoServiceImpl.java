@@ -2,9 +2,13 @@ package org.zerock.springex2.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.zerock.springex2.VO.TodoVO;
+import org.zerock.springex2.vo.TodoVO;
 import org.zerock.springex2.dto.TodoDTO;
 import org.zerock.springex2.mapper.TodoMapper;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 // 비즈니스 로직의 코드를 작서하는 Service 클래스
 // DTO를 VO로 변환하거나 VO를 DTO로 변환하는 코드
@@ -27,5 +31,49 @@ public class TodoServiceImpl implements TodoService {
                 .build();
         // Mapper를 이용해 insert문을 실행
         todoMapper.insertTodo(todoVO);
+    }
+
+    @Override
+    public List<TodoDTO> getAll() {
+        // DB에서 전체 데이터를 받아와 voList에 저장
+        List<TodoVO> voList = todoMapper.selectAll();
+        // vo로 되어 있는 리스트를 dto 리스트로 변경
+        List<TodoDTO> dtoList = new ArrayList<>();
+        for (TodoVO todoVO : voList) {
+            TodoDTO dto = new TodoDTO();
+            dto.setTno(todoVO.getTno());
+            dto.setTitle(todoVO.getTitle());
+            dto.setDueDate(todoVO.getDueDate());
+            dto.setFinished(todoVO.isFinished());
+            dto.setWriter(todoVO.getWriter());
+            dtoList.add(dto);
+        }
+        // stream과 Builder를 사용한 vo를 dto로 변경하는 방식
+        List<TodoDTO> dtoList2 = todoMapper.selectAll().stream()
+                .map(vo-> TodoDTO.builder()
+                        .tno(vo.getTno())
+                        .title(vo.getTitle())
+                        .dueDate(vo.getDueDate())
+                        .finished(vo.isFinished())
+                        .writer(vo.getWriter())
+                        .build()
+                ).collect(Collectors.toList());
+        return dtoList;
+    }
+
+    @Override
+    public TodoDTO getOne(Long tno) {
+        // DB에서 tno와 일치하는 데이터를 저장
+        TodoVO todoVO = todoMapper.selectOne(tno);
+        // VO를 DTO로 변경
+        TodoDTO dto = TodoDTO.builder()
+                .tno(todoVO.getTno())
+                .title(todoVO.getTitle())
+                .dueDate(todoVO.getDueDate())
+                .finished(todoVO.isFinished())
+                .writer(todoVO.getWriter())
+                .build();
+        // 완성된 DTO를 Controller로 반환
+        return dto;
     }
 }

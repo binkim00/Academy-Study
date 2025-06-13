@@ -26,4 +26,9 @@ public class MemberServiceImpl implements MemberService {
 
         memberMapper.insertMember(vo);
     }
+
+    @Override
+    public MemberDTO login(String id, String password) {
+        return memberMapper.login(id, password);
+    }
 }

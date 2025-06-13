@@ -26,7 +26,7 @@
 <!-- wrap -->
 <div id="wrap">
 
-	<%@ include file="/Header.jsp" %>
+	<%@ include file="/WEB-INF/views/Header.jsp" %>
 
 	<div id="container">
         <div class="main_rolling_pc">

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.tourist_spring.board.mapper.BoardMapper">
+
+    <!--  게시글 목록 조회 (페이징 + 검색) -->
+    <select id="selectPaged" parameterType="map" resultType="org.zerock.tourist_spring.board.vo.BoardVO">
+        SELECT * FROM tourist_board
+        <where>
+            <if test="searchWord != null">
+                title LIKE #{searchWord}
+            </if>
+        </where>
+        ORDER BY num DESC
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <!--  전체 게시글 수 (검색어 포함) -->
+    <select id="countAll" parameterType="string" resultType="int">
+        SELECT COUNT(*) FROM tourist_board
+        <where>
+            <if test="_parameter != null">
+                title LIKE #{_parameter}
+            </if>
+        </where>
+    </select>
+
+    <!--  게시글 상세 보기 -->
+    <select id="selectOne" parameterType="int" resultType="org.zerock.tourist_spring.board.vo.BoardVO">
+        SELECT * FROM tourist_board WHERE num = #{num}
+    </select>
+
+    <!--  게시글 등록 -->
+    <insert id="insert" parameterType="org.zerock.tourist_spring.board.vo.BoardVO">
+        INSERT INTO tourist_board (title, content, id, visitcount)
+        VALUES (#{title}, #{content}, #{id}, 0)
+    </insert>
+
+    <!--  게시글 수정 -->
+    <update id="update" parameterType="org.zerock.tourist_spring.board.vo.BoardVO">
+        UPDATE tourist_board
+        SET title = #{title}, content = #{content}
+        WHERE num = #{num}
+    </update>
+
+    <!--  게시글 삭제 -->
+    <delete id="delete" parameterType="int">
+        DELETE FROM tourist_board WHERE num = #{num}
+    </delete>
+
+    <!--  조회수 증가 -->
+    <update id="updateVisitCount" parameterType="int">
+        UPDATE tourist_board
+        SET visitcount = visitcount + 1
+        WHERE num = #{num}
+    </update>
+
+</mapper>
