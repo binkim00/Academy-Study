@@ -20,6 +20,12 @@
 </head>
 
 <body>
+<c:if test="${not empty msg}">
+    <script>
+        alert("${msg}");
+    </script>
+</c:if>
+
 <ul class="skipnavi">
     <li><a href="#container">본문내용</a></li>
 </ul>
@@ -82,12 +88,24 @@
     <script>
         function deletePost() {
             if (confirm("정말 삭제하시겠습니까?")) {
-                location.href = "${pageContext.request.contextPath}/delete?num=${board.num}";
+                const form = document.createElement("form");
+                form.method = "post";
+                form.action = "${pageContext.request.contextPath}/delete";
+
+                const input = document.createElement("input");
+                input.type = "hidden";
+                input.name = "num";
+                input.value = "${board.num}";
+
+                form.appendChild(input);
+                document.body.appendChild(form);
+                form.submit();
             }
         }
     </script>
 
-    <%-- footer --%>
+
+<%-- footer --%>
     <footer>
         <div class="foot_area box_inner">
             <ul class="foot_list clear">

@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.springex2.dto.TodoDTO;
 import org.zerock.springex2.service.TodoService;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -33,11 +35,16 @@ public class TodoController {
         model.addAttribute("dtoList",todoService.getAll());
         return "todo/list";
     }
-    @GetMapping("/read")
+    // 하나의 메서드에 여러개의 주소를 설정하는 방식
+    // {첫번째 주소, 두번째 주소 , 세번째 주소}
+    @GetMapping({"/read", "/edit"})
     // Spring의 파리미터를 자동으로 받아 tno저장
-    public String read(Long tno, Model model){
+    public void read(Long tno, Model model){
         model.addAttribute("dto", todoService.getOne(tno));
-        return "todo/read";
+        // return 타입을 void로 설정 할 경우
+        // 주소를 기준으로 폴더와 파일을 찾아서 화면(JSP파일)을 출력함
+        // todo/read => todo폴더 안의 read.jsp를 실행
+        // todo/edit => todo폴더 안의 edit.jsp를 실행
     }
 
     // 주소 : http://localhost:8081/todo/register
@@ -53,16 +60,32 @@ public class TodoController {
         todoService.register(todoDTO);
         return "redirect:/todo/list";
     }
-    // GetMapping과 같은 방식
-    @RequestMapping(value="/edit", method= RequestMethod.GET)
-    public String edit(){
-        log.info("edit");
-        return "edit";
-    }
     // PostMapping과 같은 방식
     @RequestMapping(value="/edit", method= RequestMethod.POST)
-    public String editPost(){
+    public String editPost(TodoDTO todoDTO,
+                           RedirectAttributes redirectAttributes){
         log.info("editPost");
-        return "redirect:/hello";
+        if(todoDTO.getTitle().length()>0 && todoDTO.getDueDate() != null){
+            String result = todoService.editTodo(todoDTO);
+            redirectAttributes.addFlashAttribute("msg", result);
+            redirectAttributes.addAttribute("tno", todoDTO.getTno());
+            return "redirect:/todo/read";
+        }else{
+            redirectAttributes.addFlashAttribute("msg", "수정에 실패했습니다.");
+            redirectAttributes.addAttribute("tno", todoDTO.getTno());
+            return "redirect:/todo/edit";
+        }
+    }
+    @PostMapping("/remove")
+    public String remove(Long tno){
+        // session에 저장된 로그인 유저의 ID를 확인
+        //String userId = session.getAttribute("UserId").toString();
+        TodoDTO dto = todoService.getOne(tno);
+        if(dto != null){
+            todoService.removeTodo(tno);
+            return "redirect:/todo/list";
+        }else{
+            return "redirect:/todo/list?errorMsg=error";
+        }
     }
 }

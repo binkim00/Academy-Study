@@ -21,6 +21,13 @@
 </head>
 
 <body>
+
+<c:if test="${not empty msg}">
+  <script>
+    alert("${msg}");
+  </script>
+</c:if>
+
 <ul class="skipnavi">
   <li><a href="#container">부문내용</a></li>
 </ul>
@@ -100,7 +107,15 @@
 
       <!-- pagination -->
       <div class="pagination">
-        <c:set var="queryStr" value="${not empty param.searchWord ? '&searchWord=' += param.searchWord : ''}" />
+        <c:choose>
+          <c:when test="${not empty searchWord}">
+            <c:set var="queryStr" value="&searchWord=${searchWord}" />
+          </c:when>
+          <c:otherwise>
+            <c:set var="queryStr" value="" />
+          </c:otherwise>
+        </c:choose>
+
 
         <a href="/list?pageNum=1${queryStr}" class="firstpage pbtn">
           <img src="/img/btn_firstpage.png" alt="첫 페이지로 이동">
@@ -128,6 +143,7 @@
           <img src="/img/btn_lastpage.png" alt="마지막 페이지로 이동">
         </a>
       </div>
+
       <!-- //pagination -->
     </div><!-- //bodytext_area -->
   </div><!-- //container -->
@@ -144,15 +160,23 @@
 </div>
 
 <script>
-  document.querySelector("#writeBtn").addEventListener("click", function(e) {
+  document.addEventListener("DOMContentLoaded", function () {
     const isLogin = "${sessionScope.loginUser ne null}";
-    if (!isLogin) {
-      e.preventDefault();
-      alert("로그인이 필요합니다.");
-      location.href = "${pageContext.request.contextPath}/login";
+    const writeBtn = document.querySelector("#writeBtn");
+
+    if (writeBtn) {
+      writeBtn.addEventListener("click", function(e) {
+        if (isLogin !== "true") {
+          e.preventDefault();
+          alert("로그인이 필요합니다.");
+          location.href = "${pageContext.request.contextPath}/login";
+        }
+      });
     }
   });
 </script>
+
+
 
 </body>
 </html>

@@ -19,4 +19,16 @@
     <select id="selectOne" resultType="org.zerock.springex2.vo.TodoVO">
         SELECT * FROM tbl_todo WHERE tno=#{tno}
     </select>
+
+    <delete id="deleteTodo">
+        DELETE FROM tbl_todo WHERE tno = #{tno}
+    </delete>
+
+    <update id="updateTodo">
+        UPDATE tbl_todo
+        SET title = #{title}
+        ,dueDate = #{dueDate}
+        ,finished = #{finished}
+        WHERE tno = #{tno}
+    </update>
 </mapper>

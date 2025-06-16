@@ -23,42 +23,46 @@
     <%@ include file="Header.jsp" %>
 
     <div id="container">
+        <!-- 위치 영역 -->
         <div class="location_area customer">
             <div class="box_inner">
                 <h2 class="tit_page">TOURIST <span class="in">in</span> TOUR</h2>
                 <p class="location">고객센터 <span class="path">/</span> 공지사항</p>
                 <ul class="page_menu clear">
-                    <li><a href="/list" class="on">공지사항</a></li>
+                    <li><a href="${pageContext.request.contextPath}/list" class="on">공지사항</a></li>
                     <li><a href="#">문의하기</a></li>
                 </ul>
             </div>
         </div>
 
         <div class="bodytext_area box_inner">
-            <h3 class="tit">공지사항 글쓰기</h3>
-
             <form action="${pageContext.request.contextPath}/write" method="post">
-                <div class="bbs_write">
-                    <ul>
-                        <li>
-                            <label for="title">제목</label>
-                            <input type="text" id="title" name="title" class="tbox full" required />
-                        </li>
-                        <li>
-                            <label for="content">내용</label>
-                            <textarea id="content" name="content" class="tbox full" rows="10" required></textarea>
-                        </li>
-                    </ul>
-                </div>
+                <ul class="bbsview_list">
+                    <li class="bbs_title">
+                        제목 :
+                        <input type="text" name="title" size="100" placeholder="제목을 입력해주세요." class="tbox" required />
+                    </li>
+                    <li class="bbs_content">
+                        <div class="editer_content">
+                            <textarea name="content" cols="110" rows="20" placeholder="내용을 입력해주세요." class="tbox" required></textarea>
+                        </div>
+                    </li>
+                </ul>
 
-                <div class="btn_line txt_right">
-                    <button type="submit" class="btn_bbs">등록</button>
-                    <a href="${pageContext.request.contextPath}/list" class="btn_bbs">취소</a>
-                </div>
+                <p class="btn_line txt_right">
+                    <input type="submit" value="글쓰기" class="btn_srch">
+                    <a href="${pageContext.request.contextPath}/list" class="btn_bbs">목록</a>
+                </p>
             </form>
-        </div>
-    </div>
 
+            <ul class="near_list mt20">
+                <li><h4 class="prev">다음글</h4><a href="javascript:;">추석 연휴 티켓/투어 배송 및 직접 수령 안내</a></li>
+                <li><h4 class="next">이전글</h4><a href="javascript:;">이번 여름 휴가 제주 갈까? 미션 투어 (여행경비 50만원 지원)</a></li>
+            </ul>
+        </div>
+
+
+    <!-- 푸터 영역 -->
     <footer>
         <div class="foot_area box_inner">
             <ul class="foot_list clear">

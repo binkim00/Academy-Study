@@ -42,39 +42,42 @@
           Featured
         </div>
         <div class="card-body">
-          <div class="input-group mb-3">
-            <span class="input-group-text">TNO</span>
-            <input type="text" name="tno" class="form-control"
-                   value="${dto.tno}" readonly>
-          </div>
-          <div class="input-group mb-3">
-            <span class="input-group-text">Title</span>
-            <input type="text" name="title" class="form-control"
-                   value="${dto.title}" readonly>
-          </div>
-          <div class="input-group mb-3">
-            <span class="input-group-text">DueDate</span>
-            <input type="date" name="dueDate" class="form-control"
-                   value="${dto.dueDate}" readonly>
-          </div>
-          <div class="input-group mb-3">
-            <span class="input-group-text">Writer</span>
-            <input type="text" name="writer" class="form-control"
-                   value="${dto.writer}" readonly>
-          </div>
-          <div class="form-check">
-            <label class="form-check-label">
-              Finished &nbsp;
-            </label>
-            <input type="checkbox" class="form-check-input" name="finished"
-            ${dto.finished ? "checked" : ""} disabled>
-          </div>
-          <div class="my-4">
-            <div class="float-end">
-              <button type="button" class="btn btn-primary">Modify</button>
-              <button type="button" class="btn btn-secondary">List</button>
+          <form action="/todo/edit" method="post">
+            <div class="input-group mb-3">
+              <span class="input-group-text">TNO</span>
+              <input type="text" name="tno" class="form-control"
+                     value="${dto.tno}" readonly>
             </div>
-          </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text">Title</span>
+              <input type="text" name="title" class="form-control"
+                     value="${dto.title}">
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text">DueDate</span>
+              <input type="date" name="dueDate" class="form-control"
+                     value="${dto.dueDate}">
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text">Writer</span>
+              <input type="text" name="writer" class="form-control"
+                     value="${dto.writer}" readonly>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                Finished &nbsp;
+              </label>
+              <input type="checkbox" class="form-check-input" name="finished"
+              ${dto.finished ? "checked" : ""}>
+            </div>
+            <div class="my-4">
+              <div class="float-end">
+                <button type="button" class="btn btn-danger">Remove</button>
+                <button type="submit" class="btn btn-primary">Modify</button>
+                <button type="button" class="btn btn-secondary">List</button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -90,15 +93,31 @@
     </div>
   </div>
 </div>
+
 <!-- 부트스트랩 JavaScript를 CDN방식으로 다운로드 -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script>
+  // JavaScript에서 $를 사용하는 EL사용시 '' 감싸야함
   let msg = '${empty msg?"":msg}';
   if(msg != null && msg.length > 0){
     alert(msg);
   }
-  document.querySelector(".btn-primary").addEventListener("click", function(e){
-    self.location="/todo/edit?tno="+${dto.tno};
+  document.querySelector(".btn-danger").addEventListener("click", function(e){
+
+    // 기본으로 설정되어 있던 /todo/edit의 Submit이 실행되지 않도록 설정
+    // 태그에서 설정되어있는 기능을 막는 메서드
+    e.preventDefault();
+    // 부모 태그에 이벤트가 설정되는것 막도록 설정
+    e.stopPropagation();
+
+    // form 태그를 실행하기 위해 JavaScript를 이용
+    const formObj = document.querySelector("form");
+    // action을 삭제용 URI로 변경
+    formObj.action="/todo/remove";
+    // method를 post로 번경
+    formObj.method="post";
+    // submit으로 서버에 데이터를 전송
+    formObj.submit();
   })
   document.querySelector(".btn-secondary").addEventListener("click", function(e){
     self.location="/todo/list";

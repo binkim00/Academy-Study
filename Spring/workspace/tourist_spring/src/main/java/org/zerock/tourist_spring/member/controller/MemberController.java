@@ -57,6 +57,11 @@ public class MemberController {
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {
+        // session에 데이터를 각각 삭제하는 경우
+//        session.removeAttribute("UserId");
+//        session.removeAttribute("userDTO");
+
+        // session에 데이터를 모두 삭제하는 경우
         session.invalidate();
         return "redirect:/";
     }

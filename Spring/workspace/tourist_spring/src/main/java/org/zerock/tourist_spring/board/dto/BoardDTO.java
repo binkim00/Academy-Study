@@ -8,10 +8,11 @@ import java.sql.Timestamp;
 @Data
 @Builder
 public class BoardDTO {
-    private int num;
+    private Integer num;           // <-- 여기
     private String title;
     private String content;
     private String id;
     private Timestamp postdate;
-    private int visitcount;
+    private Integer visitcount;    // <-- 그리고 여기
 }
+
