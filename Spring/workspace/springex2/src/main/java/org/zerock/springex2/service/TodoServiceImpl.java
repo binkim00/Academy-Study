@@ -2,6 +2,8 @@ package org.zerock.springex2.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.zerock.springex2.dto.PageRequestDTO;
+import org.zerock.springex2.dto.PageResponseDTO;
 import org.zerock.springex2.vo.TodoVO;
 import org.zerock.springex2.dto.TodoDTO;
 import org.zerock.springex2.mapper.TodoMapper;
@@ -59,6 +61,28 @@ public class TodoServiceImpl implements TodoService{
                         .build()
                 ).collect(Collectors.toList());
         return dtoList;
+    }
+
+    @Override
+    public PageResponseDTO<TodoDTO> getList(PageRequestDTO pageRequestDTO) {
+        List<TodoVO> voList = todoMapper.selectSearch(pageRequestDTO);
+        List<TodoDTO> dtoList = voList.stream()
+                .map(vo -> TodoDTO.builder()
+                        .tno(vo.getTno())
+                        .title(vo.getTitle())
+                        .dueDate(vo.getDueDate())
+                        .finished(vo.isFinished())
+                        .writer(vo.getWriter())
+                        .build())
+                .collect(Collectors.toList());
+        int total = todoMapper.getCount(pageRequestDTO);
+        PageResponseDTO<TodoDTO> pageResponseDTO =
+                PageResponseDTO.<TodoDTO>withAll()
+                        .pageRequestDTO(pageRequestDTO)
+                        .dtoList(dtoList)
+                        .total(total)
+                        .build();
+        return pageResponseDTO;
     }
 
     @Override

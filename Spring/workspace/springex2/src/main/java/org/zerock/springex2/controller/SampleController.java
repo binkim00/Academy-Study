@@ -73,7 +73,7 @@ public class SampleController {
         //RedirectAttributes : 리다이렉트 시 데이터를 저장할 수 있도록 하는 객체
         // addAttribute("key", "value") : 주소창에 설정되는 파라미터 설정
         redirectAttributes
-                .addAttribute("name", "ABC");
+                        .addAttribute("name", "ABC");
         // addFlashAttribute(키,값) : 주소창에 설정되지 않는 JSP에서 1회용으로 사용하는 파라미터 설정
         redirectAttributes
                 .addFlashAttribute("result","success");

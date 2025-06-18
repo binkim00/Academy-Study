@@ -62,7 +62,6 @@
                 </p>
             </form>
 
-            <!-- 메시지 출력 (수정 성공/실패 등) -->
             <c:if test="${not empty msg}">
                 <script>
                     alert("${msg}");

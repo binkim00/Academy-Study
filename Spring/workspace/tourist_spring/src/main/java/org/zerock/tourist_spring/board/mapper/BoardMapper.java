@@ -10,7 +10,7 @@ import java.util.Map;
 public interface BoardMapper {
 
     List<BoardVO> selectPaged(Map<String, Object> paramMap);
-    int countAll(String searchWord);
+    int countByCondition(Map<String, Object> paramMap);
     BoardVO selectOne(int num);
     void insert(BoardVO board);
     void update(BoardVO board);

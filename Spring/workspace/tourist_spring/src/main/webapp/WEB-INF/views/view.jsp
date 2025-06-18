@@ -26,6 +26,10 @@
     </script>
 </c:if>
 
+<c:set var="pageNum" value="${empty param.page ? 1 : param.page}" />
+<c:set var="searchWord" value="${param.searchWord}" />
+<c:set var="searchType" value="${param.searchType}" />
+
 <ul class="skipnavi">
     <li><a href="#container">본문내용</a></li>
 </ul>
@@ -68,8 +72,7 @@
                     <a onclick="deletePost()" class="btn_bbs">삭제하기</a>
                     <a href="${pageContext.request.contextPath}/edit?num=${board.num}" class="btn_bbs">수정하기</a>
                 </c:if>
-                <a href="${pageContext.request.contextPath}/list" class="btn_bbs">목록</a>
-            </p>
+                <a href="${pageContext.request.contextPath}/list?page=${pageNum}&searchWord=${searchWord}&searchType=${searchType}" class="btn_bbs">목록</a>            </p>
 
             <ul class="near_list mt20">
                 <li><h4 class="prev">다음글</h4>
@@ -84,7 +87,6 @@
     </div>
     <!-- //container -->
 
-    <%-- 삭제 처리용 JS 함수 --%>
     <script>
         function deletePost() {
             if (confirm("정말 삭제하시겠습니까?")) {

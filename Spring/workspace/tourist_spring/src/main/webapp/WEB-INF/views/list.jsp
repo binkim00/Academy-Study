@@ -28,6 +28,10 @@
   </script>
 </c:if>
 
+<c:set var="pageNum" value="${responseDTO.pageRequestDTO.page}" />
+<c:set var="searchWord" value="${responseDTO.pageRequestDTO.searchWord}" />
+
+
 <ul class="skipnavi">
   <li><a href="#container">부문내용</a></li>
 </ul>
@@ -52,7 +56,12 @@
       <form method="get" class="minisrch_form">
         <fieldset>
           <legend>검색</legend>
-          <input type="text" name="searchWord" class="tbox" title="검색어를 입력해주세요" placeholder="검색어를 입력해주세요" value="${param.searchWord}">
+          <select name="searchType" class="tbox">
+            <option value="title" ${responseDTO.pageRequestDTO.searchType == 'title' ? 'selected' : ''}>제목</option>
+            <option value="id" ${responseDTO.pageRequestDTO.searchType == 'id' ? 'selected' : ''}>작성자</option>
+          </select>
+
+          <input type="text" name="searchWord" class="tbox" value="${responseDTO.pageRequestDTO.searchWord}">
           <button class="btn_srch">검색</button>
           <a class="btn_srch" href="${pageContext.request.contextPath}/write" id="writeBtn">글쓰기</a>
         </fieldset>
@@ -69,31 +78,21 @@
         </tr>
         </thead>
 
-        <c:set var="startNum" value="${(pageNum - 1) * 10}" />
-        <c:set var="isSearch" value="${not empty param.searchWord}" />
-
         <tbody>
         <c:choose>
-          <c:when test="${empty list}">
+          <c:when test="${empty responseDTO.dtoList}">
             <tr>
               <td colspan="4" align="center">등록된 게시물이 없습니다.</td>
             </tr>
           </c:when>
           <c:otherwise>
-            <c:forEach var="vo" items="${list}" varStatus="loop">
+            <c:forEach var="vo" items="${responseDTO.dtoList}" varStatus="loop">
               <tr>
-                <td>
-                  <c:choose>
-                    <c:when test="${isSearch}">
-                      ${fn:length(list) - loop.index}
-                    </c:when>
-                    <c:otherwise>
-                      ${totalCount - (startNum + loop.index)}
-                    </c:otherwise>
-                  </c:choose>
-                </td>
+                <td>${responseDTO.total - ((responseDTO.page - 1) * responseDTO.size + loop.index)}</td>
                 <td class="tit_notice">
-                  <a href="/view?num=${vo.num}">${vo.title}</a>
+                  <a href="/view?num=${vo.num}&page=${pageNum}&searchWord=${searchWord}&searchType=${responseDTO.pageRequestDTO.searchType}">
+                      ${vo.title}
+                  </a>
                 </td>
                 <td>${vo.visitcount}</td>
                 <td><fmt:formatDate value="${vo.postdate}" pattern="yyyy-MM-dd" /></td>
@@ -103,43 +102,36 @@
         </c:choose>
         </tbody>
 
+
       </table>
 
       <!-- pagination -->
       <div class="pagination">
-        <c:choose>
-          <c:when test="${not empty searchWord}">
-            <c:set var="queryStr" value="&searchWord=${searchWord}" />
-          </c:when>
-          <c:otherwise>
-            <c:set var="queryStr" value="" />
-          </c:otherwise>
-        </c:choose>
+        <c:set var="link" value="${responseDTO.pageRequestDTO.link}" />
 
-
-        <a href="/list?pageNum=1${queryStr}" class="firstpage pbtn">
+        <a href="/list?${link}&page=1" class="firstpage pbtn">
           <img src="/img/btn_firstpage.png" alt="첫 페이지로 이동">
         </a>
 
-        <c:if test="${pageNum > 1}">
-          <a href="/list?pageNum=${pageNum - 1}${queryStr}" class="prevpage pbtn">
+        <c:if test="${responseDTO.prev}">
+          <a href="/list?${link}&page=${responseDTO.start - 1}" class="prevpage pbtn">
             <img src="/img/btn_prevpage.png" alt="이전 페이지로 이동">
           </a>
         </c:if>
 
-        <c:forEach var="i" begin="1" end="${totalPage}">
-          <a href="/list?pageNum=${i}${queryStr}">
-            <span class="pagenum ${i == pageNum ? 'currentpage' : ''}">${i}</span>
+        <c:forEach var="i" begin="${responseDTO.start}" end="${responseDTO.end}">
+          <a href="/list?${link}&page=${i}">
+            <span class="pagenum ${i == responseDTO.page ? 'currentpage' : ''}">${i}</span>
           </a>
         </c:forEach>
 
-        <c:if test="${pageNum < totalPage}">
-          <a href="/list?pageNum=${pageNum + 1}${queryStr}" class="nextpage pbtn">
+        <c:if test="${responseDTO.next}">
+          <a href="/list?${link}&page=${responseDTO.end + 1}" class="nextpage pbtn">
             <img src="/img/btn_nextpage.png" alt="다음 페이지로 이동">
           </a>
         </c:if>
 
-        <a href="/list?pageNum=${totalPage}${queryStr}" class="lastpage pbtn">
+        <a href="/list?${link}&page=${responseDTO.last}" class="lastpage pbtn">
           <img src="/img/btn_lastpage.png" alt="마지막 페이지로 이동">
         </a>
       </div>

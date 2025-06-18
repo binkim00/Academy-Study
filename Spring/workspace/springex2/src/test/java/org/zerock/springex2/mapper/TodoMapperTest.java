@@ -18,13 +18,14 @@ public class TodoMapperTest {
     private TodoMapper todoMapper;
 
     @Test
-    public void testGetTime() {
+    public void testGetTime(){
         log.info(todoMapper.getTime());
     }
 
     @Test
-    public void testInsertTodo() {
-//        TodoVO todoVO = new TodoVO();
+    public void insertTest(){
+        //TodoVO todoVO = new TodoVO();
+        // VO의 Setter가 없기 때문에 Builder를 이용하여 객체를 생성
         TodoVO todoVO = TodoVO.builder()
                 .title("스프링 테스트")
                 .dueDate(LocalDate.of(2025,06,12))

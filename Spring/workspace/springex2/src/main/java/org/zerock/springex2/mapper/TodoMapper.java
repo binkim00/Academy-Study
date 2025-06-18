@@ -1,5 +1,6 @@
 package org.zerock.springex2.mapper;
 
+import org.zerock.springex2.dto.PageRequestDTO;
 import org.zerock.springex2.vo.TodoVO;
 
 import java.util.List;
@@ -14,4 +15,7 @@ public interface TodoMapper {
     TodoVO selectOne(Long tno);
     void deleteTodo(Long tno);
     void updateTodo(TodoVO todoVO);
+    List<TodoVO> selectList(PageRequestDTO pageRequestDTO);
+    int getCount(PageRequestDTO pageRequestDTO);
+    List<TodoVO> selectSearch(PageRequestDTO pageRequestDTO);
 }

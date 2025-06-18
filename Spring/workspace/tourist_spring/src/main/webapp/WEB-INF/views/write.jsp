@@ -83,7 +83,6 @@
 </div>
 
 <script>
-    // 로그인 여부 확인
     window.addEventListener('DOMContentLoaded', function() {
         const isLogin = "${sessionScope.loginUser ne null}";
         if (!isLogin) {

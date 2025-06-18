@@ -22,11 +22,10 @@ tasks.withType(JavaCompile) {
 }
 
 dependencies {
-    compileOnly('javax.servlet:javax.servlet-api:4.0.1')
-
+    //compileOnly('javax.servlet:javax.servlet-api:4.0.1')
+    compileOnly('javax:javaee-api:8.0.1')
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
-
     // 스프링 라이브러리
     implementation group: 'org.springframework', name:'spring-core', version:'5.3.19'
     implementation group: 'org.springframework', name:'spring-context', version:'5.3.19'
@@ -54,7 +53,6 @@ dependencies {
 
     testCompileOnly 'org.projectlombok:lombok:1.18.32'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.32'
-
 }
 
 test {

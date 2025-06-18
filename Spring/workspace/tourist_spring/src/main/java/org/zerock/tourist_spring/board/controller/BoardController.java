@@ -8,13 +8,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.tourist_spring.board.dto.BoardDTO;
 import org.zerock.tourist_spring.board.service.BoardService;
+import org.zerock.tourist_spring.common.dto.PageRequestDTO;
+import org.zerock.tourist_spring.common.dto.PageResponseDTO;
 import org.zerock.tourist_spring.member.dto.MemberDTO;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
-
 
 @Controller
 @RequiredArgsConstructor
@@ -23,44 +21,27 @@ public class BoardController {
     private final BoardService boardService;
 
     @GetMapping("/list")
-    public String list(@RequestParam(defaultValue = "1") int pageNum,
-                       @RequestParam(required = false) String searchWord,
-                       Model model) {
-        int limit = 10;
-        int offset = (pageNum - 1) * limit;
-
-        String likeSearch = (searchWord != null && !searchWord.isEmpty())
-                ? "%" + searchWord + "%"
-                : null;
-
-        Map<String, Object> paramMap = new HashMap<>();
-        paramMap.put("searchWord", likeSearch);
-        paramMap.put("limit", limit);
-        paramMap.put("offset", offset);
-
-        List<BoardDTO> list = boardService.getPagedList(paramMap);
-        int totalCount = boardService.getTotalCount(likeSearch);
-
-        int totalPage = (int) Math.ceil((double) totalCount / limit);
-
-        model.addAttribute("list", list);
-        model.addAttribute("totalCount", totalCount);
-        model.addAttribute("totalPage", totalPage);
-        model.addAttribute("pageNum", pageNum);
-        model.addAttribute("searchWord", searchWord);
-
+    public String list(PageRequestDTO pageRequestDTO, Model model) {
+        PageResponseDTO<BoardDTO> responseDTO = boardService.getList(pageRequestDTO);
+        model.addAttribute("responseDTO", responseDTO);
         return "list";
     }
 
-
-
     @GetMapping("/view")
-    public String view(@RequestParam("num") int num, Model model) {
+    public String view(@RequestParam("num") int num,
+                       @RequestParam(name = "page", defaultValue = "1") int pageNum,
+                       @RequestParam(required = false) String searchWord,
+                       Model model) {
+
         boardService.increaseVisitCount(num);
         BoardDTO board = boardService.getView(num);
         model.addAttribute("board", board);
+        model.addAttribute("pageNum", pageNum);
+        model.addAttribute("searchWord", searchWord);
+
         return "view";
     }
+
 
     @GetMapping("/write")
     public String writeForm(HttpSession session) {
@@ -113,7 +94,7 @@ public class BoardController {
 
         String loginId = loginUser.getId();
 
-        if (dto.getTitle() == null || dto.getTitle().isBlank()) {
+        if (dto.getTitle() == null || dto.getTitle().trim().isEmpty()) {
             rttr.addFlashAttribute("msg", "제목은 필수입니다.");
             rttr.addAttribute("num", dto.getNum());
             return "redirect:/edit?num=" + dto.getNum();

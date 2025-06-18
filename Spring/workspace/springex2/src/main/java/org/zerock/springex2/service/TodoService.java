@@ -1,5 +1,7 @@
 package org.zerock.springex2.service;
 
+import org.zerock.springex2.dto.PageRequestDTO;
+import org.zerock.springex2.dto.PageResponseDTO;
 import org.zerock.springex2.dto.TodoDTO;
 
 import java.util.List;
@@ -11,4 +13,14 @@ public interface TodoService {
     TodoDTO getOne(Long tno);
     void removeTodo(Long tno);
     String editTodo(TodoDTO todoDTO);
+    PageResponseDTO<TodoDTO> getList(PageRequestDTO pageRequestDTO);
 }
+
+
+
+
+
+
+
+
+

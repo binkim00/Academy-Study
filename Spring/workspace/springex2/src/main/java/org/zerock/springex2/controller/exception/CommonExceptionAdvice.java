@@ -44,10 +44,10 @@ public class CommonExceptionAdvice {
         return buffer.toString();
     }*/
     @ExceptionHandler(NoHandlerFoundException.class)
-    // 404 예외 발생시 실행되는 메서드
+    // 404예외 발생시 실행되는 메서드
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public String notFound(){
-        // 404예외 발생시 custom404.jsp 파일을 실행하도록 설정
+        // 404예외 발생시 custom404.jsp파일을 실행하도록 설정
         return "custom404";
     }
 
