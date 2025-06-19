@@ -87,8 +87,8 @@
                         <tbody>
                         <c:forEach items="${responseDTO.dtoList}" var="dto">
                             <tr>
-                                    <%-- c:out : &,<,>," 같은 특수기호를 이스케이프 처리하는 JSTL 기능 --%>
-                                    <%-- 이스케이프 처리 : 특수기호가 출력될 수 있도록 앞에 역슬래시(\)를 넣어주는 처리--%>
+                                <%-- c:out : &,<,>," 같은 특수기호를 이스케이프 처리하는 JSTL 기능 --%>
+                                <%-- 이스케이프 처리 : 특수기호가 출력될 수 있도록 앞에 역슬래시(\)를 넣어주는 처리--%>
                                 <th scope="row"><c:out value="${dto.tno}"/></th>
                                 <td>
                                     <a href="/todo/read?tno=${dto.tno}&${pageRequestDTO.link}" class="text-decoration-none">
@@ -168,14 +168,15 @@
     /*document.querySelector(".btn-info").addEventListener("click",function(){
        self.location="/todo/list";
     });*/
+    // 각각의 input내용을 초기화 하는 방식
     document.querySelector(".btn-info").addEventListener("click",function(e){
         let formObj = document.querySelector("form");
-        formObj.finished.checked = false;
-        formObj.types[0].checked = false;
-        formObj.types[1].checked = false;
-        formObj.keyword.value="";
-        formObj.from.value="";
-        formObj.to.value="";
+       formObj.finished.checked = false;
+       formObj.types[0].checked = false;
+       formObj.types[1].checked = false;
+       formObj.keyword.value="";
+       formObj.from.value="";
+       formObj.to.value="";
     });
 </script>
 </body>

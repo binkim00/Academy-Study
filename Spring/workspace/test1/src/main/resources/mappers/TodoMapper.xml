@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.test1.mapper.TodoMapper">
+
+    <select id="selectList" resultType="org.zerock.test1.vo.TodoVO" parameterType="org.zerock.test1.dto.PageRequestDTO">
+        SELECT *
+        FROM tbl_todo
+        ORDER BY tno DESC
+            LIMIT #{size} OFFSET #{skip}
+    </select>
+
+    <select id="getCount" resultType="int">
+        SELECT COUNT(*) FROM tbl_todo
+    </select>
+
+    <insert id="insert" parameterType="org.zerock.test1.vo.TodoVO">
+        INSERT INTO tbl_todo (title, dueDate, finished, writer)
+        VALUES (#{title}, #{dueDate}, #{finished}, #{writer})
+    </insert>
+
+    <select id="selectOne" parameterType="long" resultType="org.zerock.test1.vo.TodoVO">
+        SELECT * FROM tbl_todo WHERE tno = #{tno}
+    </select>
+
+    <update id="update" parameterType="org.zerock.test1.vo.TodoVO">
+        UPDATE tbl_todo
+        SET title = #{title},
+            dueDate = #{dueDate},
+            finished = #{finished}
+        WHERE tno = #{tno} AND writer = #{writer}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM tbl_todo
+        WHERE tno = #{tno} AND writer = #{writer}
+    </delete>
+
+</mapper>
