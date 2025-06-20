@@ -1,0 +1,9 @@
+Spring:
+  jpa:
+    # 콘솔창에 실행한 쿼리가 나오도록 설정
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    # data.sql파일을 실행하도록 하는 설정
+    defer-datasource-initialization: true
