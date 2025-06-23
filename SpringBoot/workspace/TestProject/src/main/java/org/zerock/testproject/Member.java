@@ -3,6 +3,7 @@ package org.zerock.testproject;
 import jakarta.persistence.*;
 import lombok.*;
 
+@Builder
 @ToString
 @NoArgsConstructor(access= AccessLevel.PROTECTED)
 @AllArgsConstructor
@@ -21,4 +22,7 @@ public class Member {
     // nullable = null 입력이 가능한지 설정
     @Column(name="name", nullable = false)
     private String name;
+    public void changeName(String name){
+        this.name = name;
+    }
 }

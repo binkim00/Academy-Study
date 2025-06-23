@@ -12,12 +12,12 @@ public class TestService {
 
     public List<Member> getAllMembers(){
         // 1번 데이터 검색, SELECT
-        Member member = memberRepository.findById(1L).orElseThrow();
-        System.out.println(member);  // PK로 검색
+//        Member member = memberRepository.findById(1L).orElseThrow();
+//        System.out.println(member);  // PK로 검색
         // 새로운 데이터 저장 ,INSERT문
 //        memberRepository.save(new Member(4L, "test 4"));
         // 1번 데이터 삭제 , DELETE문
-        memberRepository.delete(member);
+//        memberRepository.delete(member);
         return memberRepository.findAll();
     }
 

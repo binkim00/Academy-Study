@@ -1,4 +1,14 @@
 Spring:
+  # 데이터베이스 연결을 직접 설정
+  datasource:
+    # DB_CLOSE_DELAY=-1 : 커넥션을 종료해도 DB를 삭제하지 않도록 하는 옵션
+    url: jdbc:h2:mem:testdb #;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  sql:
+    init:
+      mode: never
   jpa:
     # 콘솔창에 실행한 쿼리가 나오도록 설정
     show-sql: true
