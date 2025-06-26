@@ -1,6 +1,8 @@
 package org.zerock.tourist_springboot.board.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.zerock.tourist_springboot.board.domain.Board;
@@ -20,23 +22,27 @@ public class BoardService {
 
     private final BoardRepository boardRepository;
 
-    public List<BoardDTO> getList() {
-        List<Board> boards = boardRepository.findAll();
-        return boards.stream().map(board -> BoardDTO.builder()
-                .num(board.getNum())
-                .title(board.getTitle())
-                .content(board.getContent())
-                .id(board.getId())
-                .visitCount(board.getVisitCount())
-                .createdAt(board.getCreatedAt())
-                .updatedAt(board.getUpdatedAt())
-                .build()).collect(Collectors.toList());
-    }
-
     public PageResponseDTO<BoardDTO> findList(PageRequestDTO requestDTO) {
-        List<Board> boards = boardRepository.findAll();
+        Pageable pageable = requestDTO.getPageable("num");
+        Page<Board> result;
 
-        List<BoardDTO> dtoList = boards.stream()
+        String[] types = requestDTO.getTypes();
+        String keyword = requestDTO.getKeyword();
+
+        if (types != null && keyword != null && !keyword.isBlank()) {
+            String type = types[0];
+
+            switch (type) {
+                case "t" -> result = boardRepository.findByTitleContainingIgnoreCase(keyword, pageable);
+                case "c" -> result = boardRepository.findByContentContainingIgnoreCase(keyword, pageable);
+                case "w" -> result = boardRepository.findByIdContainingIgnoreCase(keyword, pageable);
+                default -> result = boardRepository.findAll(pageable);
+            }
+        } else {
+            result = boardRepository.findAll(pageable);
+        }
+
+        List<BoardDTO> dtoList = result.getContent().stream()
                 .map(board -> BoardDTO.builder()
                         .num(board.getNum())
                         .title(board.getTitle())
@@ -46,11 +52,11 @@ public class BoardService {
                         .createdAt(board.getCreatedAt())
                         .updatedAt(board.getUpdatedAt())
                         .build())
-                .toList();
+                .collect(Collectors.toList());
 
-        return new PageResponseDTO<>(requestDTO, dtoList, dtoList.size());
-
+        return new PageResponseDTO<>(requestDTO, dtoList, (int) result.getTotalElements());
     }
+
 
     public BoardDTO read(Long num) {
         Board board = boardRepository.findById(num)
@@ -61,14 +67,13 @@ public class BoardService {
         return BoardDTO.builder()
                 .num(board.getNum())
                 .title(board.getTitle())
-                .content(board.getContent())
+                .content(board.getContent().replaceAll("(\r\n|\r|\n)", "<br/>"))
                 .id(board.getId())
                 .visitCount(board.getVisitCount())
                 .createdAt(board.getCreatedAt())
                 .updatedAt(board.getUpdatedAt())
                 .build();
     }
-
 
     public void write(BoardDTO dto) {
         Board board = dto.toEntity();
@@ -89,5 +94,4 @@ public class BoardService {
     public void remove(Long num) {
         boardRepository.deleteById(num);
     }
-
 }

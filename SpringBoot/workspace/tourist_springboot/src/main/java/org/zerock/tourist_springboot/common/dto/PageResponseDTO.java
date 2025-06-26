@@ -11,22 +11,32 @@ import java.util.List;
 public class PageResponseDTO<E> {
     // 현재 선택한 페이지
     private int page;
+
     // 한번에 출력할 데이터의 개수
     private int size;
+
     // 전체 데이터의 개수
     private int total;
+
     // 시작 페이지의 번호
     private int start;
+
     // 끝 페이지의 번호
     private int end;
+
     // 이전 페이지의 존재 여부
     private boolean prev;
+
     // 다음 페이지의 존재 여부
     private boolean next;
 
+    // 마지막 페이지 번호
     private int last;
-    // 게시글의 데이터 리스트
+
+    // 실제 출력할 데이터 목록
     private List<E> dtoList;
+
+    // Builder 어노테이션을 사용하여 전체 필드를 한번에 설정할 수 있도록 구성
     @Builder(builderMethodName = "withAll")
     public PageResponseDTO(PageRequestDTO pageRequestDTO,
                            List<E> dtoList,
@@ -36,35 +46,23 @@ public class PageResponseDTO<E> {
         this.total = total;
         this.dtoList = dtoList;
 
-        // page를 10으로 나눈 값을 올림한 후 곱하기 10
-        // 1 / 10 => 0.1 올림 => 1 * 10 => 10
-        // 5 / 10 => 0.5 올림 => 1 * 10 => 10
-        // 15/10 => 1.5 올림 => 2 * 10 => 20
-        this.end = (int)(Math.ceil(this.page/10.0))*10;
-        // 현재 페이지에 해당하는 첫번째 페이지
-        this.start = this.end - 9;
-        // 마지막 페이지를 계산
-        // 123/10 = 12.3 올림 => 13
-        // 100/10 = 10 올림 => 10
-        // 75/10 = 7.5 올림 => 8
-        this.last = (int)(Math.ceil((total/(double)size)));
-        // end가 last보다 큰 경우 마지막 페이지를 last로 변경
-        // 10 > 8 ? 8 : 10 = 8
-        // 10 > 16 ? 16 : 10 = 10
-        // 20 > 16 ? 16 : 20 = 16
-        this.end = end > last ? last : end;
-        // 첫페이지가 1보다 크면 true
-        this.prev = this.start > 1;
-        // 다음페이지가 있을 경우 true
-        this.next = total > this.end * this.size;
+        // 현재 페이지를 기준으로 마지막 페이지 그룹의 끝 번호 계산
+        // 예: 1 ~ 10, 11 ~ 20 등으로 구성
+        this.end = (int)(Math.ceil(this.page/10.0)) * 10;
 
+        // 현재 페이지 그룹의 시작 번호
+        this.start = this.end - 9;
+
+        // 전체 데이터를 기반으로 한 진짜 마지막 페이지 번호
+        this.last = (int)(Math.ceil(total / (double)size));
+
+        // 계산된 end가 실제 마지막 페이지보다 크면 보정
+        this.end = end > last ? last : end;
+
+        // 첫 번째 그룹이 아니면 이전 버튼 존재
+        this.prev = this.start > 1;
+
+        // 현재 end 페이지가 전체 데이터를 모두 포함하지 못하면 다음 버튼 존재
+        this.next = total > this.end * this.size;
     }
 }
-
-
-
-
-
-
-
-

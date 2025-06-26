@@ -7,6 +7,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.PageRequest;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -25,67 +28,69 @@ public class PageRequestDTO {
     @Positive
     private int page = 1;
 
-    // 최소값은 10 최대값은 100으로 설정
+    // 최소값은 10, 최대값은 100으로 설정
     @Builder.Default
     @Min(value=10)
     @Max(value=100)
     private int size = 10;
-    // page, size데이터를 출력
+
+    // 현재 페이지 정보를 문자열로 저장 (ex. page=1&size=10 등)
     private String link;
-    // 제목, 작성자
+
+    // 검색 조건 (예: 제목, 작성자 등)
     private String[] types;
-    // 검색어
+
+    // 검색 키워드
     private String keyword;
-    // 완료여부
+
+    // 완료 여부 (예: 체크박스)
     private boolean finished;
-    // 검색 시작날짜
+
+    // 검색 시작 날짜
     private LocalDate from;
-    // 검색 종료날짜
+
+    // 검색 종료 날짜
     private LocalDate to;
 
-    public int getSkip(){
-        // 1페이지 : 0
-        // 2페이지 : 10
-        // 3페이지 : 20
-        return (page - 1) * 10;
+    // JPA에서 사용하는 Pageable 객체를 생성하는 메서드
+    // 정렬 기준 컬럼명을 매개변수로 받아 PageRequest.of(...)를 생성함
+    public Pageable getPageable(String sortBy) {
+        // page는 1부터 시작하지만 JPA는 0부터 시작하므로 -1 처리
+        // 예: page=2, size=10이면 11번째부터 10개를 조회
+        return PageRequest.of(this.page - 1, this.size, Sort.by(sortBy).descending());
     }
-    public boolean checkType(String type){
-        // types이 하나도 설정이 되어있지 않은 경우 false
-        if(types==null || types.length == 0){
-            return false;
-        }
-        // 타입이 설정되어 있다면 type안의 데이터가 types에 있는지 확인하여 true나 false를 반환
-        return Arrays.stream(types).anyMatch(type::equals);
-    }
-    public String getLink(){
+
+    public String getLink() {
         StringBuilder builder = new StringBuilder();
-        builder.append("page=" + this.page);
-        builder.append("&size=" + this.size);
-        if(finished){
-            // checkbox 타입은 on으로 저장
+        builder.append("page=").append(this.page);
+        builder.append("&size=").append(this.size);
+
+        if (finished) {
             builder.append("&finished=on");
         }
-        if(types != null && types.length>0){
-            // 제목, 작성자 두개다 설정되어 있다면 반복문을 이용하여 두개 모두 파라미터로 설정
-            for(int i=0; i<types.length; i++){
-                builder.append("&types="+types[i]);
+
+        if (types != null && types.length > 0) {
+            for (String type : types) {
+                builder.append("&types=").append(type);
             }
         }
-        if(keyword != null){
-            try{
-                // 한글이 깨지지 않도록 URLEncoder를 사용
-                builder.append("&keyword="+ URLEncoder.encode(keyword,"UTF-8"));
-            }catch(UnsupportedEncodingException e){
+
+        if (keyword != null) {
+            try {
+                builder.append("&keyword=").append(URLEncoder.encode(keyword, "UTF-8"));
+            } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
         }
-        if(from != null){
-            builder.append("&from="+from.toString());
+
+        if (from != null) {
+            builder.append("&from=").append(from.toString());
         }
-        if(to != null){
-            builder.append("&to="+to.toString());
+        if (to != null) {
+            builder.append("&to=").append(to.toString());
         }
-        link = builder.toString();
-        return link;
+
+        return builder.toString();
     }
+
 }

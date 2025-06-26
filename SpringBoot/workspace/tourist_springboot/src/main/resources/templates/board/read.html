@@ -55,11 +55,7 @@
       <p class="btn_line txt_right">
         <a onclick="deletePost()" class="btn_bbs">삭제하기</a>
         <a th:href="@{/edit(num=${board.num})}" class="btn_bbs">수정하기</a>
-        <!--<a th:if="${session.UserId != null and session.UserId == board.id}"-->
-<!--           onclick="deletePost()" class="btn_bbs">삭제하기</a>-->
-<!--        <a th:if="${session.UserId != null and session.UserId == board.id}"-->
-<!--           th:href="@{/edit(num=${board.num})}" class="btn_bbs">수정하기</a>-->
-        <a href="/list" class="btn_bbs">목록</a>
+        <a th:href="'/list?' + ${pageRequestDTO.getLink()}" class="btn_bbs">목록</a>
       </p>
 
       <ul class="near_list mt20">

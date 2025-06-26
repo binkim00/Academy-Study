@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.zerock.tourist_springboot.board.dto.BoardDTO;
 import org.zerock.tourist_springboot.board.service.BoardService;
 import org.zerock.tourist_springboot.common.dto.PageRequestDTO;
+import org.zerock.tourist_springboot.common.dto.PageResponseDTO;
 
 @Controller
 @RequiredArgsConstructor
@@ -19,16 +20,34 @@ public class BoardController {
 
     @GetMapping("/list")
     public String list(PageRequestDTO pageRequestDTO, Model model) {
-        model.addAttribute("responseDTO", boardService.findList(pageRequestDTO));
+        PageResponseDTO<BoardDTO> responseDTO = boardService.findList(pageRequestDTO);
+
+        int totalCount = responseDTO.getTotal();
+        int page = pageRequestDTO.getPage();
+        int size = pageRequestDTO.getSize();
+
+        int displayStartNum = totalCount - ((page - 1) * size);
+
+        model.addAttribute("responseDTO", responseDTO);
+        model.addAttribute("pageRequestDTO", pageRequestDTO);
+        model.addAttribute("displayStartNum", displayStartNum);
         return "board/list";
     }
 
+
+
     @GetMapping("/read")
-    public String read(@RequestParam("num") Long num, Model model) {
+    public String read(@RequestParam("num") Long num,
+                       @ModelAttribute("pageRequestDTO") PageRequestDTO pageRequestDTO,
+                       Model model) {
+
         BoardDTO boardDTO = boardService.read(num);
         model.addAttribute("board", boardDTO);
+        model.addAttribute("pageRequestDTO", pageRequestDTO);
         return "board/read";
     }
+
+
 
     @GetMapping("/write")
     public String writeForm(Model model) {
@@ -44,8 +63,9 @@ public class BoardController {
 
     @GetMapping("/edit")
     public String editForm(@RequestParam("num") Long num, Model model) {
-        BoardDTO boardDTO = boardService.read(num);
-        model.addAttribute("boardDTO", boardDTO);
+        BoardDTO dto = boardService.read(num);
+        dto.setContent(dto.getContent().replaceAll("<br\\s*/?>", "\n"));
+        model.addAttribute("boardDTO", dto);
         return "board/edit";
     }
 
@@ -60,5 +80,4 @@ public class BoardController {
         boardService.remove(num);
         return "redirect:/list";
     }
-
 }
