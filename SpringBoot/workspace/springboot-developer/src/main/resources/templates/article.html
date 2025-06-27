@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -22,14 +23,16 @@
                 <section class="mb-5">
                     <p class="fs-5 mb-4" th:text="${article.content}"></p>
                 </section>
-                <button type="button"
-                        th:onclick="|location.href='@{/new-article?id={articleId}(articleId=${article.id})}'|"
-                        class="btn btn-primary btn-sm">수정</button>
-                <button type="button" id="delete-btn" class="btn btn-secondary btn-sm">삭제</button>
+                <th:block th:if="${#authentication.name} == ${article.writer}">
+                    <button type="button"
+                            th:onclick="|location.href='@{/new-article?id={articleId}(articleId=${article.id})}'|"
+                            class="btn btn-primary btn-sm">수정</button>
+                    <button type="button" id="delete-btn" class="btn btn-secondary btn-sm">삭제</button>
+                </th:block>
             </article>
         </div>
     </div>
 </div>
-<script src="/js/article.js"></script>
+<script th:src="@{/js/article.js}"></script>
 </body>
 </html>

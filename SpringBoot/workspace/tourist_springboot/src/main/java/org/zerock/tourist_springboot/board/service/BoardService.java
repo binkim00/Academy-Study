@@ -94,4 +94,43 @@ public class BoardService {
     public void remove(Long num) {
         boardRepository.deleteById(num);
     }
+
+    // 선생님 버전
+//    public PageResponseDTO<BoardDTO> findList(PageRequestDTO pageRequestDTO) {
+//        // 전체 데이터 개수
+//        int totalCount = boardRepository.findAll().size();
+//        //Pageable을 이용한 페이징 조건 생성
+//        Pageable pageable = PageRequest.of(
+//                pageRequestDTO.getPage()-1 // 페이지 번호, 0페이지부터 시작
+//                ,pageRequestDTO.getSize() // 페이지 사이즈
+//                ,Sort.by("num").descending());// 정렬방식
+//        // 페이징 처리된 findAll의 결과물을 저장
+//        List<Board> boardList = boardRepository.findAll(pageable).getContent();
+//        // Board를 BoardDTO로 변경
+//        List<BoardDTO> dtoList = boardList.stream()
+//                .map(BoardDTO::new)
+//                .collect(Collectors.toList());
+//        // PageResponseDTO를 생성하여 반환
+//        return PageResponseDTO.<BoardDTO>withAll()
+//                .pageRequestDTO(pageRequestDTO)
+//                .dtoList(dtoList)
+//                .total(totalCount)
+//                .build();
+//    }
+//    public PageResponseDTO<BoardDTO> searchList(PageRequestDTO pageRequestDTO) {
+//        return boardRepository.searchDsl(pageRequestDTO);
+//    }
+//
+//    @Transactional // 조회수 1증가를 위한 트랜잭션
+//    public BoardDTO findOne(Long num){
+//        // num을 기준으로 데이터를 저장
+//        Board vo = boardRepository.findById(num).get();
+//        // 조회수 증가 SQL실행
+//        vo.updateVisitCount();
+//        // 화면에서 사용하는 객체인 DTO로 변경
+//        BoardDTO dto = new BoardDTO(vo);
+//
+//        return dto;
+//    }
+
 }

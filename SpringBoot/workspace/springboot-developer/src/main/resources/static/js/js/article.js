@@ -11,11 +11,11 @@ if(deleteButton){
         fetch(`/api/articles/${id}`,{
             method:'DELETE'
         })
-            // then(()->{fetch가 실행된 후 결과를 받아 실행할 코드})
-            .then(()=>{
-                alert('삭제가 완료되었습니다.');
-                location.replace('/articles');
-            })
+        // then(()->{fetch가 실행된 후 결과를 받아 실행할 코드})
+        .then(()=>{
+            alert('삭제가 완료되었습니다.');
+            location.replace('/articles');
+        })
     })
 }
 // 수정버튼을 변수에 저장
@@ -36,16 +36,16 @@ if(modifyButton){
                 content:document.getElementById("content").value
             })
         })
-            .then(()=>{
-                alert('수정이 완료되었습니다.');
-                location.replace(`/articles/${id}`);
-            })
+        .then(()=>{
+            alert('수정이 완료되었습니다.');
+            location.replace(`/articles/${id}`);
+        })
     })
 }
 
 const createButton = document.getElementById('create-btn');
 if(createButton){
-    // 수정버튼에 클릭 이벤트를 추가
+    // 등록버튼에 클릭 이벤트를 추가
     createButton.addEventListener("click", event=>{
         fetch(`/api/articles`,{
             method:'POST', // GET, POST, PUT, DELETE
@@ -57,9 +57,21 @@ if(createButton){
                 content:document.getElementById("content").value
             })
         })
-            .then(()=>{
-                alert('등록 완료되었습니다.');
-                location.replace(`/articles`);
-            })
+        .then(()=>{
+            alert('등록 완료되었습니다.');
+            location.replace(`/articles`);
+        })
     })
 }
+
+
+
+
+
+
+
+
+
+
+
+
