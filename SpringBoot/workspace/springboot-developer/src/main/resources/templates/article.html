@@ -25,8 +25,8 @@
                 </section>
                 <th:block th:if="${#authentication.name} == ${article.writer}">
                     <button type="button"
-                            th:onclick="|location.href='@{/new-article?id={articleId}(articleId=${article.id})}'|"
-                            class="btn btn-primary btn-sm">수정</button>
+                        th:onclick="|location.href='@{/new-article?id={articleId}(articleId=${article.id})}'|"
+                        class="btn btn-primary btn-sm">수정</button>
                     <button type="button" id="delete-btn" class="btn btn-secondary btn-sm">삭제</button>
                 </th:block>
             </article>

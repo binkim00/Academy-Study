@@ -23,9 +23,8 @@ public class Article {
     private String title;
     @Column(name="content", nullable = false)
     private String content;
-    @Column(name = "writer", nullable = false)
+    @Column(name="writer", nullable = false)
     private String writer;
-
     // 데이터가 처음 저장될때의 날짜 및 시간을 자동 저장
     @CreatedDate
     @Column(name="created_at")
@@ -36,9 +35,10 @@ public class Article {
     private LocalDateTime updatedAt;
 
     @Builder
-    public Article(String title, String content){
+    public Article(String title, String content, String writer){
         this.title = title;
         this.content = content;
+        this.writer = writer;
     }
     public void update(String title, String content){
         this.title = title;

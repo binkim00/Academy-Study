@@ -126,8 +126,8 @@ class BlogApiControllerTest {
                 .build());
         // 위에서 저장한 article 삭제 Controller실행
         final ResultActions resultActions = mockMvc.perform(
-                // url에 있는 {id}에 값을 설정
-                delete(url,savedArticle.getId()))
+                        // url에 있는 {id}에 값을 설정
+                        delete(url,savedArticle.getId()))
                 // url실행과 동시에 HTTP응답코드가 200번인지 확인
                 .andExpect(status().isOk());
         // 결과 확인
@@ -153,11 +153,11 @@ class BlogApiControllerTest {
                 new UpdateArticleRequest(newTitle, newContent);
         // 위에서 저장한 article 삭제 Controller실행
         final ResultActions resultActions = mockMvc.perform(
-                        // url에 있는 {id}에 값을 설정
-                        put(url,savedArticle.getId())
-                                .contentType(MediaType.APPLICATION_JSON_VALUE)
-                                .content(objectMapper.writeValueAsString(request)));
-                // url실행과 동시에 HTTP응답코드가 200번인지 확인
+                // url에 있는 {id}에 값을 설정
+                put(url,savedArticle.getId())
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content(objectMapper.writeValueAsString(request)));
+        // url실행과 동시에 HTTP응답코드가 200번인지 확인
         // 결과 확인
         resultActions.andExpect(status().isOk());
         Article article = blogRepository.findById(savedArticle.getId()).get();

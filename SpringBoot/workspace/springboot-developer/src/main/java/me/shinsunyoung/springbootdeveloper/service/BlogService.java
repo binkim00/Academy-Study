@@ -15,8 +15,8 @@ import java.util.List;
 public class BlogService {
     private final BlogRepository blogRepository;
     // 블로그 글 추가 메서드
-    public Article save(AddArticleRequest request){
-        return blogRepository.save(request.toEntity());
+    public Article save(AddArticleRequest request, String writer){
+        return blogRepository.save(request.toEntity(writer));
     }
     // DB에 저장되어있는 모든 데이터 조회
     public List<Article> findAll(){
@@ -29,19 +29,25 @@ public class BlogService {
                 .orElseThrow(()->new IllegalArgumentException("not found" + id));
     }
     // 데이터 삭제
-    public void delete(Long id){
-        blogRepository.deleteById(id);
+    public void delete(Long id, String username){
+        Article article = blogRepository.findById(id).get();
+        // 작성자와 로그인한 유저 아이디가 같으면 삭제
+        if(article.getWriter().equals(username)){
+            blogRepository.deleteById(id);
+        }
     }
     // 데이터 수정하기
     @Transactional
-    public Article update(long id, UpdateArticleRequest request){
+    public Article update(long id, UpdateArticleRequest request, String loginUserEmail){
         // id를 이용하여 데이터를 변수에 저장
         Article article = blogRepository.findById(id)
                 .orElseThrow(()->new IllegalArgumentException("not found" + id));
         // @Transactional 어노테이션이 있다면
         // title과 content를 변경하는 메서드를 실행하는 순간 바로 db에 적용됨
         // -> blogRepository.save()실행할 필요가 없음
-        article.update(request.getTitle(), request.getContent());
+        if(article.getWriter().equals(loginUserEmail)){
+            article.update(request.getTitle(), request.getContent());
+        }
         // @Transactional이 없다면 아래와 같이 save를 실행해야함
         //blogRepository.save(article);
         return article;

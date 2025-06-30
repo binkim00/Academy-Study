@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -17,9 +18,11 @@ import java.util.List;
 public class BlogApiController {
     private final BlogService blogService;
     @PostMapping("/api/articles")
-    public ResponseEntity<Article> addArticle(@RequestBody AddArticleRequest request){
+    public ResponseEntity<Article> addArticle(
+            @RequestBody AddArticleRequest request
+            ,Principal principal){
         // 데이터 추가 서비스 실행 후 DB저장한 Entity를 변수에 저장
-        Article saveArticle = blogService.save(request);
+        Article saveArticle = blogService.save(request, principal.getName());
         // 응답 코드는 201번(CREATED) 응답 데이터는 변수에 저장한 saveArticle을 반환
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(saveArticle);
@@ -47,16 +50,19 @@ public class BlogApiController {
     @DeleteMapping("/api/articles/{id}")
     // 제너릭에 Void를 설정하여 아무 데이터도 전달하지 않도록 설정
     public ResponseEntity<Void> deleteArticle(
-            @PathVariable("id") long id){
-        blogService.delete(id);
+            @PathVariable("id") long id, Principal principal){
+        blogService.delete(id, principal.getName());
         // 정상처리의 경우 아무 데이터도 전달하지 않음
         return ResponseEntity.ok().build();
     }
     @PutMapping("/api/articles/{id}")
     public ResponseEntity<Article> updateArticle(
             @PathVariable("id") long id
-            ,@RequestBody UpdateArticleRequest request){
-        Article updateArticle = blogService.update(id, request);
+            , @RequestBody UpdateArticleRequest request
+            , Principal principal){
+        // 로그인한 계정의 아이디를 저장
+        String loginUserEmail = principal.getName();
+        Article updateArticle = blogService.update(id, request, loginUserEmail);
         return ResponseEntity.ok().body(updateArticle);
     }
 }

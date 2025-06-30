@@ -24,11 +24,14 @@ import static org.springframework.boot.autoconfigure.security.servlet.PathReques
 public class WebSecurityConfig {
     @Bean
     public WebSecurityCustomizer configure(){
+        //web.ignoring() : 스프링 시큐리티를 적용하지 않을 주소들을 설정
         return (web) -> web.ignoring()
                 // /h2-console의 접속에 스프링 시큐리티를 해제
                 .requestMatchers(toH2Console())
                 // resources폴더의 static폴더 접속에 스프링 시큐리티를 해제
-                .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
+                .requestMatchers(PathRequest.toStaticResources().atCommonLocations())
+                //.requestMatchers("/articles")
+                ;
     }
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
@@ -65,8 +68,11 @@ public class WebSecurityConfig {
             BCryptPasswordEncoder bCryptPasswordEncoder,
             UserDetailsService userDetailsService
     ) throws Exception{
+        //인증 관리자 설정
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        //사용자 정보를 가지고올 방식 설정 => H2데이터베이서스에서 User를 가지고 오도록 설정
         authProvider.setUserDetailsService(userDetailsService);
+        // 비밀번호 암호화 인코더 설정
         authProvider.setPasswordEncoder(bCryptPasswordEncoder);
         return new ProviderManager(authProvider);
     }

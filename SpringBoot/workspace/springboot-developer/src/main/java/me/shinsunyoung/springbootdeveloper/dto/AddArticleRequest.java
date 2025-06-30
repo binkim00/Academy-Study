@@ -11,10 +11,12 @@ import me.shinsunyoung.springbootdeveloper.domain.Article;
 public class AddArticleRequest {
     private String title;
     private String content;
-    public Article toEntity(){
+    private String writer;
+    public Article toEntity(String writer){
         return Article.builder()
                 .title(this.title)
                 .content(this.content)
+                .writer(writer)
                 .build();
     }
 }
