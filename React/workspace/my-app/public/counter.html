@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <p>총 <span id="data">0</span>번 클릭했습니다.</p>
+        <button onClick="counter()">
+            클릭
+        </button>
+    </div>
+<script>
+    let count = 0;
+    let data = document.getElementById("data");
+    function counter(){
+        count++;
+        data.innerText = count;
+    }
+</script>
+</body>
+</html>
