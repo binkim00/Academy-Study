@@ -19,6 +19,10 @@ import GetImage from './chapter_10/GetImage';
 import Practice1 from './practice/Practice1';
 import NameForm from './chapter_11/NameForm';
 import Practice2 from './practice/Practice2';
+import Calculator from './chapter_12/Calculator';
+import ProfileCard from './chapter_13/ProfileCard';
+import DarkOrLight from './chapter_14/DarkOrLight';
+import Blocks from './chapter_15/Blocks';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 // setInterval(()=>{
@@ -40,7 +44,11 @@ root.render(
     {/* <GetImage /> */}
     {/* <Practice1 /> */}
     {/* <NameForm /> */}
-    <Practice2 />    
+    {/* <Practice2 /> */}
+    {/* <Calculator /> */}
+    {/* <ProfileCard /> */}
+    {/* <DarkOrLight /> */}
+    <Blocks />
   </React.StrictMode>
 )
 //}, 1000)
