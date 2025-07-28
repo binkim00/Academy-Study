@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>OpenLayers WMS Test</title>
+    <style>
+        html, body { margin: 0; padding: 0; height: 100%; }
+        #map { width: 100%; height: 100%; }
+    </style>
+    <script src="https://openlayers.org/api/OpenLayers.js"></script>
+</head>
+<body>
+<div id="map"></div>
+<script>
+    var map = new OpenLayers.Map("map");
+
+    var base = new OpenLayers.Layer.OSM();
+    map.addLayer(base);
+
+    var testWMS = new OpenLayers.Layer.WMS(
+        "Test WMS",
+        "https://ahocevar.com/geoserver/wms",
+        {
+            layers: 'topp:states',
+            format: 'image/png',
+            transparent: true
+        },
+        { isBaseLayer: false }
+    );
+    map.addLayer(testWMS);
+
+    // 알림으로 요청 확인
+
+
+    // 미국 중심
+    map.setCenter(
+        new OpenLayers.LonLat(-100, 40)
+            .transform('EPSG:4326', 'EPSG:3857'),
+        4
+    );
+</script>
+</body>
+</html>

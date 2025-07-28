@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>OpenLayers 6 - WMS 테스트</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+
+    <!-- OpenLayers 6 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/ol@v10.6.0/dist/ol.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v10.6.0/ol.css">
+
+</head>
+<body>
+<div id="map"></div>
+
+<script type="text/javascript">
+    // OpenStreetMap 베이스맵
+    const osmLayer = new ol.layer.Tile({
+        source: new ol.source.OSM()
+    });
+
+    // WMS 오버레이 레이어
+    const wmsLayer = new ol.layer.Tile({
+        source: new ol.source.TileWMS({
+            url: 'https://ahocevar.com/geoserver/wms',
+            params: {
+                'LAYERS': 'topp:states',
+                'TILED': true,
+                'FORMAT': 'image/png',
+                'TRANSPARENT': true
+            },
+            serverType: 'geoserver',
+            crossOrigin: 'anonymous' // CORS 회피용 (필요시)
+        })
+    });
+
+    // 지도 객체 생성
+    const map = new ol.Map({
+        target: 'map',
+        layers: [osmLayer, wmsLayer],
+        view: new ol.View({
+            center: ol.proj.fromLonLat([-100, 40]), // 미국 중심
+            zoom: 4
+        })
+    });
+</script>
+</body>
+</html>

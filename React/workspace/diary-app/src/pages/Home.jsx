@@ -3,7 +3,7 @@ import Button from "../component/ui/Button";
 import Header from "../component/ui/Header";
 import DiaryList from "../component/List/DiaryList";
 import { DiaryStateContext } from "../App";
-import {getMonthRangeByDate} from "../utils";
+import {getMonthRangeByDate, setPageTitle} from "../utils";
 const Home = () =>{
     const data = useContext(DiaryStateContext);
     const [pivotDate, setPivotDate] = useState(new Date());
@@ -20,6 +20,8 @@ const Home = () =>{
         }else{
             setFilteredData([]);
         }
+        // 로딩이 끝나면 타이틀을 변경
+        setPageTitle("Winterlood의 감성 일기장");
     },[data, pivotDate]);
 
     const onIncreaseMonth = () =>{

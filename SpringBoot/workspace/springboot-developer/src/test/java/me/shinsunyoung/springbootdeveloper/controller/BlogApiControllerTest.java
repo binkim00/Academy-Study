@@ -52,8 +52,9 @@ class BlogApiControllerTest {
         final String url = "/api/articles"; // 실행할 컨트롤러의 주소
         final String title = "title"; // 저장할 데이터
         final String content = "content"; // 저장할 데이터
+        final String writer = "writer";
         // Post실행시 전달할 객체
-        final AddArticleRequest userRequest = new AddArticleRequest(title,content);
+        final AddArticleRequest userRequest = new AddArticleRequest(title,content,writer);
         // userRequest 객체를 JSON형식의 문자열로 변경
         final String requestBody = objectMapper.writeValueAsString(userRequest);
         // when : 컨트롤러 실행 및 결과 저장
@@ -126,8 +127,8 @@ class BlogApiControllerTest {
                 .build());
         // 위에서 저장한 article 삭제 Controller실행
         final ResultActions resultActions = mockMvc.perform(
-                        // url에 있는 {id}에 값을 설정
-                        delete(url,savedArticle.getId()))
+                // url에 있는 {id}에 값을 설정
+                delete(url,savedArticle.getId()))
                 // url실행과 동시에 HTTP응답코드가 200번인지 확인
                 .andExpect(status().isOk());
         // 결과 확인
@@ -153,11 +154,11 @@ class BlogApiControllerTest {
                 new UpdateArticleRequest(newTitle, newContent);
         // 위에서 저장한 article 삭제 Controller실행
         final ResultActions resultActions = mockMvc.perform(
-                // url에 있는 {id}에 값을 설정
-                put(url,savedArticle.getId())
-                        .contentType(MediaType.APPLICATION_JSON_VALUE)
-                        .content(objectMapper.writeValueAsString(request)));
-        // url실행과 동시에 HTTP응답코드가 200번인지 확인
+                        // url에 있는 {id}에 값을 설정
+                        put(url,savedArticle.getId())
+                                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                                .content(objectMapper.writeValueAsString(request)));
+                // url실행과 동시에 HTTP응답코드가 200번인지 확인
         // 결과 확인
         resultActions.andExpect(status().isOk());
         Article article = blogRepository.findById(savedArticle.getId()).get();

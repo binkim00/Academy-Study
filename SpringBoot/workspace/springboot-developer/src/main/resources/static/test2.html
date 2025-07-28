@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OpenLayers 대형교통사고발생정보 WMS 예제</title>
+    <meta charset="utf-8" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.13.1/OpenLayers.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        #mapDiv {
+            width: 100%;
+            height: 600px; /* 지도의 높이를 필요에 따라 조정하세요 */
+            border: 1px solid #ccc;
+        }
+        h1 {
+            text-align: center;
+            margin: 10px 0;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+<h1>대형교통사고발생정보 - OpenLayers WMS 예제</h1>
+<div id="mapDiv"></div>
+
+<script>
+    var map; // map 변수를 전역적으로 선언
+
+    // WMS 레이어를 추가하는 함수
+    function addWmsLayer() {
+        console.log("addWmsLayer 함수 실행됨."); // 디버깅용 로그
+
+        var param = {
+            name: "대형교통사고발생정보",
+            serverUrl: "https://www.safemap.go.kr/openApiService/wms/getLayerData.do?apikey=AGTO30NX-ERMO-FWDX-604X-G0QGERVJZH",
+            layername: "A2SM_TFCACDSTTUS_BIG",
+            styles: "A2SM_TFCACDSTTUS_BIG",
+            service: "WMS"
+        };
+
+        if (!map) {
+            console.error("오류: 'map' 객체가 정의되지 않았습니다. WMS 레이어를 추가할 수 없습니다.");
+            return; // map 객체가 없으면 함수 종료
+        }
+
+        var wmsLayer = new OpenLayers.Layer.WMS(
+            param.name,
+            param.serverUrl,
+            {
+                layers: param.layername,
+                styles: param.styles,
+                format: 'image/png',
+                exceptions: 'text/xml',
+                transparent: true
+            },
+            {isBaseLayer: false}
+        );
+
+        console.log("WMS 레이어 객체 생성 완료."); // 디버깅용 로그
+        map.addLayer(wmsLayer);
+        console.log("WMS 레이어를 맵에 추가 시도 중."); // 디버깅용 로그
+
+        // 초기 지도 중심 및 확대/축소 레벨 설정
+        var lonLat = new OpenLayers.LonLat(127.7669, 35.9078)
+            .transform(
+                new OpenLayers.Projection("EPSG:4326"), // WGS84
+                map.getProjectionObject() // 지도의 투영
+            );
+        var zoom = 7;
+        map.setCenter(lonLat, zoom);
+    }
+
+    // 창이 로드될 때 맵을 초기화하고 WMS 레이어를 추가합니다.
+    window.onload = function() {
+        console.log("window.onload 함수 실행됨. 맵 초기화 시작."); // 디버깅용 로그
+
+        // 맵 객체 생성
+        map = new OpenLayers.Map('mapDiv');
+        console.log("맵 객체 생성 완료:", map); // 디버깅용 로그
+
+        // OpenStreetMap 기본 레이어 추가 (배경으로 사용)
+        var osm = new OpenLayers.Layer.OSM();
+        map.addLayer(osm);
+        console.log("OSM 레이어 추가 완료."); // 디버깅용 로그
+
+        // 컨트롤 추가 (사용자 상호작용용)
+        map.addControl(new OpenLayers.Control.Navigation());
+        map.addControl(new OpenLayers.Control.Zoom());
+        map.addControl(new OpenLayers.Control.LayerSwitcher());
+        console.log("맵 컨트롤 추가 완료."); // 디버깅용 로그
+
+        // 정의된 함수를 호출하여 WMS 레이어를 추가합니다.
+        addWmsLayer();
+    };
+</script>
+</body>
+</html>

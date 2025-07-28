@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OpenLayers WMS 레이어 예제</title>
+    <meta charset="utf-8" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.13.1/OpenLayers.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        #mapDiv {
+            width: 100%;
+            height: 600px; /* 지도의 높이를 필요에 따라 조정하세요 */
+            border: 1px solid #ccc;
+        }
+        h1 {
+            text-align: center;
+            margin: 10px 0;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+<h1>범죄주의구간(전체) - OpenLayers WMS 예제</h1>
+<div id="mapDiv"></div>
+
+<script>
+    // 창이 로드될 때 맵을 초기화합니다.
+    window.onload = function() {
+        // 새 OpenLayers Map 객체를 생성합니다.
+        // 'mapDiv'는 지도가 렌더링될 HTML 요소의 ID입니다.
+        var map = new OpenLayers.Map('mapDiv');
+
+        // --- 기본 레이어 (선택 사항이지만 권장) ---
+        // 기본 레이어를 추가하면 지도가 더 유용해집니다.
+        // 여기서는 OpenStreetMap 레이어를 사용하겠습니다.
+        var osm = new OpenLayers.Layer.OSM();
+        map.addLayer(osm);
+
+        // --- WMS 레이어 매개변수 ---
+        var param = {
+            name: '범죄주의구간(전체)',
+            // **중요**: [APIKEY]를 실제 API 키로 교체해야 합니다!
+            serverUrl: 'https://www.safemap.go.kr/openApiService/wms/getLayerData.do?apikey=20GEFARS-20GE-20GE-20GE-20GEFARSGR',
+            layername: 'A2SM_CRMNLHSPOT_TOT',
+            styles: 'A2SM_CrmnlHspot_Tot_Tot'
+        };
+
+        // --- WMS 레이어 생성 ---
+        var wmsLayer = new OpenLayers.Layer.WMS(
+            param.name,
+            param.serverUrl,
+            {
+                layers: param.layername,
+                styles: param.styles,
+                format: 'image/png',
+                exceptions: 'text/xml',
+                transparent: true
+            },
+            {
+                isBaseLayer: false, // 이 레이어는 기본 레이어가 아닙니다.
+                maxResolution: 'auto' // 또는 적절한 최대 해상도를 지정하세요
+            }
+        );
+
+        // --- WMS 레이어를 지도에 추가 ---
+        map.addLayer(wmsLayer);
+
+        // --- 초기 지도 중심 및 확대/축소 레벨 설정 ---
+        // 한국의 특정 지역에 초점을 맞추기 위해 이 좌표와 확대/축소 레벨을 조정할 수 있습니다.
+        // 예: 대한민국 대략적인 중심 (부산 근처를 원하시면 LonLat 값을 조정하세요)
+        var lonLat = new OpenLayers.LonLat(127.7669, 35.9078)
+            .transform(
+                new OpenLayers.Projection("EPSG:4326"), // WGS84에서 변환
+                map.getProjectionObject() // 지도의 투영(OSM의 경우 Spherical Mercator)으로 변환
+            );
+
+        var zoom = 7; // 확대/축소 레벨 조정 (숫자가 높을수록 확대됨)
+
+        map.setCenter(lonLat, zoom);
+
+        // 컨트롤 추가 (선택 사항이지만 사용자 상호 작용에 유용함)
+        map.addControl(new OpenLayers.Control.Navigation());
+        map.addControl(new OpenLayers.Control.Zoom());
+        map.addControl(new OpenLayers.Control.LayerSwitcher()); // 사용자가 레이어를 켜고 끌 수 있게 함
+    };
+</script>
+</body>
+</html>

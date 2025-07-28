@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>하천범람지도(지방하천)</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <!-- OpenLayers 2.x CDN -->
+    <script src="https://openlayers.org/api/OpenLayers.js"></script>
+    <!--    <script src="https://cdn.jsdelivr.net/npm/ol@v10.6.0/dist/ol.js"></script>-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v10.6.0/ol.css">
+
+</head>
+<body>
+<div id="map"></div>
+
+<script>
+    // 지도 객체 생성
+    var map = new OpenLayers.Map("map");
+
+    // 베이스맵 (OpenStreetMap 등)
+    var baseLayer = new OpenLayers.Layer.OSM();
+
+    // 파라미터 설정
+    var param = {
+        name: '범람',
+        serverUrl: 'www.safemap.go.kr/openApiService/wms/getLayerData.do?apikey==20GEFARS-20GE-20GE-20GE-20GEFARSGR',
+        layername: 'A2SM_FLOODFOVRRISK2',
+        styles: ''
+    };
+
+    // WMS 레이어 생성
+    var wmsLayer = new OpenLayers.Layer.WMS(
+        param.name,
+        param.serverUrl,
+        {
+            layers: param.layername,
+            styles: param.styles,
+            format: 'image/png',
+            exceptions: 'text/xml',
+            transparent: true
+        },
+        {
+            isBaseLayer: false
+        }
+    );
+
+    // 지도에 레이어 추가
+    map.addLayers([baseLayer, wmsLayer]);
+
+    // 초기 위치 및 줌 설정 (대한민국 중심 좌표 기준)
+    map.setCenter(
+        new OpenLayers.LonLat(127.5, 36.5) // 경도, 위도
+            .transform('EPSG:4326', 'EPSG:3857'), // 좌표계 변환
+        11 // 줌 레벨
+    );
+</script>
+</body>
+</html>

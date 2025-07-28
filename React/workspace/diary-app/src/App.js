@@ -81,7 +81,7 @@ function App() {
   }
   useEffect(()=>{
     // 임시 데이터를 localStorage에 저장 개발 완료 후 삭제
-    localStorage.setItem("diary", JSON.stringify(mockData));
+    // localStorage.setItem("diary", JSON.stringify(mockData));
     const rawData = localStorage.getItem("diary");
     if(!rawData){
       setIsDataLoaded(true);
@@ -122,10 +122,10 @@ function App() {
         <div>
           {/* Link : 리액트에서 페이지 이동시 사용하는 컴포넌트 */}
           {/* 새로고침을 하지 않고 Route에 설정된 경로로 이동시키는 기능 */}
-          <Link to={"/"}>Home</Link>
+          {/* <Link to={"/"}>Home</Link>
           <Link to={"/new"}>New</Link>
           <Link to={"/diary/1"}>Diary</Link>
-          <Link to={"/edit/1"}>Edit</Link>
+          <Link to={"/edit/1"}>Edit</Link> */}
         </div>
       </div>
       </DiaryDispatchContext.Provider>

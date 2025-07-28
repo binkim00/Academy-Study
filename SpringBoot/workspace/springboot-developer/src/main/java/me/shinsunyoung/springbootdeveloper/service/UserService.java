@@ -20,4 +20,10 @@ public class UserService {
                 .build()
         ).getId();
     }
+    // 자동으로 생성되는 1씩더해지는 user_id로 데이터를 검색
+    // Token에 저장하는 값이 user_id이기 때문에 작성하는 메서드
+    public User findById(Long userId){
+        return userRepository.findById(userId)
+                .orElseThrow(()->new IllegalArgumentException("Unexpected user"));
+    }
 }

@@ -1,7 +1,7 @@
 import "./Editor.css";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { emotionList } from "../../utils";
+import { emotionList, getFormattedDate } from "../../utils";
 import EmotionItem from "./EmotionItem";
 import Button from "../ui/Button";
 //            초기화데이터, 작성완료버튼함수 
@@ -9,17 +9,18 @@ const Editor = ({initData, onSubmit}) =>{
     const navigate = useNavigate();
     const [state, setState] = useState(
         {
-            date: new Date().toLocaleDateString(),
+            date: getFormattedDate(new Date()),
             emotionId:3,
             content:"",
         }
     );
     useEffect(()=>{
+        
         // 수정페이지의 경우 초기화데이터를 설정
         if(initData){
             setState({
                 ...initData,
-                date:new Date(initData.date).toLocaleDateString(),
+                date:getFormattedDate(new Date(parseInt(initData.date))),
             });
         }
     },[initData]);

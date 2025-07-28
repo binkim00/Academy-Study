@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OpenLayers WMS Layer Example</title>
+    <meta charset="utf-8" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.13.1/OpenLayers.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        #mapDiv {
+            width: 100%;
+            height: 600px; /* Adjust height as needed */
+            border: 1px solid #ccc;
+        }
+        h1 {
+            text-align: center;
+            margin: 10px 0;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+<h1>범죄주의구간(전체) - OpenLayers WMS Example</h1>
+<div id="mapDiv"></div>
+
+<script>
+    // Initialize the map when the window loads
+    window.onload = function() {
+        // Create a new OpenLayers Map object
+        // 'mapDiv' is the ID of the HTML element where the map will be rendered.
+        var map = new OpenLayers.Map('mapDiv');
+
+        // --- Base Layers (Optional but Recommended) ---
+        // Adding a base layer makes the map more useful.
+        // Here, we'll use an OpenStreetMap layer.
+        var osm = new OpenLayers.Layer.OSM();
+        map.addLayer(osm);
+
+        // --- Your WMS Layer Parameters ---
+        var param = {
+            name: '범죄주의구간(전체)',
+            // **IMPORTANT**: Replace [APIKEY] with your actual API key
+            serverUrl: 'https://www.safemap.go.kr/openApiService/wms/getLayerData.do?apikey=20GEFARS-20GE-20GE-20GE-20GEFARSGR',
+            layername: 'A2SM_CRMNLHSPOT_TOT',
+            styles: 'A2SM_CrmnlHspot_Tot_Tot'
+        };
+
+        // --- Create the WMS Layer ---
+        var wmsLayer = new OpenLayers.Layer.WMS(
+            param.name,
+            param.serverUrl,
+            {
+                layers: param.layername,
+                styles: param.styles,
+                format: 'image/png',
+                exceptions: 'text/xml',
+                transparent: true
+            },
+            {
+                isBaseLayer: false, // This layer is not a base layer
+                maxResolution: 'auto' // Or specify a suitable max resolution
+            }
+        );
+
+        // --- Add the WMS Layer to the Map ---
+        map.addLayer(wmsLayer);
+
+        // --- Set initial map center and zoom ---
+        // You can adjust these coordinates and zoom level to focus on a specific area in Korea.
+        // Example: Center of South Korea (approximately)
+        var lonLat = new OpenLayers.LonLat(127.7669, 35.9078)
+            .transform(
+                new OpenLayers.Projection("EPSG:4326"), // Transform from WGS84
+                map.getProjectionObject() // to the map's projection (Spherical Mercator for OSM)
+            );
+
+        var zoom = 7; // Adjust zoom level (higher number means more zoomed in)
+
+        map.setCenter(lonLat, zoom);
+
+        // Add controls (optional, but good for user interaction)
+        map.addControl(new OpenLayers.Control.Navigation());
+        map.addControl(new OpenLayers.Control.Zoom());
+        map.addControl(new OpenLayers.Control.LayerSwitcher()); // Allows users to toggle layers
+    };
+</script>
+</body>
+</html>
