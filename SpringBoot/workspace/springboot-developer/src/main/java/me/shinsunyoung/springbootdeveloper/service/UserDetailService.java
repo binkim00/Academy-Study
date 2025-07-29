@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
+// formLogin용 로그인 객체를 저장하는 서비스
 public class UserDetailService implements UserDetailsService {
     private final UserRepository userRepository;
 

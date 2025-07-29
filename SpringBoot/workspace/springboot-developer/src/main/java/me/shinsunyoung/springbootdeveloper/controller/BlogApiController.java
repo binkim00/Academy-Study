@@ -50,8 +50,8 @@ public class BlogApiController {
     @DeleteMapping("/api/articles/{id}")
     // 제너릭에 Void를 설정하여 아무 데이터도 전달하지 않도록 설정
     public ResponseEntity<Void> deleteArticle(
-            @PathVariable("id") long id, Principal principal){
-        blogService.delete(id, principal.getName());
+            @PathVariable("id") long id){
+        blogService.delete(id);
         // 정상처리의 경우 아무 데이터도 전달하지 않음
         return ResponseEntity.ok().build();
     }
