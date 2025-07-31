@@ -36,7 +36,7 @@ public class WebOAuthSecurityConfig {
         //web.ignoring() : 스프링 시큐리티를 적용하지 않을 주소들을 설정
         return (web) -> web.ignoring()
                 // /h2-console의 접속에 스프링 시큐리티를 해제
-                .requestMatchers(toH2Console())
+//                .requestMatchers(toH2Console())
                 // resources폴더의 static폴더 접속에 스프링 시큐리티를 해제
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations())
                 //.requestMatchers("/articles")
