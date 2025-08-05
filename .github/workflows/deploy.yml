@@ -31,7 +31,7 @@ jobs:
 
       - name: Set artifact
         working-directory: SpringBoot/workspace/springboot-developer
-        run: echo "artifact=$(ls ./build/libs)" >> $GITHUB_ENV
+        run: echo "artifact=$(basename $(ls ./build/libs/*.jar))" >> $GITHUB_ENV
 
       - name: Beanstalk Deploy
         uses: einaregilsson/beanstalk-deploy@v20
